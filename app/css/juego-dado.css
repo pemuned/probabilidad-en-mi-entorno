@@ -1422,6 +1422,14 @@ body.tournament-page .content-container {
   .game-info p {
     font-size: 1em;
   }
+
+  .game-text p {
+    font-size: 0.9em;
+  }
+
+  .results-table-container {
+    font-size: 0.9em;
+  }
 }
 
 /* Responsive para el slider de preguntas */

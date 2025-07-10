@@ -1402,6 +1402,54 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
   }
 }
 
+@media (max-width: 480px) {
+  .page-text p {
+    font-size: 0.95em;
+  }
+  .page-text li {
+    font-size: 0.95em;
+  }
+  .page-text h3 {
+    font-size: 1.1em;
+  }
+  .page-text h2 {
+    font-size: 1.3em;
+  }
+  .page-text h1 {
+    font-size: 1.5em;
+  }
+  .page-text em {
+    font-size: 0.95em;
+  }
+  .page-text a {
+    font-size: 0.95em;
+  }
+  .page-text blockquote {
+    font-size: 0.95em;
+  }
+  .page-text blockquote cite {
+    font-size: 0.95em;
+  }
+  .page-text blockquote cite::before {
+    font-size: 0.95em;
+  }
+  .page-text blockquote cite::after {
+    font-size: 0.95em;
+  }
+  .page-title {
+    font-size: 1.5em;
+  }
+  .avatar-message .message p {
+    font-size: 0.95em;
+  }
+  .modal-style-content {
+    gap: 10px;
+  }
+  .modal-style-text {
+    gap: 10px;
+  }
+}
+
 .analysis-avatar-container {
   display: flex;
   justify-content: center;
