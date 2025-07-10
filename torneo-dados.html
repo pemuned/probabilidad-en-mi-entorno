@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneo de dados</title>
+
+    <!-- Preact local -->
+    <script src="app/js/lib/preact.min.js"></script>
+
+    <link rel="stylesheet" href="app/css/styles.css" />
+    <link rel="stylesheet" href="app/css/juego-dado.css" />
+</head>
+
+<body class="dado-game-page tournament-page">
+    <!-- Header -->
+    <header class="page-header" id="header-component"></header>
+
+    <!-- Modal de Bienvenida para el Torneo de dados -->
+    <div id="welcome-modal-tournament" class="modal-overlay">
+        <div class="modal-dialog">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar2.svg" alt="Avatar" class="modal-avatar" />
+                <h2 class="modal-title">Torneo de dados</h2>
+                <p class="modal-text">¡Bienvenidos al Torneo de dados! Este evento está diseñado tanto para aficionados
+                    como para expertos en el juego de dados. Será una actividad emocionante para demostrar sus
+                    conocimientos, aprender nuevas estrategias y ganar en un entorno de sana diversión. Evan, Ambar y
+                    Samuel, estudiantes de secundaria, participarán en el torneo donde la competencia está en su punto
+                    más alto.</p>
+                <button id="start-tournament-btn" class="modal-button">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="page-content">
+
+
+
+        <div class="content-container">
+            <h1 class="page-title">Torneo de dados</h1>
+
+            <!-- Botón de Materiales - Siempre disponible -->
+            <div class="materials-button-container">
+                <button id="materials-btn-tournament" class="modal-button secondary">Materiales</button>
+            </div>
+
+            <!-- Modal de Materiales -->
+            <div id="materials-modal-tournament" class="modal-overlay">
+                <div class="modal-dialog">
+                    <button class="modal-close">&times;</button>
+                    <div class="modal-content">
+                        <img src="app/img/avatar3.svg" alt="Avatar" class="modal-avatar" />
+                        <h2 class="modal-title">Materiales para el torneo</h2>
+                        <div class="modal-text">
+                            <p>Lista de materiales:</p>
+                            <ul>
+
+                                <li>Tres dados</li>
+                                <li>Un lápiz</li>
+                                <li>Una libreta</li>
+                            </ul>
+                        </div>
+                        <a href="assets/documents/guia-torneo-dados.pdf" class="modal-style-button ficha-download-btn"
+                            download target="_blank">Descargar guía del torneo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider de Rondas del Torneo -->
+            <div class="tournament-slider-container">
+                <button class="slider-arrow slider-arrow-left" id="slider-left">‹</button>
+                <div class="tournament-slider">
+                    <div class="slider-slide active" data-slide="1">
+                        <div class="slide-content">
+                            <div class="slide-avatar">
+                                <img src="app/img/avatar3.svg" alt="Avatar" />
+                            </div>
+                            <div class="slide-text">
+                                <h3>Primera Ronda:</h3>
+                                <p>Las personas participantes se preparan para el primer desafío: obtener un número
+                                    mayor
+                                    que 5.
+                                    Con determinación, cada uno lanza su dado. ¿Quién logrará superar este primer
+                                    obstáculo?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-slide" data-slide="2">
+                        <div class="slide-content">
+                            <div class="slide-avatar">
+                                <img src="app/img/avatar3.svg" alt="Avatar" />
+                            </div>
+                            <div class="slide-text">
+                                <h3>Segunda Ronda:</h3>
+                                <p>El desafío es obtener un número primo. (Recuerde que un número primo es un número
+                                    natural
+                                    mayor que 1, divisible solo por sí mismo y por 1; por ejemplo, el 2 es un número
+                                    primo).
+                                    Los
+                                    jugadores se concentran y lanzan sus dados nuevamente. ¿Quién demostrará su destreza
+                                    matemática?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-slide" data-slide="3">
+                        <div class="slide-content">
+                            <div class="slide-avatar">
+                                <img src="app/img/avatar3.svg" alt="Avatar" />
+                            </div>
+                            <div class="slide-text">
+                                <h3>Tercera Ronda:</h3>
+                                <p>La tarea es simple: obtener un número mayor o igual que 1. Aunque parece sencillo,
+                                    cada
+                                    lanzamiento tiene su propia tensión. ¿Quién mantendrá la calma y cumplirá con este
+                                    requisito
+                                    básico?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-slide" data-slide="4">
+                        <div class="slide-content">
+                            <div class="slide-avatar">
+                                <img src="app/img/avatar3.svg" alt="Avatar" />
+                            </div>
+                            <div class="slide-text">
+                                <h3>Cuarta Ronda:</h3>
+                                <p>El desafío es obtener un número impar. (Recuerde que un número impar no es divisible
+                                    por
+                                    2,
+                                    es decir, no es múltiplo de 2). La estrategia y la suerte juegan un papel crucial
+                                    aquí.
+                                    ¿Quién se destacará en esta ronda?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-slide" data-slide="5">
+                        <div class="slide-content">
+                            <div class="slide-avatar">
+                                <img src="app/img/avatar3.svg" alt="Avatar" />
+                            </div>
+                            <div class="slide-text">
+                                <h3>Ronda Final:</h3>
+                                <p>El desafío es único: obtener el número 7. Aunque no es posible en un dado estándar,
+                                    ¿podrán
+                                    Evan, Ambar y Samuel encontrar una solución creativa?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-slide" data-slide="6">
+                        <div class="slide-content">
+                            <div class="slide-avatar">
+                                <img src="app/img/avatar3.svg" alt="Avatar" />
+                            </div>
+                            <div class="slide-text">
+                                <h3>¡Vamos a jugar!</h3>
+                                <p>Pero en el torneo no solo participan Evan, Ambar y Samuel. ¡Vamos! Juguemos a
+                                    "Verdadero
+                                    o
+                                    Falso" y analicemos juntos la veracidad de los desafíos planteados en cada ronda del
+                                    torneo.
+                                </p>
+                                <div class="start-button-container">
+                                    <button class="modal-button start-tournament-btn"
+                                        id="start-questions-btn">¡Empezar!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-arrow slider-arrow-right" id="slider-right">›</button>
+            </div>
+
+            <!-- Slider de Preguntas -->
+            <div class="questions-slider-container" id="questions-slider">
+                <button class="slider-arrow slider-arrow-left" id="question-left">‹</button>
+                <div class="tournament-slider questions-slider">
+                    <!-- Pregunta 1 -->
+                    <div class="question-slide active" data-question="1">
+                        <div class="question-content">
+                            <div class="question-icon">
+                                <img src="app/img/question.svg" alt="Pregunta" />
+                            </div>
+                            <div class="question-text">
+                                <h3>Primera pregunta:</h3>
+                                <p>El desafío de la primera ronda (obtener un número mayor que 5) es más sencillo que
+                                    ocurra
+                                    que
+                                    el desafío indicado en la segunda ronda (obtener un número primo).</p>
+                                <div class="question-buttons">
+                                    <button class="question-btn true-btn" data-correct="false">Verdadero</button>
+                                    <button class="question-btn false-btn" data-correct="true">Falso</button>
+                                </div>
+                                <div class="feedback-area" style="display: none;">
+                                    <div class="feedback-message"></div>
+                                    <button class="modal-button next-question-btn">Siguiente pregunta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="question-slide" data-question="2">
+                        <div class="question-content">
+                            <div class="question-icon">
+                                <img src="app/img/question.svg" alt="Pregunta" />
+                            </div>
+                            <div class="question-text">
+                                <h3>Segunda pregunta:</h3>
+                                <p>El desafío de la cuarta ronda (obtener un número impar) es menos sencillo que el
+                                    tercer
+                                    desafío (obtener un número mayor o igual que 1).</p>
+                                <div class="question-buttons">
+                                    <button class="question-btn true-btn" data-correct="true">Verdadero</button>
+                                    <button class="question-btn false-btn" data-correct="false">Falso</button>
+                                </div>
+                                <div class="feedback-area" style="display: none;">
+                                    <div class="feedback-message"></div>
+                                    <button class="modal-button next-question-btn">Siguiente pregunta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="question-slide" data-question="3">
+                        <div class="question-content">
+                            <div class="question-icon">
+                                <img src="app/img/question.svg" alt="Pregunta" />
+                            </div>
+                            <div class="question-text">
+                                <h3>Tercera pregunta:</h3>
+                                <p>El desafío final (obtener el número 7) es más complejo que el de la tercera ronda
+                                    (obtener un
+                                    número mayor o igual que 1).</p>
+                                <div class="question-buttons">
+                                    <button class="question-btn true-btn" data-correct="true">Verdadero</button>
+                                    <button class="question-btn false-btn" data-correct="false">Falso</button>
+                                </div>
+                                <div class="feedback-area" style="display: none;">
+                                    <div class="feedback-message"></div>
+                                    <button class="modal-button next-question-btn">Siguiente pregunta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="question-slide" data-question="4">
+                        <div class="question-content">
+                            <div class="question-icon">
+                                <img src="app/img/question.svg" alt="Pregunta" />
+                            </div>
+                            <div class="question-text">
+                                <h3>Cuarta pregunta:</h3>
+                                <p>El segundo desafío (obtener un número primo) tiene un mismo nivel de complejidad que
+                                    el
+                                    de la
+                                    cuarta ronda (obtener un número impar).</p>
+                                <div class="question-buttons">
+                                    <button class="question-btn true-btn" data-correct="true">Verdadero</button>
+                                    <button class="question-btn false-btn" data-correct="false">Falso</button>
+                                </div>
+                                <div class="feedback-area" style="display: none;">
+                                    <div class="feedback-message"></div>
+                                    <button class="modal-button next-question-btn">Siguiente pregunta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 5 -->
+                    <div class="question-slide" data-question="5">
+                        <div class="question-content">
+                            <div class="question-icon">
+                                <img src="app/img/question.svg" alt="Pregunta" />
+                            </div>
+                            <div class="question-text">
+                                <h3>Quinta pregunta:</h3>
+                                <p>Es posible completar el primer desafío (obtener un número mayor que 5).</p>
+                                <div class="question-buttons">
+                                    <button class="question-btn true-btn" data-correct="true">Verdadero</button>
+                                    <button class="question-btn false-btn" data-correct="false">Falso</button>
+                                </div>
+                                <div class="feedback-area" style="display: none;">
+                                    <div class="feedback-message"></div>
+                                    <button class="modal-button next-question-btn">Siguiente pregunta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 6 -->
+                    <div class="question-slide" data-question="6">
+                        <div class="question-content">
+                            <div class="question-icon">
+                                <img src="app/img/question.svg" alt="Pregunta" />
+                            </div>
+                            <div class="question-text">
+                                <h3>Sexta pregunta:</h3>
+                                <p>El desafío de la segunda ronda (obtener un número primo) no se puede completar.</p>
+                                <div class="question-buttons">
+                                    <button class="question-btn true-btn" data-correct="false">Verdadero</button>
+                                    <button class="question-btn false-btn" data-correct="true">Falso</button>
+                                </div>
+                                <div class="feedback-area" style="display: none;">
+                                    <div class="feedback-message"></div>
+                                    <button class="modal-button next-question-btn">Siguiente pregunta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pantalla Final -->
+                    <div class="question-slide" data-question="7">
+                        <div class="question-content">
+                            <div class="question-icon">
+                                <img src="app/img/avatar3.svg" alt="Avatar" />
+                            </div>
+                            <div class="question-text">
+                                <h3>¡Excelente trabajo!</h3>
+                                <p>¡Excelente desempeño en el torneo de dados! Al resolver los desafíos que se han
+                                    presentado, ha reforzado sus conocimientos en probabilidad. Si considera que aún no
+                                    tiene claros
+                                    los desafíos anteriores, puede volver a participar en el torneo de dados. De lo
+                                    contrario, puede continuar esta aventura participando en el juego con tres vasos.
+                                </p>
+                                <div class="final-feedback-area" style="display: none;">
+                                    <div class="final-feedback-message"></div>
+                                </div>
+                                <div class="final-buttons">
+                                    <button class="modal-button secondary" id="restart-tournament">Volver a
+                                        jugar</button>
+                                    <button class="modal-button" id="go-to-three-cups">Juego de tres vasos</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-arrow slider-arrow-right" id="question-right">›</button>
+            </div>
+
+            <!-- Banner de contexto -->
+            <div class="context-banner" id="context-banner">
+                <img src="app/img/tournament.png" alt="Torneo de dados" class="context-banner-image" />
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer" id="footer-component">
+        <!-- El footer se cargará dinámicamente -->
+    </footer>
+
+    <script type="module" src="app/js/app.js"></script>
+    <script src="app/js/torneo-dados.js"></script>
+</body>
+
+</html>

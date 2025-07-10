@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego con tres vasos</title>
+
+    <!-- Preact local -->
+    <script src="app/js/lib/preact.min.js"></script>
+
+    <link rel="stylesheet" href="app/css/styles.css" />
+    <link rel="stylesheet" href="app/css/juego-dado.css" />
+    <link rel="stylesheet" href="app/css/juego-tres-vasos.css" />
+</head>
+
+<body class="vasos-game-page">
+    <header class="page-header" id="header-component"></header>
+
+    <!-- Modal de Materiales -->
+    <div id="materials-modal" class="modal-overlay">
+        <div class="modal-dialog">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar3.svg" alt="Avatar" class="modal-avatar" />
+                <h2 class="modal-title">Materiales para jugar en físico</h2>
+                <p class="modal-text">Lista de materiales a considerar: Es recomendable que tenga a mano los siguientes
+                    materiales para realizar las actividades:</p>
+                <ul>
+                    <li>Tres vasos iguales</li>
+                    <li>Una bolita pequeña</li>
+                </ul>
+                <a href="assets/documents/guia-juego-tres-vasos.pdf" class="modal-style-button ficha-download-btn"
+                    download target="_blank">Descargar ficha de este ejercicio</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Instrucciones -->
+    <div id="instructions-modal" class="modal-overlay">
+        <div class="modal-dialog">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar2.svg" alt="Avatar" class="modal-avatar" />
+                <h2 class="modal-title">Instrucciones del juego</h2>
+                <p class="modal-text">Juegue en diez ocasiones sin cambiar de elección y anote cuántas veces ha
+                    encontrado la bolita. Luego, juegue otras diez veces cambiando su elección y anote en cuántas
+                    ocasiones encontró la bolita.</p>
+
+                <p class="modal-text">Mientras juega, analice las siguientes preguntas:</p>
+
+                <p class="modal-text"><strong>a)</strong> ¿Debería mantener su elección o escoger el otro vaso?</p>
+                <p class="modal-text"><strong>b)</strong> ¿Habrá alguna diferencia?</p>
+
+                <p class="modal-text">¡Buena suerte! ¿Listo o lista para jugar? Haga clic en "Empezar" para comenzar.
+                </p>
+
+                <button id="start-game-btn" class="modal-button">Empezar</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="page-content">
+        <div class="content-container">
+            <h1 class="page-title">Juego con tres vasos</h1>
+
+            <!-- Pestañas de Navegación -->
+            <div class="tabs-container">
+                <div class="tab-item active" data-tab="intro">Introducción</div>
+                <div class="tab-item" data-tab="game">Juego</div>
+                <div class="tab-item" data-tab="analysis">Análisis</div>
+            </div>
+
+            <!-- Botones de Materiales e Instrucciones - Siempre disponibles -->
+            <div class="materials-button-container">
+                <button id="materials-btn-intro" class="modal-button secondary">Materiales</button>
+                <button id="instructions-btn" class="modal-button secondary">Instrucciones</button>
+            </div>
+
+            <!-- Contenido de las Pestañas -->
+            <div class="tab-content active" id="intro">
+                <div class="intro-content">
+                    <p>Un problema clásico, incluso reconocido por el Ministerio de Educación Pública, es el problema de
+                        Monty Hall. Este consiste en elegir entre tres puertas, detrás de una de ellas se encuentra un
+                        auto, y detrás de las otras dos, hay burros.</p>
+
+                    <p>A continuación, vamos a analizar esta misma situación a partir de un juego con tres vasos y una
+                        bolita.</p>
+
+                    <div class="tip-box">
+                        <p>Recuerde que puede jugar desde cualquier lugar utilizando los materiales disponibles.
+                            Consulte la guía en el botón de "Materiales".</p>
+                    </div>
+
+                    <div class="intro-buttons">
+                        <button id="continue-to-game-btn" class="modal-button primary-action">Continuar</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tab-content" id="game">
+                <div class="montyhall-container">
+                    <div id="game-message" class="game-message"></div>
+                    <div class="cups-table-area">
+                        <div class="table-perspective"></div>
+                        <div class="cups-numbers-grid" id="cups-numbers-grid">
+                            <div class="cup-3d" data-cup="0">
+                                <img src="assets/images/cup.svg" alt="Vaso" class="cup-svg" />
+                                <div class="cup-shadow"></div>
+                            </div>
+                            <div class="cup-3d" data-cup="1">
+                                <img src="assets/images/cup.svg" alt="Vaso" class="cup-svg" />
+                                <div class="cup-shadow"></div>
+                            </div>
+                            <div class="cup-3d" data-cup="2">
+                                <img src="assets/images/cup.svg" alt="Vaso" class="cup-svg" />
+                                <div class="cup-shadow"></div>
+                            </div>
+                            <span class="table-number">1</span>
+                            <span class="table-number">2</span>
+                            <span class="table-number">3</span>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label" id="progress-label-vasos">0/10</div>
+                        <div class="progress-bar" id="progress-bar-vasos"></div>
+                    </div>
+                    <div class="game-controls-row">
+                        <button class="shuffle-btn" id="shuffle-btn">Mezclar</button>
+                        <button id="restart-btn-header" class="modal-button secondary">Reiniciar</button>
+                    </div>
+                    <button id="reveal-btn" class="modal-button primary-action"
+                        style="display:none; margin-top: 20px;">Revelar</button>
+                </div>
+                <div class="results-area">
+                    <div id="feedback-message-vasos" class="feedback-hidden"></div>
+                    <div class="final-buttons"
+                        style="display: flex; gap: 16px; justify-content: center; margin-top: 16px;">
+                        <button id="restart-btn-vasos" class="modal-button" style="display: none;">Volver a
+                            jugar</button>
+                        <button id="analysis-btn" class="modal-button" style="display: none;">Ver análisis</button>
+                    </div>
+                </div>
+
+
+                <div class="montyhall-container-animation">
+                    <div class="filter-container">
+                        <div class="filtr-item" data-category="1">
+                            <img src="assets/images/cup.svg" alt="Vaso" />
+                        </div>
+                        <div class="filtr-item" data-category="2">
+                            <img src="assets/images/cup.svg" alt="Vaso" />
+                        </div>
+                        <div class="filtr-item" data-category="3">
+                            <img src="assets/images/cup.svg" alt="Vaso" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress bar and feedback message for rounds -->
+                <div class="results-area">
+                    <div class="results-table-container table-responsive">
+                        <h4>Tabla de resultados</h4>
+                        <table id="results-table-vasos">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Vaso 1</th>
+                                    <th>Vaso 2</th>
+                                    <th>Vaso 3</th>
+                                    <th>Resultado si mantiene su elección</th>
+                                    <th>Resultado si cambia de elección</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas se llenarán con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="analysis">
+                <div class="analysis-section page-text">
+                    <div class="analysis-avatar-container">
+                        <div class="modal-style-avatar">
+                            <img src="app/img/avatar1.svg" alt="Avatar" />
+                        </div>
+                    </div>
+                    <h2>Análisis del problema de los tres vasos</h2>
+                    <p>Observe que la probabilidad inicial de elegir el vaso con la bolita es <strong>1/3</strong>.<br>
+                        Si selecciona un vaso, se consideran las siguientes posibilidades (probabilidad 1/3 de que tenga
+                        la bolita, 2/3 de que esté vacío).</p>
+                    <p>Note que al mostrar uno de los vasos vacíos y proponer el cambio de elección, se tienen las
+                        siguientes posibilidades:</p>
+                    <ul>
+                        <li>Si inicialmente eligió un vaso vacío (probabilidad <strong>2/3</strong>), cambiar de vaso
+                            resulta en ganar (encontrar la bolita).</li>
+                        <li>Si inicialmente eligió el vaso que contenía la bolita (probabilidad <strong>1/3</strong>),
+                            cambiar de vaso resulta en perder (vaso vacío).</li>
+                    </ul>
+                    <p>Por lo tanto, es estadísticamente mejor cambiar de elección, ya que la probabilidad de encontrar
+                        la bolita al cambiar de elección es <strong>2/3</strong>, mientras que si se queda con su
+                        elección original, la probabilidad de ganar es solo <strong>1/3</strong>.</p>
+                    <h3>Explicación gráfica</h3>
+                    <div class="analysis-table-container">
+                        <table class="analysis-table">
+                            <thead>
+                                <tr>
+                                    <th>Vaso 1</th>
+                                    <th>Vaso 2</th>
+                                    <th>Vaso 3</th>
+                                    <th>Si mantiene la elección</th>
+                                    <th>Si cambia la elección</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bolita</td>
+                                    <td>Vacío</td>
+                                    <td>Vacío</td>
+                                    <td class="result-success">Encuentra la bolita</td>
+                                    <td class="result-fail">Pierde</td>
+                                </tr>
+                                <tr>
+                                    <td>Vacío</td>
+                                    <td>Bolita</td>
+                                    <td>Vacío</td>
+                                    <td class="result-fail">Pierde</td>
+                                    <td class="result-success">Encuentra la bolita</td>
+                                </tr>
+                                <tr>
+                                    <td>Vacío</td>
+                                    <td>Vacío</td>
+                                    <td>Bolita</td>
+                                    <td class="result-fail">Pierde</td>
+                                    <td class="result-success">Encuentra la bolita</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <span id="selected-cup-number"></span>
+    <span id="empty-cup-tooltip">Vaso vacío revelado</span>
+    <footer class="page-footer" id="footer-component"></footer>
+    <script src="app/js/vanilla.filterizr.min.js"></script>
+    <script type="module" src="app/js/app.js"></script>
+    <script src="app/js/juego-tres-vasos.js"></script>
+</body>
+
+<script>
+    const options = {
+        layout: 'sameSize',
+        animationDuration: 0.1,
+        animationEffect: 'fadeInUp',
+        animationEffectDuration: 0.1,
+        animationEffectDelay: 0.1,
+        animationEffectEasing: 'ease-in-out',
+        animationEffectIn: 'fadeInUp',
+    };
+    window.filterizr = new Filterizr('.filter-container', options);
+</script>
+
+</html>

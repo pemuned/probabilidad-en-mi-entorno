@@ -1,0 +1,115 @@
+/* Estilos para el contenedor de Three.js */
+#threejs-container-scene1,
+#threejs-container-scene2,
+#threejs-container-scene3,
+#threejs-container-scene2d1,
+#threejs-container-scene2d2 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Loader simple para Three.js */
+.threejs-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  border-radius: 12px;
+}
+
+.threejs-loader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ocultar los estilos del dado CSS que ya no se usan */
+.dice-container .dice {
+  display: none !important;
+}
+
+/* Asegurar que el contenedor de Three.js tenga el espacio correcto */
+.dice-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350px;
+}
+
+/* Ajustes para el canvas de Three.js */
+#threejs-container-scene1 canvas,
+#threejs-container-scene2 canvas,
+#threejs-container-scene3 canvas,
+#threejs-container-scene2d1 canvas,
+#threejs-container-scene2d2 canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  border-radius: 12px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #threejs-container-scene1,
+  #threejs-container-scene2,
+  #threejs-container-scene3,
+  #threejs-container-scene2d1,
+  #threejs-container-scene2d2 {
+    height: 300px;
+    max-height: 300px;
+  }
+
+  .dice-container {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  #threejs-container-scene1,
+  #threejs-container-scene2,
+  #threejs-container-scene3,
+  #threejs-container-scene2d1,
+  #threejs-container-scene2d2 {
+    height: 250px;
+    max-height: 250px;
+  }
+
+  .dice-container {
+    min-height: 250px;
+  }
+}
+
+.dice-container.dice-single {
+  width: 100%;
+  max-width: 980px;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  height: 320px;
+  min-height: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}

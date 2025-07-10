@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego con 1 dado</title>
+
+    <!-- Preact local -->
+    <script src="app/js/lib/preact.min.js"></script>
+
+    <link rel="stylesheet" href="app/css/styles.css" />
+    <link rel="stylesheet" href="app/css/juego-dado.css" />
+    <link rel="stylesheet" href="app/css/juego-dado-threejs.css" />
+</head>
+
+<body class="dado-game-page">
+    <!-- Header -->
+    <header class="page-header" id="header-component"></header>
+
+    <!-- Modal de Bienvenida (con estilo del index) -->
+    <div id="welcome-modal" class="modal-overlay">
+        <div class="modal-dialog">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar2.svg" alt="Avatar" class="modal-avatar" />
+                <h2 class="modal-title">Juego con un dado</h2>
+                <p class="modal-text">¡Bienvenidos y bienvenidas al juego con un dado! Aquí exploraremos la emoción y la
+                    estrategia detrás de este clásico juego. En este espacio, aprenderá conceptos básicos sobre la
+                    probabilidad. Prepárese para una experiencia donde las matemáticas y la emoción se combinan,
+                    ofreciendo
+                    la oportunidad de convertirse en un jugador más informado.</p>
+                <button id="start-game-btn" class="modal-button">Iniciar juego</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nuevo: Modal de Materiales -->
+    <div id="materials-modal" class="modal-overlay">
+        <div class="modal-dialog">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar3.svg" alt="Avatar" class="modal-avatar" />
+                <h2 class="modal-title">Materiales para jugar en físico</h2>
+                <p class="modal-text">Lista de materiales a considerar: Es recomendable que tenga a mano los siguientes
+                    materiales para realizar las actividades en su espacio:</p>
+                <ul>
+                    <li>Un dado</li>
+                    <li>Una libreta</li>
+                    <li>Un lápiz o bolígrafo</li>
+                </ul>
+                <a href="assets/documents/guia-un-dado.pdf" class="modal-style-button ficha-download-btn" download
+                    target="_blank">Descargar ficha de este juego</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="page-content">
+        <div class="content-container">
+            <h1 class="page-title">Juego con 1 dado</h1>
+
+            <!-- Pestañas de Navegación -->
+            <div class="tabs-container">
+                <div class="tab-item active" data-tab="scene-1">Escenario 1</div>
+                <div class="tab-item" data-tab="scene-2">Escenario 2</div>
+                <div class="tab-item" data-tab="scene-3">Escenario 3</div>
+                <div class="tab-item" data-tab="scene-4">Análisis final</div>
+            </div>
+
+            <!-- Botón de Materiales - Siempre disponible -->
+            <div class="materials-button-container">
+                <button id="materials-btn-global" class="modal-button secondary">Materiales</button>
+            </div>
+
+            <!-- Contenido de las Pestañas -->
+            <div class="tab-content active" id="scene-1">
+                <div class="game-area">
+                    <div class="game-text">
+                        <p>Imagine que tiene un dado con seis caras iguales y todas las caras están en blanco, ¿qué
+                            posibilidades hay de obtener un uno? Haga el experimento de lanzar en diez ocasiones el dado
+                            y anote sus respuestas.</p>
+                        <div class="tip-box">
+                            <p>Recuerde que para hacer el experimento con un dado real, debe pegar un papelito en las
+                                caras
+                                para cambiar la numeración. Consulte la guía en el botón de "Materiales".</p>
+                        </div>
+                    </div>
+                    <div class="dice-container dice-single">
+                        <div id="threejs-container-scene1"
+                            style="width: 100%; max-width: 980px; height: 350px; max-height: 350px; position: relative; margin: 0 auto;">
+                            <div class="threejs-loader" id="threejs-loader-scene1">
+                                <div class="threejs-loader-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Barra de Progreso -->
+                    <div class="progress-container">
+                        <div class="progress-label" id="progress-label">0/10</div>
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                    <div class="game-controls">
+                        <div class="action-buttons">
+                            <button id="roll-dice-btn-esc1" class="modal-button primary-action">Lanzar dado</button>
+                        </div>
+                        <div class="support-buttons">
+                            <button id="simulate-100-btn-esc1" class="modal-button secondary"
+                                style="display: none;">Simular 100
+                                lanzamientos</button>
+                            <button id="reset-scene-btn" class="modal-button secondary">Reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-area">
+                    <!-- Loader de espera -->
+                    <div id="waiting-loader-esc1" class="waiting-loader" style="display: none;">
+                        <div class="loader-spinner"></div>
+                        <p class="waiting-text">Esperando resultado...</p>
+                    </div>
+                    <div id="feedback-message" class="feedback-hidden"></div>
+                    <button id="continue-btn" class="modal-button" style="display: none;">Continuar</button>
+                    <div class="results-table-container table-responsive">
+                        <table id="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Lanzamiento</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas se llenarán con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="scene-2">
+                <div class="game-area">
+                    <div class="game-text">
+                        <p>Analicemos ¿qué posibilidades habrá de obtener un uno, si todas las caras del dado tienen un
+                            uno? Haga el experimento de lanzar en diez ocasiones el dado y anote sus respuestas.</p>
+                        <div class="tip-box">
+                            <p>Recuerde hacer el experimento con un dado real, pegando un papelito en las caras para
+                                cambiar la numeración. Consulte la guía en el botón de "Materiales".</p>
+                        </div>
+                    </div>
+                    <div class="dice-container dice-single">
+                        <div id="threejs-container-scene2"
+                            style="width: 100%; max-width: 980px; height: 350px; max-height: 350px; position: relative; margin: 0 auto;">
+                            <div class="threejs-loader" id="threejs-loader-scene2">
+                                <div class="threejs-loader-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Barra de Progreso -->
+                    <div class="progress-container">
+                        <div class="progress-label" id="progress-label-scene2">0/10</div>
+                        <div class="progress-bar" id="progress-bar-scene2"></div>
+                    </div>
+                    <div class="game-controls">
+                        <div class="action-buttons">
+                            <button id="roll-dice-btn-scene2" class="modal-button primary-action">Lanzar
+                                dado</button>
+                        </div>
+                        <div class="support-buttons">
+                            <button id="simulate-100-btn-scene2" class="modal-button secondary"
+                                style="display: none;">Simular 100
+                                lanzamientos</button>
+                            <button id="reset-scene-btn-scene2" class="modal-button secondary">Reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-area">
+                    <!-- Loader de espera -->
+                    <div id="waiting-loader-scene2" class="waiting-loader" style="display: none;">
+                        <div class="loader-spinner"></div>
+                        <p class="waiting-text">Esperando resultado...</p>
+                    </div>
+                    <div id="feedback-message-scene2" class="feedback-hidden"></div>
+                    <button id="continue-btn-scene2" class="modal-button" style="display: none;">Continuar</button>
+                    <div class="results-table-container table-responsive">
+                        <table id="results-table-scene2">
+                            <thead>
+                                <tr>
+                                    <th>Lanzamiento</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas se llenarán con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="scene-3">
+                <div class="game-area">
+                    <div class="game-text">
+                        <p>Continuemos jugando, tome el dado y observe sus caras. Analice ¿qué posibilidades habrá de
+                            obtener un uno? Realice el experimento de lanzarlo en diez ocasiones.</p>
+                        <div class="tip-box">
+                            <p>Puede hacer el experimento con un dado real y realizar conmigo esta actividad. Consulte
+                                la guía en el botón de "Materiales".</p>
+                        </div>
+                    </div>
+                    <div class="dice-container dice-single">
+                        <div id="threejs-container-scene3"
+                            style="width: 100%; max-width: 980px; height: 350px; max-height: 350px; position: relative; margin: 0 auto;">
+                            <div class="threejs-loader" id="threejs-loader-scene3">
+                                <div class="threejs-loader-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Barra de Progreso -->
+                    <div class="progress-container">
+                        <div class="progress-label" id="progress-label-scene3">0/10</div>
+                        <div class="progress-bar" id="progress-bar-scene3"></div>
+                    </div>
+                    <div class="game-controls">
+                        <div class="action-buttons">
+                            <button id="roll-dice-btn-scene3" class="modal-button primary-action">Lanzar
+                                dado</button>
+                        </div>
+                        <div class="support-buttons">
+                            <button id="simulate-100-btn-scene3" class="modal-button secondary"
+                                style="display: none;">Simular 100
+                                lanzamientos</button>
+                            <button id="reset-scene-btn-scene3" class="modal-button secondary">Reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-area">
+                    <!-- Loader de espera -->
+                    <div id="waiting-loader-scene3" class="waiting-loader" style="display: none;">
+                        <div class="loader-spinner"></div>
+                        <p class="waiting-text">Esperando resultado...</p>
+                    </div>
+                    <div id="feedback-message-scene3" class="feedback-hidden"></div>
+                    <button id="continue-btn-scene3" class="modal-button" style="display: none;">Continuar con el
+                        análisis final</button>
+                    <div class="results-table-container table-responsive">
+                        <table id="results-table-scene3">
+                            <thead>
+                                <tr>
+                                    <th>Lanzamiento</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas se llenarán con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="scene-4">
+                <div class="analysis-section page-text">
+
+                    <div class="analysis-avatar-container">
+                        <div class="modal-style-avatar">
+                            <img src="app/img/avatar1.svg" alt="Avatar" />
+                        </div>
+                    </div>
+
+                    <p>Por medio del juego podemos explorar los siguientes temas:</p>
+
+
+                    <h3>Evento Imposible</h3>
+                    <p>El evento imposible es aquel evento que no es posible que ocurra, es decir, su probabilidad
+                        de ocurrencia es cero. En este caso, al lanzar un dado con sus caras iguales, en blanco y
+                        tratar de obtener un uno en un lanzamiento.</p>
+
+                    <h3>Evento Seguro</h3>
+                    <p>El evento seguro es aquel que sin duda alguna va a ocurrir, es decir, tiene completa
+                        probabilidad de ocurrencia. Por ejemplo, en el caso de lanzar un dado con todas sus caras
+                        iguales y numeradas todas con el uno, la posibilidad de obtener un uno al lanzar el dado es
+                        totalmente probable.</p>
+
+                    <h3>Espacio Muestral</h3>
+                    <p>El espacio muestral es el conjunto de todos los posibles resultados al realizar un
+                        experimento aleatorio. Por ejemplo, en un dado numerado del uno al seis, la probabilidad de
+                        obtener un uno nos lleva a pensar en todos los posibles resultados, es decir, al lanzar el
+                        dado además de obtener un 1 podría obtener un 2, un 3, un 4, un 5 o un 6, el conjunto de
+                        estos resultados conforman el espacio muestral.</p>
+
+                    <h3>Punto Muestral</h3>
+                    <p>Cada posible resultado en el espacio muestral se conoce como punto muestral, es decir, es uno
+                        de los posibles resultados de un experimento aleatorio. En nuestro ejemplo la posibilidad de
+                        obtener un 1 al lanzar el dado es un punto muestral, la posibilidad de obtener un 2 es otro
+                        y así con cada una de las posibilidades que conforman el espacio muestral.</p>
+
+                    <h3>Evento Simple</h3>
+                    <p>El evento simple es aquel que tiene una única posibilidad de ocurrencia, en este caso el
+                        obtener un 1 como resultado al lanzar un dado numerado del uno al seis es un evento simple,
+                        solo hay una cara que contiene al uno.</p>
+
+                    <h3>Evento Probable y Aleatorio</h3>
+                    <p>El evento probable es aquel que tiene una alta posibilidad de ocurrencia, es decir, puede o
+                        no ocurrir. Por otro lado, el evento aleatorio es aquel cuyo resultado no puede predecirse
+                        con certeza y está sujeto al azar.</p>
+
+                    <h3>Concepto de Aleatorio</h3>
+                    <p>El término aleatorio se conceptualiza por varios autores. M. Moliner (1983, citado por
+                        Batanero, 1995), define lo aleatorio como "Incierto. Se dice de aquello que depende de la
+                        suerte o del azar, siendo el azar la supuesta causa de los sucesos no debidos a una
+                        necesidad natural ni a una intervención humana o divina" (p. 2).</p>
+
+                    <p>Por otra parte, Ortiz, Batanero y Serrano (2001), indican que otros términos que se asocian a
+                        los fenómenos aleatorios pueden presentar matices diferentes de acuerdo con el contexto, por
+                        ejemplo, "casual, accidental, eventual, fortuito, impensado, imprevisible, inesperado,
+                        inopinado, ocasional, por suerte o las expresiones tales como por chiripa, por chamba, de
+                        rebote, de rechazo, sin querer, sin intención, sin plan" (p. 5).</p>
+
+                    <p>En síntesis, se puede definir el concepto de aleatorio como una característica de un fenómeno
+                        o suceso cuyo resultado es incierto.</p>
+
+                    <h3>Dato Curioso</h3>
+                    <p>Yarza (2013), indica el término aleatorio es de origen latino y significa "a suertes" y que,
+                        además, se relaciona con los dados, o estocástico que proviene del griego y se relaciona con
+                        la Fortuna, ser mitológico femenino, completamente calva excepto por un largo pelo conocido
+                        como "la Oportunidad" al que el hombre debe aferrarse.</p>
+                </div>
+            </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer" id="footer-component"></footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cannon@0.6.0/build/cannon.min.js"></script>
+    <script type="module" src="app/js/app.js"></script>
+    <script src="app/js/juego-dado-threejs.js"></script>
+    <script src="app/js/juego-dado-gui.js"></script>
+    <button id="go-to-top-btn" class="go-to-top-btn" title="Ir arriba"><span class="arrow-up">▲</span></button>
+</body>
+
+</html>

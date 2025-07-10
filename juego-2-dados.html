@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego con 2 dados</title>
+
+    <!-- Preact local -->
+    <script src="app/js/lib/preact.min.js"></script>
+
+    <link rel="stylesheet" href="app/css/styles.css" />
+    <link rel="stylesheet" href="app/css/juego-dado.css" />
+    <link rel="stylesheet" href="app/css/juego-dado-threejs.css" />
+</head>
+
+<body class="dado-game-page">
+    <!-- Header -->
+    <header class="page-header" id="header-component"></header>
+
+    <!-- Modal de Bienvenida para el juego de 2 dados -->
+    <div id="welcome-modal-2dados" class="modal-overlay">
+        <div class="modal-dialog">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar2.svg" alt="Avatar" class="modal-avatar" />
+                <h2 class="modal-title">Juego con dos dados</h2>
+                <p class="modal-text">Continuamos nuestra aventura de aprender jugando. En esta ocasión, utilizaremos un
+                    juego con dos dados para construir y reforzar algunos conceptos de probabilidad. Prepárese para una
+                    experiencia llena de emoción y sorpresas mientras exploramos este juego.</p>
+                <button id="start-game-btn-2dados" class="modal-button">Iniciar juego</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Materiales para el juego de 2 dados -->
+    <div id="materials-modal" class="modal-overlay">
+        <div class="modal-dialog">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar3.svg" alt="Avatar" class="modal-avatar" />
+                <h2 class="modal-title">Materiales para jugar en físico</h2>
+                <p class="modal-text">Lista de materiales a considerar: Es recomendable que tenga a mano los siguientes
+                    materiales para realizar las actividades:</p>
+                <ul>
+                    <li>Dos dados</li>
+                    <li>Una libreta</li>
+                    <li>Un lápiz o bolígrafo</li>
+                </ul>
+                <a href="assets/documents/guia-dos-dados.pdf" class="modal-style-button ficha-download-btn" download
+                    target="_blank">Descargar ficha de este juego</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="page-content">
+        <div class="content-container">
+            <h1 class="page-title">Juego con 2 dados</h1>
+
+            <!-- Pestañas de Navegación -->
+            <div class="tabs-container" id="tabs-2dados">
+                <div class="tab-item active" data-tab="scene-2d-1">Escenario 1</div>
+                <div class="tab-item" data-tab="scene-2d-2">Escenario 2</div>
+                <div class="tab-item" data-tab="scene-2d-3">Análisis final</div>
+            </div>
+
+            <!-- Botón de Materiales - Siempre disponible -->
+            <div class="materials-button-container">
+                <button id="materials-btn-global-2dados" class="modal-button secondary">Materiales</button>
+            </div>
+
+            <!-- Contenido de las Pestañas -->
+            <div class="tab-content active" id="scene-2d-1">
+                <div class="game-area">
+                    <div class="game-text">
+                        <p>Avancemos juntos en este aprendizaje, ahora tenemos dos dados perfectos, los dos están
+                            numerados del uno al seis. Si se lanzan ambos dados a la vez, ¿qué posibilidades hay de que
+                            la suma total sea seis? Realice el experimento de lanzarlos simultáneamente en diez
+                            ocasiones y anote los resultados que se obtienen.</p>
+                        <div class="tip-box">
+                            <p>Recuerde que se puede jugar desde su ubicación con los dados que se tengan disponibles.
+                                Consulte la guía en el botón de Materiales.</p>
+                        </div>
+                    </div>
+                    <div class="dice-container dice-single">
+                        <!-- Three.js container for scene 1 -->
+                        <div id="threejs-container-scene2d1" class="threejs-container">
+                            <div class="threejs-loader" id="threejs-loader-scene2d1">
+                                <div class="threejs-loader-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Barra de Progreso -->
+                    <div class="progress-container">
+                        <div class="progress-label" id="progress-label-2d-1">0/10</div>
+                        <div class="progress-bar" id="progress-bar-2d-1"></div>
+                    </div>
+                    <div class="game-controls">
+                        <div class="action-buttons">
+                            <button id="roll-dice-btn-2d-1" class="modal-button primary-action">Lanzar
+                                dados</button>
+                        </div>
+                        <div class="support-buttons">
+                            <button id="simulate-100-btn-2d-1" class="modal-button secondary"
+                                style="display: none;">Simular 100
+                                lanzamientos</button>
+                            <button id="reset-scene-btn-2d-1" class="modal-button secondary">Reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-area">
+                    <!-- Loader de espera -->
+                    <div id="waiting-loader-2d-1" class="waiting-loader" style="display: none;">
+                        <div class="loader-spinner"></div>
+                        <p class="waiting-text">Esperando resultado...</p>
+                    </div>
+                    <div id="feedback-message" class="feedback-hidden"></div>
+                    <button id="continue-btn-2d-1" class="modal-button" style="display: none;">Continuar con la
+                        siguiente explicación</button>
+                    <div class="results-table-container table-responsive">
+                        <table id="results-table" class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Lanzamiento</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas se llenarán con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="scene-2d-2">
+                <div class="game-area">
+                    <div class="game-text">
+                        <p>Ahora, analice si al lanzar simultáneamente dos dados perfectos, numerados del uno al seis,
+                            ¿es posible que la suma sea 0 o 1? ¿Qué resultados obtiene? Realice el experimento de
+                            lanzarlos simultáneamente en diez ocasiones.</p>
+                        <div class="tip-box">
+                            <p>Recuerda que se puede jugar desde donde estés con los dados que se tengan disponibles.
+                                Consulte la guía en el botón de Materiales.</p>
+                        </div>
+                    </div>
+                    <div class="dice-container dice-single">
+                        <!-- Three.js container for scene 2 -->
+                        <div id="threejs-container-scene2d2" class="threejs-container">
+                            <div class="threejs-loader" id="threejs-loader-scene2d2">
+                                <div class="threejs-loader-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Barra de Progreso -->
+                    <div class="progress-container">
+                        <div class="progress-label" id="progress-label-2d-2">0/10</div>
+                        <div class="progress-bar" id="progress-bar-2d-2"></div>
+                    </div>
+                    <div class="game-controls">
+                        <div class="action-buttons">
+                            <button id="roll-dice-btn-2d-2" class="modal-button primary-action">Lanzar
+                                dados</button>
+                        </div>
+                        <div class="support-buttons">
+                            <button id="simulate-100-btn-2d-2" class="modal-button secondary"
+                                style="display: none;">Simular 100
+                                lanzamientos</button>
+                            <button id="reset-scene-btn-2d-2" class="modal-button secondary">Reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-area">
+                    <!-- Loader de espera -->
+                    <div id="waiting-loader-2d-2" class="waiting-loader" style="display: none;">
+                        <div class="loader-spinner"></div>
+                        <p class="waiting-text">Esperando resultado...</p>
+                    </div>
+                    <div id="feedback-message-scene2" class="feedback-hidden"></div>
+                    <button id="continue-btn-scene2" class="modal-button" style="display: none;">Continuar con el
+                        análisis final</button>
+                    <div class="results-table-container table-responsive">
+                        <table id="results-table-scene2" class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Lanzamiento</th>
+                                    <th>Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las filas se llenarán con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="scene-2d-3">
+                <div class="analysis-section page-text">
+                    <div class="analysis-avatar-container">
+                        <div class="modal-style-avatar">
+                            <img src="app/img/avatar1.svg" alt="Avatar" />
+                        </div>
+                    </div>
+                    <p>A partir del juego, podemos explorar los conceptos de <strong>evento compuesto</strong> y
+                        <strong>evento imposible</strong>.
+                    </p>
+                    <p>Un <strong>evento compuesto</strong> se forma al realizar dos eventos simples al mismo tiempo.
+                        Por ejemplo, al lanzar dos dados numerados del uno al seis, la posibilidad de que el resultado
+                        total sea 6 dependerá de las combinaciones posibles de cada dado. En un dado se podría obtener
+                        un 4 y en el otro un 2, entre otras opciones.</p>
+                    <p>Por otro lado, un <strong>evento imposible</strong> es aquel que no puede ocurrir, es decir, su
+                        probabilidad de ocurrencia es cero. En este caso, al lanzar dos dados con caras numeradas del
+                        uno al seis, es imposible obtener un resultado cuya suma sea 0 o 1 en un lanzamiento simultáneo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer" id="footer-component"></footer>
+
+    <button id="go-to-top-btn" class="go-to-top-btn" title="Ir arriba"><span class="arrow-up">▲</span></button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cannon@0.6.0/build/cannon.min.js"></script>
+    <script type="module" src="app/js/app.js"></script>
+    <script src="app/js/juego-2-dados-threejs.js"></script>
+    <script src="app/js/juego-2-dados-gui.js"></script>
+</body>
+
+</html>

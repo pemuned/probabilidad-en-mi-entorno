@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicaciones - Descubriendo la probabilidad en mi entorno</title>
+
+    <!-- Preact local -->
+    <script src="app/js/lib/preact.min.js"></script>
+
+    <link rel="stylesheet" href="app/css/styles.css" />
+    <link rel="stylesheet" href="app/css/aplicaciones.css" />
+</head>
+
+<body>
+    <!-- Header con 3 barras -->
+    <header class="page-header" id="header-component">
+        <!-- El header se cargará dinámicamente -->
+    </header>
+
+    <!-- Modal Introductorio -->
+    <div id="intro-modal" class="modal-overlay">
+        <div class="modal-dialog">
+            <button class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar1.svg" alt="Avatar" class="modal-avatar" />
+                <h2 class="modal-title">Explora las aplicaciones</h2>
+                <p class="modal-text">Voltee las cartas para explorar algunos ejemplos de áreas en las que se emplea la
+                    probabilidad.</p>
+                <button id="start-exploration-btn" class="modal-button">Comenzar exploración</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="page-content">
+        <div class="content-container">
+            <div class="breadcrumbs">
+                <a href="importancia.html">Importancia</a><span class="separator"></span>Aplicaciones
+            </div>
+            <h1 class="page-title" style="display: none;">Aplicaciones de la Probabilidad</h1>
+
+            <div id="interactive-diagram">
+                <div class="diagram-center">
+                    <img src="assets/images/g_probabilidad.svg" alt="Aplicaciones de la Probabilidad">
+                </div>
+
+                <div class="diagram-arrow arrow-up"></div>
+                <div class="diagram-arrow arrow-down"></div>
+                <div class="diagram-arrow arrow-left"></div>
+                <div class="diagram-arrow arrow-right"></div>
+
+                <!-- Secciones -->
+                <div class="diagram-section section-top">
+                    <img src="assets/images/g_sociales.svg" alt="Ciencias Sociales" class="section-image">
+                    <div class="card-container">
+                        <div class="card" data-title="Política"
+                            data-description="En la política, se utiliza en la predicción de resultados electorales. Las encuestas y sondeos son herramientas fundamentales para los partidos políticos, medios de comunicación y analistas para entender la opinión pública y anticipar los resultados de las elecciones. Estas encuestas utilizan métodos estadísticos y probabilísticos para obtener muestras representativas de la población y calcular las probabilidades de que un candidato o partido gane en una elección.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #5595D2;"><img
+                                        src="assets/images/icon_politica.svg">
+                                    <p>Política</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Economía"
+                            data-description="La probabilidad permite a los economistas modelar la incertidumbre para realizar inversiones de manera segura, anticipando lo que puede ocurrir bajo ciertas condiciones, por ejemplo, cuando se desea invertir en acciones de una empresa.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #5595D2;"><img
+                                        src="assets/images/icon_economia.svg">
+                                    <p>Economía</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Administración"
+                            data-description="En el área de la administración, la probabilidad se utiliza para evaluar y gestionar riesgos. Las empresas emplean modelos probabilísticos para calcular la probabilidad de eventos adversos, como cambios en los tipos de interés, fluctuaciones en los precios de los activos o pérdidas por incumplimientos crediticios. Estos modelos les permiten estimar los riesgos asociados con diversas decisiones financieras y diseñar estrategias de mitigación adecuadas, como la diversificación de la cartera de inversiones o la adquisición de seguros.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #5595D2;"><img
+                                        src="assets/images/icon_administracion.svg">
+                                    <p>Administración</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Educación"
+                            data-description="Se usa para analizar datos, evaluar métodos de enseñanza, recursos, evaluación, rendimiento académico, entre otros, con el fin de mejorar la calidad de educación.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #5595D2;"><img
+                                        src="assets/images/icon_educacion.svg">
+                                    <p>Educación</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diagram-section section-left">
+                    <div class="card-container">
+                        <div class="card" data-title="Juego de cartas"
+                            data-description="Al determinar la probabilidad de ganar en una partida de cartas, los jugadores pueden aumentar la ganancia en las apuestas.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #C73472;"><img
+                                        src="assets/images/icon_cartas.svg">
+                                    <p>Juego de cartas</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Juegos de rol con dados"
+                            data-description="Los jugadores pueden tomar decisiones sobre el éxito o fracaso en ciertas jugadas.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #C73472;"><img
+                                        src="assets/images/icon_dados.svg">
+                                    <p>Juegos de rol con dados</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Ajedrez"
+                            data-description="Sirve para analizar jugadas, evaluar posiciones y mejorar el rendimiento de las técnicas, por ejemplo, evaluar la eficacia de cierto movimiento o jugada.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #C73472;"><img
+                                        src="assets/images/icon_ajedrez.svg">
+                                    <p>Ajedrez</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="assets/images/g_juego.svg" alt="Juego" class="section-image">
+                </div>
+
+                <div class="diagram-section section-right">
+                    <img src="assets/images/g_salud.svg" alt="Salud" class="section-image">
+                    <div class="card-container">
+                        <div class="card" data-title="Microbiología"
+                            data-description="Permite a los científicos analizar datos y hacer predicciones sobre los fenómenos biológicos, por ejemplo, estimar el crecimiento de una población de bacterias en un tiempo determinado.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #C75A95;"><img
+                                        src="assets/images/icon_microbiologia.svg">
+                                    <p>Microbiología</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Genética"
+                            data-description="Permite a los científicos predecir la herencia de rasgos y patrones de enfermedades. Por ejemplo, el estudio de la distribución de alelos en padres e hijos ayuda a calcular las posibles combinaciones genéticas.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #C75A95;"><img
+                                        src="assets/images/icon_genetica.svg">
+                                    <p>Genética</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Epidemiología"
+                            data-description="Permite analizar la propagación de enfermedades, prevenir los riesgos y de esta manera tomar decisiones sobre la salud, por ejemplo, predecir la tasa de incidencia de ciertos virus en una determinada población.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #C75A95;"><img
+                                        src="assets/images/icon_epidemiologia.svg">
+                                    <p>Epidemiología</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diagram-section section-bottom">
+                    <div class="card-container">
+                        <div class="card" data-title="Meteorología"
+                            data-description="Se utiliza en meteorología para predecir el tiempo y anticipar la incertidumbre de los sistemas atmosféricos, por ejemplo, los meteorólogos utilizan modelos probabilísticos para predecir la probabilidad de lluvia en determinadas zonas.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #E6A32E;"><img
+                                        src="assets/images/icon_meteorologia.svg">
+                                    <p>Meteorología</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Biología"
+                            data-description="Para comprender la dinámica de poblaciones en ecosistemas naturales. Los investigadores utilizan modelos probabilísticos para predecir la probabilidad de supervivencia y reproducción de individuos en diferentes condiciones ambientales, así como para estimar la probabilidad de extinción de especies. Estos modelos ayudan a comprender cómo los factores ambientales y las interacciones entre especies afectan la estructura y la estabilidad de los ecosistemas. Un ejemplo concreto es la mariposa monarca cuya migración anual es monitoreada con modelos probabilísticos para estimar el tamaño de la población y predecir el éxito de la migración.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #E6A32E;"><img
+                                        src="assets/images/icon_biologia.svg">
+                                    <p>Biología</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-title="Matemática"
+                            data-description="Se utiliza para medir la incertidumbre y predecir la ocurrencia de eventos en distintas circunstancias o problemas.">
+                            <div class="card-inner">
+                                <div class="card-front"><img src="assets/images/card.svg"></div>
+                                <div class="card-back" style="border-color: #E6A32E;"><img
+                                        src="assets/images/icon_matematicas.svg">
+                                    <p>Matemática</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="assets/images/g_ciencias.svg" alt="Ciencias Básicas" class="section-image">
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div id="card-modal" class="card-modal-overlay">
+                <div class="card-modal-content">
+                    <span class="close-button">&times;</span>
+                    <div id="modal-body">
+                        <!-- Content will be injected by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer" id="footer-component">
+        <!-- El footer se cargará dinámicamente -->
+    </footer>
+
+    <script type="module" src="app/js/app.js"></script>
+    <script src="app/js/aplicaciones.js"></script>
+</body>
+
+</html>

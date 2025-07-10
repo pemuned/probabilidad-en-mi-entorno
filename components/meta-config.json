@@ -1,0 +1,17 @@
+{
+    "default": {
+        "title": "Descubriendo la probabilidad en mi entorno",
+        "description": "Aplicación educativa sobre probabilidad para estudiantes",
+        "keywords": "probabilidad, matemáticas, educación, dados, juegos",
+        "author": "Universidad Estatal a Distancia",
+        "favicon": "favicon.svg",
+        "og": {
+            "title": "Descubriendo la probabilidad en mi entorno",
+            "description": "Aplicación educativa sobre probabilidad para estudiantes",
+            "image": "app/img/logo.svg",
+            "type": "website",
+            "locale": "es_ES",
+            "site_name": "UNED"
+        }
+    }
+}

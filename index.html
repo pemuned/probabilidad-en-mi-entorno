@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- meta description -->
+    <meta name="description" content="Descubriendo la probabilidad en mi entorno">
+    <meta name="keywords" content="probabilidad, entorno, escuela, matemáticas, estadística">
+    <meta name="author" content="">
+    <!-- og -->
+    <meta property="og:title" content="Descubriendo la probabilidad en mi entorno">
+    <meta property="og:description" content="Descubriendo la probabilidad en mi entorno">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Descubriendo la probabilidad en mi entorno">
+
+    <title>Descubriendo la probabilidad en mi entorno</title>
+
+    <!-- Preact local -->
+    <script src="app/js/lib/preact.min.js"></script>
+
+    <link rel="stylesheet" href="app/css/styles.css" />
+    <link rel="stylesheet" href="app/css/index.css" />
+</head>
+
+<body class="index-page">
+    <!-- Loader -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <img src="app/img/logo.svg" alt="Logo" />
+                <div class="loader-spinner">
+                    <div class="spinner-ring"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header con menú hamburguesa -->
+    <header class="page-header" id="header-component">
+        <!-- El header se cargará dinámicamente -->
+    </header>
+
+    <div id="arrow-left" class="scroll-arrow">&lsaquo;</div>
+    <div id="arrow-right" class="scroll-arrow">&rsaquo;</div>
+
+    <!-- Parallax Background - FUERA del contenedor de scroll -->
+    <div id="parallax-bg">
+        <img src="app/img/mountains.svg" id="mountains-bg" alt="Montañas" />
+        <div id="clouds-container">
+            <div class="clouds"></div>
+            <div class="clouds"></div>
+        </div>
+    </div>
+
+    <!-- Logo Fixed - FUERA del contenedor de scroll -->
+    <img src="app/img/logo.svg" id="logo-fixed" alt="Logo" />
+
+    <!-- Modal Dialog - FUERA del contenedor de scroll -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div id="modal-dialog" class="modal-dialog">
+            <button id="modal-close" class="modal-close">&times;</button>
+            <div class="modal-content">
+                <img src="app/img/avatar1.svg" alt="Avatar" class="modal-avatar" />
+
+                <!-- Bienvenida -->
+                <div class="modal-section" data-section="bienvenida">
+                    <h2 class="modal-title">Bienvenida</h2>
+                    <p class="modal-text">Aquí podrá conocer más acerca de este material diseñado para ofrecer una
+                        perspectiva innovadora sobre la enseñanza de la probabilidad. ¡Nos entusiasma que se unan a
+                        nosotros en este emocionante viaje hacia el mundo de la probabilidad y su impacto en la vida
+                        real!</p>
+                </div>
+
+                <!-- Consideraciones -->
+                <div class="modal-section" data-section="consideraciones" style="display: none;">
+                    <h2 class="modal-title">Consideraciones</h2>
+                    <p class="modal-text">En esta sección, se presentan los objetivos de este contenido y algunas
+                        recomendaciones para que el profesorado las tenga en cuenta al planificar las clases que
+                        abarcan
+                        los conceptos de probabilidad estudiados en este laboratorio.</p>
+                </div>
+
+                <!-- Importancia -->
+                <div class="modal-section" data-section="importancia" style="display: none;">
+                    <h2 class="modal-title">Importancia</h2>
+                    <p class="modal-text">En esta sección, exploraremos la relevancia de la enseñanza de la
+                        probabilidad
+                        y sus diversas aplicaciones en áreas como la ciencia, la economía, la medicina y la
+                        tecnología.
+                        A través de situaciones cotidianas, descubriremos cómo la probabilidad se utiliza en la
+                        predicción del clima, la toma de decisiones y más. Comprender estas aplicaciones nos
+                        permitirá
+                        visualizar conceptos prácticos que serán útiles en el día a día. ¡Acompáñenos en este
+                        emocionante viaje por las múltiples facetas de la probabilidad!</p>
+                </div>
+
+                <!-- Explicaciones -->
+                <div class="modal-section" data-section="explicaciones" style="display: none;">
+                    <h2 class="modal-title">Explicaciones</h2>
+                    <p class="modal-text">En esta sección encontrarás explicaciones detalladas y ejemplos prácticos
+                        que
+                        te ayudarán a comprender los conceptos de probabilidad de manera clara y sencilla.</p>
+                    <div class="submenu-container">
+                        <button class="modal-button submenu-button" data-submenu="juego-1-dado">Juego con 1
+                            dado</button>
+                        <button class="modal-button submenu-button" data-submenu="juego-2-dados">Juego con 2
+                            dados</button>
+                    </div>
+                </div>
+
+                <!-- Ejercicios -->
+                <div class="modal-section" data-section="ejercicios" style="display: none;">
+                    <h2 class="modal-title">¡Bienvenidos a la sección <br>de ejercicios!</h2>
+                    <p class="modal-text">En este apartado, usted será el protagonista. Su misión es garantizar que
+                        todos los juegos se realicen de manera justa y equitativa. Para lograrlo, necesitará dominar
+                        los
+                        principios de probabilidad. Prepárese para desafiar a la suerte y aplicar sus conocimientos
+                        matemáticos.</p>
+                    <div class="submenu-container">
+                        <button class="modal-button submenu-button" data-submenu="torneo-dados">Torneo de
+                            dados</button>
+                        <button class="modal-button submenu-button" data-submenu="juego-tres-vasos">Juego con tres
+                            vasos</button>
+                    </div>
+                </div>
+
+                <button class="modal-button">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor principal con scroll horizontal -->
+    <div id="main-scroll-container">
+        <div id="horizontal-scroll">
+            <div id="school-container">
+                <img src="app/img/school.svg" id="school-img" alt="Escuela" />
+                <nav id="school-menu">
+                    <a href="#bienvenida" class="menu-link" style="left: 10%; top: 45%;">Bienvenida</a>
+                    <a href="#consideraciones" class="menu-link" style="left: 32%; top: 42%;">Consideraciones</a>
+                    <a href="#importancia" class="menu-link" style="left: 38%; top: 67%;">Importancia</a>
+                    <a href="#explicaciones" class="menu-link" style="left: 56%; top: 43%;">Explicaciones</a>
+                    <a href="#ejercicios" class="menu-link" style="left: 74%; top: 50%;">Ejercicios</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer fuera del área de scroll -->
+    <footer class="page-footer" id="footer-component">
+        <!-- El footer se cargará dinámicamente -->
+    </footer>
+
+    <script type="module" src="app/js/app.js"></script>
+</body>
+
+</html>

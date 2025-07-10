@@ -1,0 +1,739 @@
+/* Estilos específicos para la página index */
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
+
+body.index-page {
+  background: #a1d9f8;
+  margin: 0;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  padding-bottom: 60px; /* Espacio para el footer */
+}
+
+/* Loader Styles */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #a1d9f8 0%, #87c4e8 50%, #6bb0d8 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+.page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-container {
+  text-align: center;
+  animation: loaderFadeIn 0.6s ease-out;
+}
+
+.loader-logo {
+  position: relative;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+.loader-logo img {
+  width: 300px;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+  transition: width 0.3s ease;
+}
+
+/* Responsive para el logo */
+@media (max-width: 768px) {
+  .loader-logo img {
+    width: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-logo img {
+    width: 180px;
+  }
+}
+
+.loader-spinner {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  z-index: 10;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 6px solid rgba(194, 54, 113, 0.1);
+  border-top: 6px solid #c23671;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+/* Responsive para el spinner */
+@media (max-width: 768px) {
+  .loader-spinner {
+    width: 50px;
+    height: 50px;
+    top: -35px;
+  }
+
+  .spinner-ring {
+    border-width: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-spinner {
+    width: 40px;
+    height: 40px;
+    top: -30px;
+  }
+
+  .spinner-ring {
+    border-width: 4px;
+  }
+}
+
+@keyframes loaderFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Header en página index */
+body.index-page .page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000; /* Por encima del logo fijo */
+  background: transparent; /* Fondo transparente para no tapar el logo */
+}
+
+/* Ocultar elementos del header en página index, excepto el menú hamburguesa */
+body.index-page .header-bar {
+  display: none !important;
+}
+
+body.index-page .header-logo {
+  display: none !important;
+}
+
+/* Ocultar elementos del header en página index, excepto el menú hamburguesa */
+body.index-page .header-bar {
+  display: none !important;
+}
+
+body.index-page .header-logo {
+  display: none !important;
+}
+
+/* Logo fijo ajustado para no interferir con el header */
+body.index-page #logo-fixed {
+  z-index: 9999; /* Por debajo del header */
+}
+
+/* Contenedor principal con scroll horizontal */
+#main-scroll-container {
+  width: 100vw;
+  height: calc(100vh - 62px); /* Restar altura del footer */
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  display: block;
+  user-select: none;
+  /* Permitir manipulación directa del scroll */
+  cursor: grab;
+  /* Mejorar la experiencia de scroll */
+  -webkit-overflow-scrolling: touch;
+  /* Mejorar la visibilidad del scroll */
+  scrollbar-color: white #57a953;
+  /* Optimizar para rendimiento */
+  will-change: scroll-position;
+  transform: translateZ(0);
+}
+
+#main-scroll-container:active {
+  cursor: grabbing;
+}
+
+#main-scroll-container:hover {
+  cursor: grab;
+}
+
+#main-scroll-container.dragging {
+  cursor: grabbing !important;
+  /* Optimizar durante el drag */
+  will-change: scroll-position;
+  transform: translateZ(0);
+}
+
+/* Permitir interacción con la barra de scroll - MÁS ANCHA Y VISIBLE */
+#main-scroll-container::-webkit-scrollbar {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+#main-scroll-container::-webkit-scrollbar-track {
+  background: #57a953;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 6px;
+  border: 2px solid #2d5a2b;
+}
+
+#main-scroll-container::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  border: 3px solid #57a953;
+  cursor: pointer;
+  min-height: 100px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#main-scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: #2d5a2b;
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#main-scroll-container::-webkit-scrollbar-thumb:active {
+  background-color: #1a3d1a;
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+/* Scrollbar para navegadores basados en Webkit - GENERAL */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+  transition: background-color 0.2s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a8a8;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+/* Parallax Background */
+#parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#mountains-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: auto;
+  min-height: 60vh;
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.1s ease-out;
+  margin-bottom: 25vh;
+}
+
+#clouds-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.clouds {
+  position: absolute;
+  top: 5vh;
+  left: 0;
+  width: 200vw;
+  height: 30vh;
+  background: url("../../app/img/clouds.svg") repeat-x;
+  background-size: contain;
+  opacity: 0.7;
+  animation: clouds-move 60s linear infinite;
+  transition: transform 0.1s ease-out;
+}
+
+.clouds:nth-child(2) {
+  top: 15vh;
+  opacity: 0.5;
+  animation-duration: 90s;
+}
+
+@keyframes clouds-move {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+}
+
+/* Logo Fixed */
+#logo-fixed {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: auto;
+  z-index: 10;
+  pointer-events: none;
+  max-width: 30%;
+  min-width: 300px;
+  text-align: center;
+}
+
+/* Horizontal Scroll */
+#horizontal-scroll {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(100vh - 60px);
+  width: max-content;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  min-width: 100vw;
+}
+
+#school-container {
+  position: relative;
+  display: inline-block;
+}
+
+#school-img {
+  height: calc(100vh - 60px);
+  min-width: unset;
+  object-fit: contain;
+  margin-left: 0;
+  display: block;
+}
+
+/* Menu Links */
+.menu-link {
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 6;
+  font-family: "Futura", sans-serif;
+  font-size: 1.375em;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  background-color: rgba(30, 129, 206, 0.8);
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 2px solid white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.menu-link:hover {
+  background-color: rgba(75, 179, 253, 1);
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Scroll Arrows - POSICIÓN COMPLETAMENTE FIJA */
+.scroll-arrow {
+  position: fixed !important;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  width: 60px;
+  height: 60px;
+  background-color: #96285985;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3em;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  user-select: none;
+  pointer-events: auto;
+  border: 3px solid white;
+  box-shadow: 2px 2px 8px #96285a;
+  /* Posición completamente fija */
+  position: fixed !important;
+  left: auto;
+  right: auto;
+}
+
+.scroll-arrow.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scroll-arrow.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#arrow-left {
+  left: 30px !important;
+  position: fixed !important;
+}
+
+#arrow-right {
+  right: 30px !important;
+  position: fixed !important;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(-50%);
+  }
+  40% {
+    transform: translateY(-50%) scale(1.1);
+  }
+  60% {
+    transform: translateY(-50%) scale(1.05);
+  }
+}
+
+.scroll-arrow:hover {
+  animation: bounce 1s infinite;
+}
+
+/* Modal Dialog Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  transition: background-color 0.3s ease-in-out;
+  pointer-events: auto;
+  /* Asegurar que esté centrado independientemente del scroll */
+  transform: translateZ(0);
+}
+
+.modal-overlay.show {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  pointer-events: auto;
+}
+
+.modal-overlay.animate-in {
+  background-color: rgba(0, 0, 0, 0.7);
+  pointer-events: auto;
+}
+
+.modal-overlay.animate-out {
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: auto;
+}
+
+.modal-dialog {
+  background-color: #064570;
+  border: 4px solid white;
+  border-radius: 8px;
+  padding: 40px;
+  max-width: 500px;
+  width: 70%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1000000;
+  min-width: 300px;
+}
+
+.modal-overlay.animate-in .modal-dialog {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.modal-overlay.animate-out .modal-dialog {
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: 2px solid #36a9e1;
+  border-radius: 50%;
+  color: #36a9e1;
+  font-size: 1.6em;
+  line-height: 1;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background-color: #36a9e1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.modal-content {
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.modal-avatar {
+  width: 160px;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.modal-title {
+  color: white;
+  font-family: "Futura", sans-serif;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.modal-text {
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.modal-button {
+  background: linear-gradient(180deg, #064570 0%, #022b41 100%);
+  color: white;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 12px 30px;
+  font-family: "Futura", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  margin: auto;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.modal-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.content-section h1 {
+  color: white;
+  font-family: "Futura", sans-serif;
+  font-size: 1.75em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.content-section p {
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* ===== ESTILOS PARA DRAG HORIZONTAL ===== */
+
+/* Feedback visual durante el drag */
+body.dragging {
+  cursor: grabbing !important;
+  user-select: none;
+}
+
+body.dragging * {
+  cursor: grabbing !important;
+  user-select: none;
+}
+
+/* Cursor específico para elementos interactivos durante el drag */
+body.dragging .menu-link {
+  cursor: grabbing !important;
+  pointer-events: none;
+}
+
+body.dragging .scroll-arrow {
+  cursor: grabbing !important;
+  pointer-events: none;
+}
+
+/* Indicador visual de que se puede hacer drag */
+body.index-page {
+  cursor: grab;
+}
+
+body.index-page:active {
+  cursor: grabbing;
+}
+
+/* Mantener dimensiones específicas del logo */
+#logo-fixed {
+  max-width: 30% !important;
+  min-width: 300px !important;
+}
+
+/* Mantener dimensiones específicas de las montañas */
+#mountains-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: auto;
+  min-height: 40vh;
+  pointer-events: none;
+  z-index: 2;
+  transition: width 0.3s;
+  margin-bottom: 35vh;
+}
+
+/* Mantener dimensiones específicas del parallax */
+#parallax-bg {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Mantener dimensiones específicas de la escuela */
+#school-img {
+  height: 100vh !important;
+  object-fit: contain !important;
+}
+
+/* Asegurar que los enlaces mantengan su funcionalidad */
+.menu-link {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+body.dragging .menu-link {
+  pointer-events: none !important;
+}
+
+/* Mejorar la experiencia en dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  body.index-page {
+    cursor: default;
+  }
+
+  body.dragging {
+    cursor: default !important;
+  }
+
+  body.dragging * {
+    cursor: default !important;
+  }
+}
