@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     cards.forEach(c => c.classList.remove('is-flipped'));
                     this.classList.add('is-flipped');
-                    
+
                     // En móvil, abrir automáticamente el modal después de 1 segundo
                     setTimeout(() => {
                         if (this.classList.contains('is-flipped')) {
@@ -90,21 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${description}</p>
         `;
 
-        modal.classList.remove('hide');
+        modal.classList.remove('animate-out');
         modal.classList.add('show');
-        modal.style.display = 'block';
+        setTimeout(() => {
+            modal.classList.add('animate-in');
+        }, 10);
     }
 
     // Función para cerrar el modal
     function closeModal() {
-        modal.classList.remove('show');
-        modal.classList.add('hide');
-        modal.addEventListener('animationend', function handler() {
-            if (modal.classList.contains('hide')) {
-                modal.style.display = 'none';
-            }
-            modal.removeEventListener('animationend', handler);
-        });
+        modal.classList.remove('animate-in');
+        modal.classList.add('animate-out');
+        setTimeout(() => {
+            modal.classList.remove('show', 'animate-out');
+        }, 300);
     }
 
     closeButton.addEventListener('click', closeModal);
