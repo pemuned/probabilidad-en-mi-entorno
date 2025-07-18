@@ -1132,6 +1132,9 @@ body.vasos-game-page .content-container {
 #results-table-vasos tr:nth-child(even) {
   background: #fafbfc;
 }
+#results-table-vasos tr:nth-child(odd) {
+  background: #fff;
+}
 #results-table-vasos tr:hover {
   background: #f5f7fa;
 }
@@ -1323,7 +1326,7 @@ body.vasos-game-page .content-container {
   }
 
   .montyhall-container-animation {
-    top: 120px;
+    top: 80px;
   }
 
   .materials-button-container {
@@ -1428,7 +1431,6 @@ body.vasos-game-page .content-container {
   /* Estilos para game-message en pantallas muy pequeñas */
   .game-message {
     font-size: 1em;
-    padding: 14px 16px;
     margin-bottom: 50px;
     border-width: 2px;
     border-left-width: 6px;

@@ -297,7 +297,7 @@ body.three-cups-page .content-container {
   background-color: #064570;
   border: 4px solid white;
   border-radius: 8px;
-  padding: 40px;
+  padding: 25px;
   max-width: 500px;
   width: 50%;
   position: relative;
@@ -1444,6 +1444,10 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
   }
   .modal-style-text {
     gap: 10px;
+  }
+
+  .modal-text {
+    font-size: 0.95em;
   }
 }
 

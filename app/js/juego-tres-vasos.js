@@ -641,6 +641,8 @@ function updateSelectedCupNumber(idx, changed = false) {
         }
 
         tooltip.style.display = '';
+        tooltip.style.fontSize = '0.8em';
+        tooltip.style.fontWeight = 'normal';
     } else {
         tooltip.style.display = 'none';
     }
