@@ -899,6 +899,39 @@ body.vasos-game-page .content-container {
   --tooltip-arrow-color: #a02a5a;
 }
 
+/* Reglas responsive para el tooltip del vaso seleccionado */
+@media (max-width: 768px) {
+  #selected-cup-number {
+    white-space: normal !important;
+    max-width: 140px !important;
+    min-width: 100px !important;
+    font-size: 0.85em !important;
+    padding: 6px 12px !important;
+    line-height: 1.2 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #selected-cup-number {
+    max-width: 120px !important;
+    min-width: 80px !important;
+    font-size: 0.8em !important;
+    padding: 4px 8px !important;
+    line-height: 1.1 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #selected-cup-number {
+    max-width: 100px !important;
+    min-width: 60px !important;
+    font-size: 0.75em !important;
+    padding: 3px 6px !important;
+  }
+}
+
 #selected-cup-number::after {
   content: "";
   position: absolute;
@@ -1220,6 +1253,39 @@ body.vasos-game-page .content-container {
   opacity: 0.9;
 }
 
+/* Reglas responsive para el tooltip */
+@media (max-width: 768px) {
+  #empty-cup-tooltip {
+    white-space: normal !important;
+    max-width: 120px !important;
+    min-width: 80px !important;
+    font-size: 0.75em !important;
+    padding: 4px 8px !important;
+    line-height: 1.2 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #empty-cup-tooltip {
+    max-width: 100px !important;
+    min-width: 60px !important;
+    font-size: 0.7em !important;
+    padding: 3px 6px !important;
+    line-height: 1.1 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #empty-cup-tooltip {
+    max-width: 80px !important;
+    min-width: 50px !important;
+    font-size: 0.65em !important;
+    padding: 2px 4px !important;
+  }
+}
+
 #empty-cup-tooltip::after {
   content: "";
   position: absolute;
@@ -1341,7 +1407,6 @@ body.vasos-game-page .content-container {
   }
 
   .game-controls-row {
-    flex-direction: column;
     gap: 10px;
   }
 
@@ -1435,6 +1500,10 @@ body.vasos-game-page .content-container {
     border-width: 2px;
     border-left-width: 6px;
   }
+
+  body.vasos-game-page .content-container {
+    padding: 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1455,6 +1524,14 @@ body.vasos-game-page .content-container {
     width: 70px;
     height: 70px;
   }
+
+  .feedback-message {
+    font-size: 0.9em;
+  }
+
+  #feedback-message-vasos {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 360px) {
@@ -1474,5 +1551,42 @@ body.vasos-game-page .content-container {
   .filtr-item img {
     width: 60px;
     height: 60px;
+  }
+}
+
+/* Prevenir scroll horizontal en móvil para las tablas */
+@media (max-width: 768px) {
+  body:not(.index-page) .results-table-container {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  body:not(.index-page) #results-table-vasos {
+    min-width: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  body:not(.index-page) .table-responsive {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  body:not(.index-page) .table-responsive table {
+    min-width: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  body:not(.index-page) .results-table-container {
+    margin-top: 16px !important;
+  }
+
+  body:not(.index-page) #results-table-vasos {
+    font-size: 0.6em !important;
   }
 }

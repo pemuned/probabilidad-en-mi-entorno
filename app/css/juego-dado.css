@@ -168,7 +168,6 @@ body.tournament-page .content-container {
   justify-content: space-between;
   align-items: center;
   margin-top: 0px;
-  flex-wrap: wrap;
   gap: 20px;
   width: 80%;
 }
@@ -1428,6 +1427,16 @@ body.tournament-page .content-container {
 
   .results-table-container {
     font-size: 0.9em;
+  }
+
+  .feedback-text, .tip-box {
+    font-size: 0.85em;
+  }
+
+  #feedback-message,
+  #feedback-message-scene2,
+  #feedback-message-scene3 {
+    flex-direction:column;
   }
 }
 

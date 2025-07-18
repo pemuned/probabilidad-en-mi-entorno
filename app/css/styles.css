@@ -1386,6 +1386,275 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
   color: #c23636;
   font-weight: bold;
 }
+
+/* --- PREVENIR SCROLL HORIZONTAL EN MÓVIL PARA TODAS LAS PÁGINAS EXCEPTO INDEX --- */
+@media (max-width: 768px) {
+  /* Solo aplicar estas reglas si NO es la página index */
+  body:not(.index-page) {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  /* Prevenir scroll horizontal en elementos específicos */
+  body:not(.index-page) * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ajustar elementos que usan 100vw */
+  body:not(.index-page) #parallax-bg,
+  body:not(.index-page) #mountains-bg,
+  body:not(.index-page) #clouds-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Ajustar contenedores de tablas */
+  body:not(.index-page) .analysis-table-container,
+  body:not(.index-page) .table-responsive,
+  body:not(.index-page) .results-table-container {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Ajustar tablas para que no causen scroll horizontal */
+  body:not(.index-page) .analysis-table,
+  body:not(.index-page) table {
+    min-width: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Ajustar contenido de páginas */
+  body:not(.index-page) .page-content {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 15px 100px 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ajustar modales */
+  body:not(.index-page) .modal-overlay,
+  body:not(.index-page) .card-modal-overlay {
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  /* Ajustar contenido de modales */
+  body:not(.index-page) .modal-dialog,
+  body:not(.index-page) .card-modal-content {
+    width: 90% !important;
+    max-width: 90% !important;
+    min-width: auto !important;
+  }
+
+  /* Ajustar elementos de navegación */
+  body:not(.index-page) .header-nav {
+    width: 200px !important;
+    max-width: 200px !important;
+  }
+
+  /* Ajustar elementos de contenido */
+  body:not(.index-page) .content-section {
+    width: 90% !important;
+    max-width: 90% !important;
+  }
+
+  /* Ajustar elementos de análisis */
+  body:not(.index-page) .analysis-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px 15px 18px 15px !important;
+  }
+
+  /* Ajustar elementos de avatar y mensajes */
+  body:not(.index-page) .avatar-message,
+  body:not(.index-page) .modal-style-block {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Ajustar elementos de texto */
+  body:not(.index-page) .page-text,
+  body:not(.index-page) .page-text p,
+  body:not(.index-page) .page-text li,
+  body:not(.index-page) .page-text h1,
+  body:not(.index-page) .page-text h2,
+  body:not(.index-page) .page-text h3 {
+    max-width: 100% !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Ajustar elementos de bloque */
+  body:not(.index-page) blockquote {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ajustar elementos de submenu */
+  body:not(.index-page) .submenu-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Ajustar botones */
+  body:not(.index-page) .modal-style-button,
+  body:not(.index-page) .modal-button,
+  body:not(.index-page) .submenu-button {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ajustar elementos de navegación móvil */
+  body:not(.index-page) .hamburger-menu {
+    width: 60px !important;
+    max-width: 60px !important;
+  }
+
+  /* Ajustar elementos de footer */
+  body:not(.index-page) .page-footer {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Ajustar elementos de header */
+  body:not(.index-page) .page-header {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Ajustar elementos de header-bar */
+  body:not(.index-page) .header-bar,
+  body:not(.index-page) .header-bar-1,
+  body:not(.index-page) .header-bar-2 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Ajustar elementos de header-logo */
+  body:not(.index-page) .header-logo {
+    max-width: 100% !important;
+  }
+
+  body:not(.index-page) .header-logo img {
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  /* Ajustar elementos de navegación */
+  body:not(.index-page) .nav-menu {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  body:not(.index-page) .nav-menu a {
+    max-width: 100% !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Ajustar elementos de dropdown */
+  body:not(.index-page) .dropdown-menu {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Ajustar elementos de referencias */
+  body:not(.index-page) .references-list {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  body:not(.index-page) .references-list li {
+    max-width: 100% !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+/* Reglas adicionales para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  body:not(.index-page) {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  /* Ajustar padding y márgenes para pantallas muy pequeñas */
+  body:not(.index-page) .page-content {
+    padding: 0 10px 100px 10px !important;
+  }
+
+  body:not(.index-page) .analysis-content {
+    padding: 12px 10px 14px 10px !important;
+  }
+
+  /* Ajustar modales para pantallas muy pequeñas */
+  body:not(.index-page) .modal-dialog,
+  body:not(.index-page) .card-modal-content {
+    width: 95% !important;
+    max-width: 95% !important;
+    padding: 20px !important;
+  }
+
+  /* Ajustar elementos de texto para pantallas muy pequeñas */
+  body:not(.index-page) .page-text p {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .page-text li {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .page-text h3 {
+    font-size: 1.1em;
+  }
+  body:not(.index-page) .page-text h2 {
+    font-size: 1.3em;
+  }
+  body:not(.index-page) .page-text h1 {
+    font-size: 1.5em;
+  }
+  body:not(.index-page) .page-text em {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .page-text a {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .page-text blockquote {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .page-text blockquote cite {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .page-text blockquote cite::before {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .page-text blockquote cite::after {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .page-title {
+    font-size: 1.5em;
+  }
+  body:not(.index-page) .avatar-message .message p {
+    font-size: 0.95em;
+  }
+  body:not(.index-page) .modal-style-content {
+    gap: 10px;
+  }
+  body:not(.index-page) .modal-style-text {
+    gap: 10px;
+  }
+
+  body:not(.index-page) .modal-text {
+    font-size: 0.95em;
+  }
+}
+
+/* Reglas para pantallas de 700px */
 @media (max-width: 700px) {
   .analysis-content {
     padding: 16px 2vw 18px 2vw;
@@ -1396,58 +1665,6 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
   }
   .analysis-content h2 {
     font-size: 1.3em;
-  }
-}
-
-@media (max-width: 480px) {
-  .page-text p {
-    font-size: 0.95em;
-  }
-  .page-text li {
-    font-size: 0.95em;
-  }
-  .page-text h3 {
-    font-size: 1.1em;
-  }
-  .page-text h2 {
-    font-size: 1.3em;
-  }
-  .page-text h1 {
-    font-size: 1.5em;
-  }
-  .page-text em {
-    font-size: 0.95em;
-  }
-  .page-text a {
-    font-size: 0.95em;
-  }
-  .page-text blockquote {
-    font-size: 0.95em;
-  }
-  .page-text blockquote cite {
-    font-size: 0.95em;
-  }
-  .page-text blockquote cite::before {
-    font-size: 0.95em;
-  }
-  .page-text blockquote cite::after {
-    font-size: 0.95em;
-  }
-  .page-title {
-    font-size: 1.5em;
-  }
-  .avatar-message .message p {
-    font-size: 0.95em;
-  }
-  .modal-style-content {
-    gap: 10px;
-  }
-  .modal-style-text {
-    gap: 10px;
-  }
-
-  .modal-text {
-    font-size: 0.95em;
   }
 }
 

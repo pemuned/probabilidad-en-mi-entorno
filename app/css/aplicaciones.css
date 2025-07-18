@@ -225,6 +225,28 @@
   transition: background-color 0.3s ease-in-out;
 }
 
+/* Prevenir scroll horizontal en móvil para el modal de tarjetas */
+@media (max-width: 768px) {
+  body:not(.index-page) .card-modal-overlay {
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  body:not(.index-page) .card-modal-content {
+    width: 90% !important;
+    max-width: 90% !important;
+    min-width: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  body:not(.index-page) .card-modal-content {
+    width: 95% !important;
+    max-width: 95% !important;
+    padding: 20px !important;
+  }
+}
+
 .card-modal-overlay.show {
   display: flex;
   background-color: rgba(0, 0, 0, 0.7);
