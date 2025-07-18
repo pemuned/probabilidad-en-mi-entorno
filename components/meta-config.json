@@ -8,7 +8,7 @@
         "og": {
             "title": "Descubriendo la probabilidad en mi entorno",
             "description": "Aplicación educativa sobre probabilidad para estudiantes",
-            "image": "og-image.png",
+            "image": "https://deiverhz.github.io/probabilidad/og-image.png",
             "type": "website",
             "locale": "es_ES",
             "site_name": "UNED"
