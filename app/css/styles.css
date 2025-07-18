@@ -1053,7 +1053,7 @@ blockquote:hover {
     position: fixed;
     top: 0;
     left: 0;
-    width: 200px;
+    width: 250px;
     height: 100%;
     background-color: #064570;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
@@ -1448,12 +1448,6 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
     width: 90% !important;
     max-width: 90% !important;
     min-width: auto !important;
-  }
-
-  /* Ajustar elementos de navegación */
-  body:not(.index-page) .header-nav {
-    width: 200px !important;
-    max-width: 200px !important;
   }
 
   /* Ajustar elementos de contenido */
