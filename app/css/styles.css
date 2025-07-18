@@ -457,10 +457,11 @@ body.three-cups-page .content-container {
 
 .header-logo {
   position: absolute;
-  top: 35%;
+  top: 50px;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+  /* width: 250px; */
 }
 
 .header-logo a {
@@ -1537,7 +1538,6 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
 
   body:not(.index-page) .header-logo img {
     max-width: 100% !important;
-    width: auto !important;
   }
 
   /* Ajustar elementos de navegación */
