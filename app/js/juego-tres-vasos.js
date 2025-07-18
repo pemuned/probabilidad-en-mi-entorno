@@ -458,7 +458,7 @@ function showFinalFeedback() {
         let changedWins = results.filter(r => r.changed && r.win).length;
         let keptWins = results.filter(r => !r.changed && r.win).length;
 
-        msg = `Ha jugado ${MAX_ROUNDS} rondas con una estrategia mixta. Al mantener su elección (${keptCount} veces) acertó ${keptWins} veces, y al cambiar (${changedCount} veces) acertó ${changedWins} veces. Total de aciertos: <strong>${winCount}</strong>.`;
+        msg = `Ha jugado ${MAX_ROUNDS} rondas con una estrategia mixta. Al mantener su elección (${keptCount == 1 ? 'una vez' : `${keptCount} veces`}) acertó ${keptWins == 1 ? 'una vez' : `${keptWins} veces`}, y al cambiar (${changedCount == 1 ? 'una vez' : `${changedCount} veces`}) acertó ${changedWins == 1 ? 'una vez' : `${changedWins} veces`}. Total de aciertos: <strong>${winCount}</strong>.`;
         feedbackClass = 'feedback-message feedback-message-info';
     }
 

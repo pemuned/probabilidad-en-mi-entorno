@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackMessage: (results) => {
                 const hasZero = results.some(r => r.d1 + r.d2 === 0);
                 const hasOne = results.some(r => r.d1 + r.d2 === 1);
-                let msg = '¿Obtuvo un 0 o un 1? En este caso la situación es similar a la de lanzar un dado de seis caras en blanco y la posibilidad de obtener un uno, es decir, estamos ante un <strong>evento imposible</strong>.';
+                let msg = '¿Obtuvo un cero o un uno? En este caso la situación es similar a la de lanzar un dado de seis caras en blanco y la posibilidad de obtener un uno, es decir, estamos ante un <strong>evento imposible</strong>.';
                 if (hasZero || hasOne) {
                     msg = '<strong>¡Atención!</strong> Se obtuvo un 0 o un 1, lo cual no es posible con dos dados numerados del 1 al 6.';
                 }

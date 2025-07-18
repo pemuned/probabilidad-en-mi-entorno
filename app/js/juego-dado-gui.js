@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             maxRolls: 10,
             resultGenerator: () => 0, // Siempre 0 para escena 1
-            feedbackMessage: '<div class="feedback-avatar"><img src="app/img/avatar2.svg" alt="Avatar" /></div><div class="feedback-text"><p>Ahora que ha visto el resultado, ¿logró obtener un uno? Es imposible obtener un resultado diferente a 0, porque las 6 caras del dado tienen un 0. Note que este evento no podría ocurrir. A esto se le llama un <strong>evento imposible</strong>.</p></div>',
+            feedbackMessage: '<div class="feedback-avatar"><img src="app/img/avatar2.svg" alt="Avatar" /></div><div class="feedback-text"><p>Ahora que ha visto el resultado, ¿logró obtener un uno? Es imposible obtener un resultado diferente a cero, porque las seis caras del dado tienen un cero. Este evento no podría ocurrir. A esto se le llama un <strong>evento imposible</strong>.</p></div>',
             feedbackCondition: (results) => results.every(r => r === 0)
         },
         'scene-2': {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             maxRolls: 10,
             resultGenerator: () => 1, // Siempre 1 para escena 2
-            feedbackMessage: '<div class="feedback-avatar"><img src="app/img/avatar2.svg" alt="Avatar" /></div><div class="feedback-text"><p>¿Logró obtener un uno?, ¿en cuántas ocasiones? Es imposible obtener un resultado diferente a 1, porque las 6 caras del dado tienen un 1. Note que, en este caso, en cualquier cara que caiga el dado, se obtendrá como resultado un uno. A esto le denominamos <strong>evento seguro</strong>.</p></div>',
+            feedbackMessage: '<div class="feedback-avatar"><img src="app/img/avatar2.svg" alt="Avatar" /></div><div class="feedback-text"><p>¿Logró obtener un uno?, ¿en cuántas ocasiones? Note que, en este caso, en cualquier cara que caiga el dado, se obtendrá como resultado un uno. A esto le denominamos <strong>evento seguro</strong>.</p></div>',
             feedbackCondition: (results) => results.every(r => r === 1)
         },
         'scene-3': {

@@ -147,6 +147,7 @@ body.tournament-page .content-container {
   flex: 1;
   font-size: 1.25em;
   font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.25;
 }
 
 /* --- Nuevos Estilos --- */
