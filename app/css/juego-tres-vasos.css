@@ -715,78 +715,6 @@ body.vasos-game-page .content-container {
   min-width: 150px;
 }
 
-/* Estilos responsive para pestañas */
-@media (max-width: 768px) {
-  .tabs-container {
-    flex-direction: column;
-    border-bottom: none;
-    border-left: 2px solid #ddd;
-    margin-bottom: 15px;
-  }
-
-  .tab-item {
-    padding: 12px 15px;
-    border-bottom: none;
-    border-left: 3px solid transparent;
-    text-align: left;
-    font-size: 0.95em;
-  }
-
-  .tab-item.active {
-    border-bottom-color: transparent;
-    border-left-color: #064570;
-    background-color: rgba(6, 69, 112, 0.1);
-  }
-
-  .tab-item:hover {
-    background-color: rgba(6, 69, 112, 0.05);
-  }
-
-  .intro-content {
-    padding: 15px 0;
-  }
-
-  .intro-content p {
-    font-size: 1em;
-    text-align: left;
-  }
-
-  .intro-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .intro-buttons .modal-button {
-    width: 100%;
-    max-width: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  .tabs-container {
-    margin-bottom: 10px;
-  }
-
-  .tab-item {
-    padding: 10px 12px;
-    font-size: 0.9em;
-  }
-
-  .intro-content p {
-    font-size: 0.95em;
-  }
-
-  /* Estilos para game-message en pantallas muy pequeñas */
-  .game-message {
-    font-size: 1em;
-    padding: 14px 16px;
-    margin-bottom: 50px;
-    border-width: 2px;
-    border-left-width: 6px;
-  }
-}
-
 /* Estilos para los botones de materiales e instrucciones */
 .materials-button-container {
   display: flex;
@@ -863,48 +791,6 @@ body.vasos-game-page .content-container {
   color: white;
   border: 2px solid white;
   transform: translateY(-2px) scale(1.05);
-}
-
-/* Estilos responsive para el modal de instrucciones */
-@media (max-width: 768px) {
-  .materials-button-container {
-    justify-content: center;
-    margin-bottom: 15px;
-    gap: 16px;
-  }
-
-  .materials-button-container .modal-button {
-    padding: 8px 16px;
-    font-size: 0.9em;
-  }
-
-  .game-controls-row {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .game-controls-row .shuffle-btn {
-    margin: 0;
-  }
-
-  .game-controls-row .modal-button {
-    padding: 8px 16px;
-    font-size: 0.9em;
-  }
-
-  #instructions-modal .modal-content {
-    max-width: 95%;
-    margin: 20px;
-  }
-
-  #instructions-modal .modal-text {
-    font-size: 1em;
-  }
-
-  #start-game-btn {
-    font-size: 1.1em;
-    padding: 12px 30px;
-  }
 }
 
 @keyframes bounceAttention {
@@ -1415,7 +1301,7 @@ body.vasos-game-page .content-container {
   transform: scale(1.1);
 }
 
-/* Responsive design para Filterizr */
+/* Estilos responsive para el modal de instrucciones */
 @media (max-width: 768px) {
   .filter-container {
     gap: 50px; /* Gap reducido en pantallas pequeñas */
@@ -1438,6 +1324,114 @@ body.vasos-game-page .content-container {
 
   .montyhall-container-animation {
     top: 120px;
+  }
+
+  .materials-button-container {
+    justify-content: center;
+    margin-bottom: 15px;
+    gap: 16px;
+  }
+
+  .materials-button-container .modal-button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+
+  .game-controls-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .game-controls-row .shuffle-btn {
+    margin: 0;
+  }
+
+  .game-controls-row .modal-button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+
+  #instructions-modal .modal-content {
+    max-width: 95%;
+    margin: 20px;
+  }
+
+  #instructions-modal .modal-text {
+    font-size: 1em;
+  }
+
+  #start-game-btn {
+    font-size: 1.1em;
+    padding: 12px 30px;
+  }
+
+  .tabs-container {
+    flex-direction: column;
+    border-bottom: none;
+    border-left: 2px solid #ddd;
+    margin-bottom: 15px;
+  }
+
+  .tab-item {
+    padding: 12px 15px;
+    border-bottom: none;
+    border-left: 3px solid transparent;
+    text-align: left;
+    font-size: 0.95em;
+  }
+
+  .tab-item.active {
+    border-bottom-color: transparent;
+    border-left-color: #064570;
+    background-color: rgba(6, 69, 112, 0.1);
+  }
+
+  .tab-item:hover {
+    background-color: rgba(6, 69, 112, 0.05);
+  }
+
+  .intro-content {
+    padding: 15px 0;
+  }
+
+  .intro-content p {
+    font-size: 1em;
+    text-align: left;
+  }
+
+  .intro-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .intro-buttons .modal-button {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabs-container {
+    margin-bottom: 10px;
+  }
+
+  .tab-item {
+    padding: 10px 12px;
+    font-size: 0.9em;
+  }
+
+  .intro-content p {
+    font-size: 0.95em;
+  }
+
+  /* Estilos para game-message en pantallas muy pequeñas */
+  .game-message {
+    font-size: 1em;
+    padding: 14px 16px;
+    margin-bottom: 50px;
+    border-width: 2px;
+    border-left-width: 6px;
   }
 }
 
