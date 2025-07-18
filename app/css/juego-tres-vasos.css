@@ -31,7 +31,6 @@ body.vasos-game-page .content-container {
   padding-left: 16px;
   padding-right: 16px;
   user-select: none;
-  /* border-bottom: solid 15px #715332; */
 }
 
 .table-perspective {
@@ -466,13 +465,6 @@ body.vasos-game-page .content-container {
     min-height: 90px;
     padding-top: 12px;
     padding-bottom: 8px;
-  }
-
-  .table-perspective {
-    max-width: 99vw;
-    min-width: 0;
-    height: 38vw;
-    min-height: 40px;
   }
 
   .cup-3d {

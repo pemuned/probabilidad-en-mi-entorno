@@ -117,8 +117,9 @@ body.tournament-page .content-container {
 
 /* --- Estilos para contenedores Three.js --- */
 .threejs-container {
-  width: 940px;
-  height: 350px;
+  width: 100%;
+  height: auto;
+  max-width: 940px;
   border-radius: 15px;
   overflow: hidden;
   position: relative;

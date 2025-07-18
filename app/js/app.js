@@ -84,7 +84,7 @@ class MetaDataManager {
 
     loadDefaultMetaData() {
         const pageTitle = this.getPageTitle();
-        document.title = pageTitle || 'Descubriendo la probabilidad en mi entorno';
+        document.title = pageTitle;
 
         // Metadatos por defecto
         const defaultMeta = {
@@ -107,13 +107,13 @@ class MetaDataManager {
             ['description', config.description],
             ['keywords', config.keywords],
             ['author', config.author],
-            ['og:title', pageTitle || config.og?.title || 'Descubriendo la probabilidad en mi entorno'],
+            ['og:title', pageTitle || config.og?.title],
             ['og:description', config.og?.description || config.description],
-            ['og:image', config.og?.image || 'app/img/logo.svg'],
+            ['og:image', config.og?.image],
             ['og:url', window.location.href],
-            ['og:type', config.og?.type || 'website'],
-            ['og:locale', config.og?.locale || 'es_ES'],
-            ['og:site_name', config.og?.site_name || 'UNED']
+            ['og:type', config.og?.type],
+            ['og:locale', config.og?.locale],
+            ['og:site_name', config.og?.site_name]
         ];
 
         metaUpdates.forEach(([property, content]) => {

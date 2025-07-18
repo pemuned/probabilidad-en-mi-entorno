@@ -24,10 +24,20 @@ function getContainerSize(containerId) {
         const width = container.offsetWidth;
         const height = container.offsetHeight;
 
+        // Detectar si es dispositivo móvil
+        const isMobile = window.innerWidth <= 768;
+
         // Si el contenedor no tiene dimensiones (no está visible), usar las dimensiones de la pestaña 1
         if (!width || !height) {
             const scene1Container = document.getElementById('threejs-container-scene2d1');
             if (scene1Container) {
+                // En móvil, usar dimensiones fijas para evitar problemas de renderizado
+                if (isMobile) {
+                    return {
+                        width: 427,
+                        height: 250
+                    };
+                }
                 return {
                     width: scene1Container.offsetWidth || 940,
                     height: scene1Container.offsetHeight || 350
@@ -35,11 +45,26 @@ function getContainerSize(containerId) {
             }
         }
 
+        // En móvil, forzar las dimensiones correctas
+        if (isMobile) {
+            return {
+                width: 427,
+                height: 250
+            };
+        }
+
         return {
             width: width || 940,
             height: height || 350
         };
     }
+
+    // Detectar si es dispositivo móvil para el fallback
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        return { width: 427, height: 250 };
+    }
+
     return { width: 940, height: 350 };
 }
 
