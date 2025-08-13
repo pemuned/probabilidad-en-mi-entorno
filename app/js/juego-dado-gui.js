@@ -67,7 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
             rollCount: 0,
             results: [],
             isAnimating: false,
-            isSimulating100: false
+            isSimulating100: false,
+            hasSimulated100: false // Nuevo flag para controlar si ya se usó la simulación
         };
     });
 
@@ -171,17 +172,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         simulate100Rolls() {
             if (this.state.isAnimating) return;
+            if (this.state.hasSimulated100) return; // Evitar múltiples simulaciones
 
             this.state.isSimulating100 = true;
+            this.state.hasSimulated100 = true; // Marcar como ya simulado
             this.state.rollCount = 0;
             this.elements.progressBar.style.width = '0%';
             this.elements.progressLabel.textContent = '0/100';
             this.elements.resultsTable.innerHTML = '';
             this.state.results.length = 0;
 
-            // Deshabilitar botón durante la animación
+            // Deshabilitar botón durante y después de la animación
             if (this.elements.simulateBtn) {
                 this.elements.simulateBtn.disabled = true;
+                this.elements.simulateBtn.textContent = 'Simulación completada';
             }
 
             // Iniciar la simulación directamente sin ejecutar un lanzamiento adicional
@@ -189,10 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         startSimulation() {
-            // Rehabilitar botón al comenzar la simulación
-            if (this.elements.simulateBtn) {
-                this.elements.simulateBtn.disabled = false;
-            }
+            // NO rehabilitar botón - ya está marcado como usado
 
             const totalRolls = 100;
             let currentRoll = 0;
@@ -283,12 +284,17 @@ document.addEventListener('DOMContentLoaded', () => {
             this.elements.feedback.classList.remove('feedback-hidden');
             this.elements.feedback.classList.add('show');
             this.elements.continueBtn.style.display = 'block';
-            this.elements.simulateBtn.style.display = 'inline-block';
+
+            // Solo mostrar el botón si no se ha usado la simulación de 100
+            if (!this.state.hasSimulated100) {
+                this.elements.simulateBtn.style.display = 'inline-block';
+            }
         }
 
         resetScene() {
             this.state.rollCount = 0;
             this.state.results.length = 0;
+            this.state.hasSimulated100 = false; // Resetear el flag de simulación
             this.elements.resultsTable.innerHTML = '';
 
             this.elements.rollBtn.disabled = false;
@@ -307,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.updateProgressBar();
             this.elements.simulateBtn.style.display = 'none';
             this.elements.simulateBtn.disabled = false;
+            this.elements.simulateBtn.textContent = 'Simular 100 lanzamientos'; // Restaurar texto original
             this.state.isAnimating = false;
         }
 

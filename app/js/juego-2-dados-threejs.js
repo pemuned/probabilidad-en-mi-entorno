@@ -533,12 +533,15 @@ function rollDice(sceneType) {
 
 function detectResultWhenStopped(containerId) {
     let stableFrames = 0;
-    const requiredStableFrames = 25; // COPIADO DE JUEGO-1-DADO
+    const requiredStableFrames = 40; // Aumentado de 25 a 40 para mejor estabilidad
     let lastDice1Velocity = { x: 0, y: 0, z: 0 };
     let lastDice1AngularVelocity = { x: 0, y: 0, z: 0 };
     let lastDice2Velocity = { x: 0, y: 0, z: 0 };
     let lastDice2AngularVelocity = { x: 0, y: 0, z: 0 };
-    let minFramesBeforeDetection = 30; // COPIADO DE JUEGO-1-DADO
+
+    // Detectar rendimiento y ajustar timing para laptops lentas
+    const performanceMultiplier = (performance.now() % 100 > 50) ? 1.5 : 1;
+    let minFramesBeforeDetection = Math.floor(60 * performanceMultiplier); // Aumentado y adaptativo
 
     const checkVelocity = () => {
         if (!diceBodies[containerId] || diceBodies[containerId].length < 2) {
@@ -565,19 +568,22 @@ function detectResultWhenStopped(containerId) {
         const dice2VelocityMagnitude = Math.sqrt(dice2.velocity.x * dice2.velocity.x + dice2.velocity.y * dice2.velocity.y + dice2.velocity.z * dice2.velocity.z);
         const dice2AngularMagnitude = Math.sqrt(dice2.angularVelocity.x * dice2.angularVelocity.x + dice2.angularVelocity.y * dice2.angularVelocity.y + dice2.angularVelocity.z * dice2.angularVelocity.z);
 
-        // Umbral COPIADO DE JUEGO-1-DADO
-        const isLowVelocity = dice1VelocityMagnitude < 0.05 && dice1AngularMagnitude < 0.05 &&
-            dice2VelocityMagnitude < 0.05 && dice2AngularMagnitude < 0.05;
+        // Umbrales más estrictos para mayor precisión en laptops lentas
+        const velocityThreshold = 0.03; // Reducido de 0.05 a 0.03
+        const angularThreshold = 0.03;  // Reducido de 0.05 a 0.03
+        const isLowVelocity = dice1VelocityMagnitude < velocityThreshold && dice1AngularMagnitude < angularThreshold &&
+            dice2VelocityMagnitude < velocityThreshold && dice2AngularMagnitude < angularThreshold;
 
-        // Verificar si las velocidades han cambiado muy poco (estable) - COPIADO DE JUEGO-1-DADO
+        // Verificar si las velocidades han cambiado muy poco (estable) - Umbrales más estrictos
         const dice1VelocityChange = Math.abs(dice1VelocityMagnitude - Math.sqrt(lastDice1Velocity.x * lastDice1Velocity.x + lastDice1Velocity.y * lastDice1Velocity.y + lastDice1Velocity.z * lastDice1Velocity.z));
         const dice1AngularChange = Math.abs(dice1AngularMagnitude - Math.sqrt(lastDice1AngularVelocity.x * lastDice1AngularVelocity.x + lastDice1AngularVelocity.y * lastDice1AngularVelocity.y + lastDice1AngularVelocity.z * lastDice1AngularVelocity.z));
 
         const dice2VelocityChange = Math.abs(dice2VelocityMagnitude - Math.sqrt(lastDice2Velocity.x * lastDice2Velocity.x + lastDice2Velocity.y * lastDice2Velocity.y + lastDice2Velocity.z * lastDice2Velocity.z));
         const dice2AngularChange = Math.abs(dice2AngularMagnitude - Math.sqrt(lastDice2AngularVelocity.x * lastDice2AngularVelocity.x + lastDice2AngularVelocity.y * lastDice2AngularVelocity.y + lastDice2AngularVelocity.z * lastDice2AngularVelocity.z));
 
-        const isStable = dice1VelocityChange < 0.005 && dice1AngularChange < 0.005 &&
-            dice2VelocityChange < 0.005 && dice2AngularChange < 0.005; // COPIADO DE JUEGO-1-DADO
+        const changeThreshold = 0.003; // Reducido de 0.005 a 0.003 para mayor precisión
+        const isStable = dice1VelocityChange < changeThreshold && dice1AngularChange < changeThreshold &&
+            dice2VelocityChange < changeThreshold && dice2AngularChange < changeThreshold;
 
         if (isLowVelocity && isStable) {
             stableFrames++;
@@ -591,7 +597,7 @@ function detectResultWhenStopped(containerId) {
         lastDice2Velocity = { x: dice2.velocity.x, y: dice2.velocity.y, z: dice2.velocity.z };
         lastDice2AngularVelocity = { x: dice2.angularVelocity.x, y: dice2.angularVelocity.y, z: dice2.angularVelocity.z };
 
-        // Si ha estado estable por suficientes frames, verificar posición adicional - COPIADO DE JUEGO-1-DADO
+        // Si ha estado estable por suficientes frames, verificar posición adicional y sincronización visual
         if (stableFrames >= requiredStableFrames) {
             // Verificación adicional: asegurar que ambos dados estén en posición estable
             const dice1Position = dice1.position;
@@ -599,30 +605,36 @@ function detectResultWhenStopped(containerId) {
             const dice2Position = dice2.position;
             const dice2Quaternion = dice2.quaternion;
 
-            // Verificar que ambos dados estén cerca de la mesa (no rebotando alto) - COPIADO DE JUEGO-1-DADO
+            // Verificar que ambos dados estén cerca de la mesa (no rebotando alto)
             const isDice1NearTable = dice1Position.y < 1.5;
             const isDice2NearTable = dice2Position.y < 1.5;
 
-            // Verificar que las rotaciones sean estables (no girando) - COPIADO DE JUEGO-1-DADO
+            // Verificar que las rotaciones sean estables (no girando)
             const dice1RotationStability = Math.abs(dice1Quaternion.x) + Math.abs(dice1Quaternion.y) + Math.abs(dice1Quaternion.z) + Math.abs(dice1Quaternion.w - 1);
             const dice2RotationStability = Math.abs(dice2Quaternion.x) + Math.abs(dice2Quaternion.y) + Math.abs(dice2Quaternion.z) + Math.abs(dice2Quaternion.w - 1);
             const isDice1RotationStable = dice1RotationStability < 0.1;
             const isDice2RotationStable = dice2RotationStability < 0.1;
 
-            if (isDice1NearTable && isDice2NearTable && isDice1RotationStable && isDice2RotationStable) {
-                isAnimating[containerId] = false;
-                // Detectar ambos dados
-                const result1 = detectDiceResult(dice1);
-                const result2 = detectDiceResult(dice2);
-                if (onDiceResultCallback) {
-                    onDiceResultCallback({ d1: result1, d2: result2 });
-                }
-                if (onDiceAnimationEndCallback) {
-                    onDiceAnimationEndCallback();
-                }
+            // NUEVA: Verificación de sincronización visual-física
+            const visualSync = checkVisualPhysicsSync(containerId);
+
+            if (isDice1NearTable && isDice2NearTable && isDice1RotationStable && isDice2RotationStable && visualSync) {
+                // Esperar un frame adicional para asegurar sincronización completa
+                setTimeout(() => {
+                    isAnimating[containerId] = false;
+                    // Detectar ambos dados con confirmación
+                    const result1 = detectDiceResultWithConfirmation(dice1, containerId);
+                    const result2 = detectDiceResultWithConfirmation(dice2, containerId);
+                    if (onDiceResultCallback) {
+                        onDiceResultCallback({ d1: result1, d2: result2 });
+                    }
+                    if (onDiceAnimationEndCallback) {
+                        onDiceAnimationEndCallback();
+                    }
+                }, 100); // 100ms adicionales para sincronización
                 return;
             } else {
-                // Si no están en posición estable, resetear contadores y continuar - COPIADO DE JUEGO-1-DADO
+                // Si no están en posición estable o no hay sincronización, resetear contadores y continuar
                 stableFrames = 0;
             }
         }
@@ -634,12 +646,13 @@ function detectResultWhenStopped(containerId) {
 
     checkVelocity();
 
-    // Backup timeout más largo para casos problemáticos - COPIADO DE JUEGO-1-DADO
+    // Backup timeout más largo para casos problemáticos - Aumentado para laptops lentas
+    const backupTimeout = Math.floor(5000 * performanceMultiplier); // 5-7.5 segundos según rendimiento
     setTimeout(() => {
         if (isAnimating[containerId]) {
-            // Detectar ambos dados
-            const result1 = detectDiceResult(diceBodies[containerId][0]);
-            const result2 = detectDiceResult(diceBodies[containerId][1]);
+            // Detectar ambos dados con confirmación adicional
+            const result1 = detectDiceResultWithConfirmation(diceBodies[containerId][0], containerId);
+            const result2 = detectDiceResultWithConfirmation(diceBodies[containerId][1], containerId);
             isAnimating[containerId] = false;
             if (onDiceResultCallback) {
                 onDiceResultCallback({ d1: result1, d2: result2 });
@@ -648,7 +661,77 @@ function detectResultWhenStopped(containerId) {
                 onDiceAnimationEndCallback();
             }
         }
-    }, 3500); // COPIADO DE JUEGO-1-DADO
+    }, backupTimeout);
+}
+
+// NUEVA: Función para verificar sincronización entre visual y física
+function checkVisualPhysicsSync(containerId) {
+    if (!diceGroups[containerId] || !diceBodies[containerId] || diceBodies[containerId].length < 2) {
+        return false;
+    }
+
+    const visualDice1 = diceGroups[containerId].children[0];
+    const visualDice2 = diceGroups[containerId].children[1];
+    const physicalDice1 = diceBodies[containerId][0];
+    const physicalDice2 = diceBodies[containerId][1];
+
+    // Verificar que las posiciones visuales y físicas estén sincronizadas
+    const positionTolerance = 0.1;
+    const rotationTolerance = 0.1;
+
+    const pos1Diff = visualDice1.position.distanceTo(physicalDice1.position);
+    const pos2Diff = visualDice2.position.distanceTo(physicalDice2.position);
+
+    const quat1Diff = Math.abs(
+        visualDice1.quaternion.x - physicalDice1.quaternion.x +
+        visualDice1.quaternion.y - physicalDice1.quaternion.y +
+        visualDice1.quaternion.z - physicalDice1.quaternion.z +
+        visualDice1.quaternion.w - physicalDice1.quaternion.w
+    );
+
+    const quat2Diff = Math.abs(
+        visualDice2.quaternion.x - physicalDice2.quaternion.x +
+        visualDice2.quaternion.y - physicalDice2.quaternion.y +
+        visualDice2.quaternion.z - physicalDice2.quaternion.z +
+        visualDice2.quaternion.w - physicalDice2.quaternion.w
+    );
+
+    return pos1Diff < positionTolerance && pos2Diff < positionTolerance &&
+        quat1Diff < rotationTolerance && quat2Diff < rotationTolerance;
+}
+
+// NUEVA: Función de detección con confirmación múltiple
+function detectDiceResultWithConfirmation(diceBody, containerId) {
+    // Realizar múltiples detecciones para confirmar resultado
+    const results = [];
+
+    for (let i = 0; i < 3; i++) {
+        const result = detectDiceResult(diceBody);
+        results.push(result);
+    }
+
+    // Si todos los resultados coinciden, usar ese valor
+    if (results[0] === results[1] && results[1] === results[2]) {
+        return results[0];
+    }
+
+    // Si hay discrepancia, usar el resultado más común
+    const resultCounts = {};
+    results.forEach(result => {
+        resultCounts[result] = (resultCounts[result] || 0) + 1;
+    });
+
+    let mostCommonResult = results[0];
+    let maxCount = 0;
+
+    for (const [result, count] of Object.entries(resultCounts)) {
+        if (count > maxCount) {
+            maxCount = count;
+            mostCommonResult = parseInt(result);
+        }
+    }
+
+    return mostCommonResult;
 }
 
 function detectDiceResult(diceBody) {
@@ -760,8 +843,7 @@ function detectDiceResultWithRaycast(diceBody) {
         }
     }
 
-    return null;
-
+    // Si no hay intersección válida, retornar null
     return null;
 }
 
@@ -801,53 +883,57 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
 }
 
 function detectAlternativeResult(quaternion) {
-    const euler = new THREE.Euler().setFromQuaternion(quaternion);
+    // Método mejorado: usar vectores de cara directamente
+    const faces = [
+        { value: 1, normal: new THREE.Vector3(0, 1, 0) },
+        { value: 2, normal: new THREE.Vector3(0, -1, 0) },
+        { value: 3, normal: new THREE.Vector3(0, 0, 1) },
+        { value: 4, normal: new THREE.Vector3(0, 0, -1) },
+        { value: 5, normal: new THREE.Vector3(1, 0, 0) },
+        { value: 6, normal: new THREE.Vector3(-1, 0, 0) }
+    ];
 
-    // Normalizar ángulos a 0-360 grados
+    const upVector = new THREE.Vector3(0, 1, 0);
+    let maxDot = -1;
+    let result = 1;
+
+    faces.forEach(face => {
+        const rotatedNormal = face.normal.clone().applyQuaternion(quaternion);
+        const dot = rotatedNormal.dot(upVector);
+
+        if (dot > maxDot) {
+            maxDot = dot;
+            result = face.value;
+        }
+    });
+
+    // Solo retornar resultado si hay confianza suficiente (umbral más alto)
+    if (maxDot > 0.8) {
+        return result;
+    }
+
+    // Fallback: método de ángulos con umbrales más estrictos
+    const euler = new THREE.Euler().setFromQuaternion(quaternion);
     const x = ((euler.x * 180 / Math.PI) % 360 + 360) % 360;
     const y = ((euler.y * 180 / Math.PI) % 360 + 360) % 360;
     const z = ((euler.z * 180 / Math.PI) % 360 + 360) % 360;
 
-    // Determinar qué cara está más orientada hacia arriba basándose en los ángulos
-    // Usar un umbral más permisivo para evitar resultados incorrectos
+    // Usar umbrales más estrictos (20 grados en lugar de 30)
+    if (Math.abs(x) < 20 || Math.abs(x) > 340) return 1;
+    if (Math.abs(x) > 160 && Math.abs(x) < 200) return 2;
+    if (Math.abs(z) < 20 || Math.abs(z) > 340) return 3;
+    if (Math.abs(z) > 160 && Math.abs(z) < 200) return 4;
+    if (Math.abs(y) < 20 || Math.abs(y) > 340) return 5;
+    if (Math.abs(y) > 160 && Math.abs(y) < 200) return 6;
 
-    // Rotación en X (arriba/abajo)
-    if (Math.abs(x) < 30 || Math.abs(x) > 330) {
-        return 1; // Cara 1 hacia arriba
-    } else if (Math.abs(x) > 150 && Math.abs(x) < 210) {
-        return 2; // Cara 2 hacia arriba
-    }
-
-    // Rotación en Z (frente/atrás)
-    if (Math.abs(z) < 30 || Math.abs(z) > 330) {
-        return 3; // Cara 3 hacia arriba
-    } else if (Math.abs(z) > 150 && Math.abs(z) < 210) {
-        return 4; // Cara 4 hacia arriba
-    }
-
-    // Rotación en Y (derecha/izquierda)
-    if (Math.abs(y) < 30 || Math.abs(y) > 330) {
-        return 5; // Cara 5 hacia arriba
-    } else if (Math.abs(y) > 150 && Math.abs(y) < 210) {
-        return 6; // Cara 6 hacia arriba
-    }
-
-    // Si no se puede determinar claramente, usar el valor más cercano
-    const angles = [x, y, z];
-    const minAngle = Math.min(...angles.map(angle => Math.min(angle, 360 - angle)));
-
-    if (minAngle === Math.min(x, 360 - x)) {
-        return x < 180 ? 1 : 2;
-    } else if (minAngle === Math.min(z, 360 - z)) {
-        return z < 180 ? 3 : 4;
-    } else {
-        return y < 180 ? 5 : 6;
-    }
+    // Último recurso: devolver el resultado del método de producto punto
+    return result;
 }
 
 function isDiceStopped(diceBody) {
-    const velocityThreshold = 0.05;
-    const angularThreshold = 0.05;
+    // Umbrales más estrictos para mayor precisión en la detección
+    const velocityThreshold = 0.03; // Reducido de 0.05 a 0.03
+    const angularThreshold = 0.03;  // Reducido de 0.05 a 0.03
 
     return Math.abs(diceBody.velocity.x) < velocityThreshold &&
         Math.abs(diceBody.velocity.y) < velocityThreshold &&
