@@ -1590,3 +1590,31 @@ body.vasos-game-page .content-container {
     font-size: 0.6em !important;
   }
 }
+
+/* Estilos para fracciones matemáticas en la sección de análisis */
+#analysis sup,
+.analysis-section sup {
+  font-size: 0.8em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+#analysis sub,
+.analysis-section sub {
+  font-size: 0.8em;
+  vertical-align: sub;
+  line-height: 0;
+}
+
+#analysis sup + .fraction-slash + sub,
+.analysis-section sup + .fraction-slash + sub {
+  margin-left: 0.1em;
+}
+
+/* Mejorar la apariencia de las fracciones en texto en negrita */
+#analysis strong sup,
+#analysis strong sub,
+.analysis-section strong sup,
+.analysis-section strong sub {
+  font-weight: bold;
+}

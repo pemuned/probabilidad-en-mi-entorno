@@ -46,15 +46,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.slider-slide');
     const leftArrow = document.getElementById('slider-left');
     const rightArrow = document.getElementById('slider-right');
+    const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
 
     function showSlide(index) {
         slides.forEach(slide => slide.classList.remove('active'));
         slides[index].classList.add('active');
 
+        // Actualizar dots
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[index]) {
+            dots[index].classList.add('active');
+        }
+
         // Actualizar estado de las flechas
         leftArrow.disabled = index === 0;
         rightArrow.disabled = index === slides.length - 1;
+
+        // Controlar animación de pulso en la flecha derecha
+        if (index === slides.length - 1) {
+            rightArrow.style.animation = 'none';
+        } else {
+            rightArrow.style.animation = 'pulse 2s infinite';
+        }
+    }
+
+    function goToSlide(index) {
+        if (index >= 0 && index < slides.length) {
+            currentSlide = index;
+            showSlide(currentSlide);
+        }
     }
 
     function nextSlide() {
@@ -73,6 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (leftArrow) leftArrow.addEventListener('click', prevSlide);
     if (rightArrow) rightArrow.addEventListener('click', nextSlide);
+
+    // Event listeners para los dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            goToSlide(index);
+        });
+    });
 
     // Inicializar estado de las flechas
     showSlide(0);
@@ -127,28 +155,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const feedbackMessages = {
         1: {
-            true: "<h3>Incorrecto</h3> La posibilidad de obtener un número mayor que 5 es que salga el 6, mientras que las posibilidades de obtener un número primo son que salga el 2, 3 ó 5.",
-            false: "<h3>¡Correcto!</h3> Es falso, porque la posibilidad de obtener un número mayor que 5 es que salga el 6, mientras que las posibilidades de obtener un número primo son que salga el 2, 3 ó 5."
+            true: "<h3>🔴 Incorrecto</h3> La posibilidad de obtener un número mayor que 5 es que salga el 6, mientras que las posibilidades de obtener un número primo son que salga el 2, 3 ó 5. Por lo tanto, su selección no fue correcta.",
+            false: "<h3>🟢 ¡Correcto!</h3> Es falso, porque la posibilidad de obtener un número mayor que 5 es que salga el 6, mientras que las posibilidades de obtener un número primo son que salga el 2, 3 ó 5."
         },
         2: {
-            true: "<h3>¡Correcto!</h3> ¡Correcto! La posibilidad de que al lanzar el dado se obtenga como resultado el 1 o un número mayor es más probable a que se obtenga un número impar.",
-            false: "<h3>Incorrecto</h3> La posibilidad de que al lanzar el dado se obtenga como resultado el 1 o un número mayor es más probable a que se obtenga un número impar."
+            true: "<h3>🟢 ¡Correcto!</h3> ¡Correcto! La posibilidad de que al lanzar el dado se obtenga como resultado el 1 o un número mayor es más probable a que se obtenga un número impar.",
+            false: "<h3>🔴 Incorrecto</h3> La posibilidad de que al lanzar el dado se obtenga como resultado el 1 o un número mayor es más probable a que se obtenga un número impar. Por lo tanto, su selección no fue correcta."
         },
         3: {
-            true: "<h3>¡Correcto!</h3> ¡Correcto! Es más probable obtener un número igual o mayor al 1 que obtener como resultado el 7, el cual es un que no está en ninguna de las caras del dado.",
-            false: "<h3>Incorrecto</h3> Es más probable obtener un número igual o mayor al 1 que obtener como resultado el 7, el cual no está en ninguna de las caras del dado."
+            true: "<h3>🟢 ¡Correcto!</h3> ¡Correcto! Es más probable obtener un número igual o mayor al 1 que obtener como resultado el 7, el cual es un que no está en ninguna de las caras del dado.",
+            false: "<h3>🔴 Incorrecto</h3> Es más probable obtener un número igual o mayor al 1 que obtener como resultado el 7, el cual no está en ninguna de las caras del dado. Por lo tanto, su selección no fue correcta."
         },
         4: {
-            true: "<h3>¡Correcto!</h3> ¡Muy bien! La probabilidad de obtener un número primo es de 3/6, misma que la de obtener un número impar.",
-            false: "<h3>Incorrecto</h3> La probabilidad de obtener un número primo es de 3/6, misma que la de obtener un número impar."
+            true: "<h3>🟢 ¡Correcto!</h3> ¡Muy bien! La probabilidad de obtener un número primo es de <sup>3</sup>&frasl;<sub>6</sub>, misma que la de obtener un número impar.",
+            false: "<h3>🔴 Incorrecto</h3> La probabilidad de obtener un número primo es de <sup>3</sup>&frasl;<sub>6</sub>, misma que la de obtener un número impar. Por lo tanto, su selección no fue correcta."
         },
         5: {
-            true: "<h3>¡Correcto!</h3> ¡Excelente! La probabilidad de obtener un número mayor que 5 es que salga un 6, por lo que sería un evento que puede suceder.",
-            false: "<h3>Incorrecto</h3> La probabilidad de obtener un número mayor que 5 es que salga un 6, por lo que sería un evento que puede suceder."
+            true: "<h3>🟢 ¡Correcto!</h3> ¡Excelente! La probabilidad de obtener un número mayor que 5 es que salga un 6, por lo que sería un evento que puede suceder.",
+            false: "<h3>🔴 Incorrecto</h3> La probabilidad de obtener un número mayor que 5 es que salga un 6, por lo que sería un evento que puede suceder. Por lo tanto, su selección no fue correcta."
         },
         6: {
-            true: "<h3>Incorrecto</h3> Existe la probabilidad de obtener un número primo, ya sea 2, 3 ó 5.",
-            false: "<h3>¡Correcto!</h3> ¡Muy bien hecho! Falso es la opción correcta porque sí existe la probabilidad de obtener un número primo, ya sea 2, 3 ó 5."
+            true: "<h3>🔴 Incorrecto</h3> Existe la probabilidad de obtener un número primo, ya sea 2, 3 ó 5. Por lo tanto, su selección no fue correcta.",
+            false: "<h3>🟢 ¡Correcto!</h3> ¡Muy bien hecho! Falso es la opción correcta porque sí existe la probabilidad de obtener un número primo, ya sea 2, 3 ó 5."
         }
     };
 
@@ -199,31 +227,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 correctAnswers.add(questionNumber);
             }
 
-            // Deshabilitar todos los botones de la pregunta
-            questionSlide.querySelectorAll('.question-btn').forEach(b => {
+            // Obtener todos los botones de la pregunta
+            const allBtns = questionSlide.querySelectorAll('.question-btn');
+
+            // Deshabilitar todos los botones
+            allBtns.forEach(b => {
                 b.disabled = true;
+            });
+
+            // Marcar el botón seleccionado
+            this.classList.add('selected');
+
+            // Encontrar y marcar la respuesta correcta con parpadeo
+            const correctBtn = Array.from(allBtns).find(b => b.dataset.correct === 'true');
+            if (correctBtn) {
+                correctBtn.classList.add('correct-answer');
+            }
+
+            // Si la respuesta seleccionada es incorrecta, marcarla como tal
+            if (!isCorrect) {
+                this.classList.add('incorrect-selected');
+            }
+
+            // Aplicar estilos legacy para compatibilidad
+            allBtns.forEach(b => {
                 if (b === this) {
                     b.classList.add(isCorrect ? 'correct' : 'incorrect');
-                    b.classList.add('chosen'); // Marcar como elegido
+                    b.classList.add('chosen');
                 } else {
                     b.classList.add(isCorrect ? 'incorrect' : 'correct');
                 }
             });
 
-            // Mostrar feedback
-            const feedbackArea = questionSlide.querySelector('.feedback-area');
-            const feedbackMessage = questionSlide.querySelector('.feedback-message');
-            const answer = isTrue ? 'true' : 'false';
-            feedbackMessage.innerHTML = feedbackMessages[questionNumber][answer];
-            feedbackArea.style.display = 'block';
+            // Mostrar feedback después de un breve delay para que se vean los efectos
+            setTimeout(() => {
+                const feedbackArea = questionSlide.querySelector('.feedback-area');
+                const feedbackMessage = questionSlide.querySelector('.feedback-message');
+                const answer = isTrue ? 'true' : 'false';
+                feedbackMessage.innerHTML = feedbackMessages[questionNumber][answer];
+                feedbackArea.style.display = 'block';
 
-            // Actualizar estado de las flechas después de responder
-            showQuestion(currentQuestion);
+                // Actualizar estado de las flechas después de responder
+                showQuestion(currentQuestion);
 
-            // Si es la última pregunta (pregunta 6), mostrar el resumen final
-            if (questionNumber === 6) {
-                showFinalScore();
-            }
+                // Si es la última pregunta (pregunta 6), mostrar el resumen final
+                if (questionNumber === 6) {
+                    showFinalScore();
+                }
+            }, 1000);
         });
     });
 
@@ -276,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.question-slide').forEach(slide => {
             slide.querySelectorAll('.question-btn').forEach(btn => {
                 btn.disabled = false;
-                btn.classList.remove('correct', 'incorrect', 'chosen');
+                btn.classList.remove('correct', 'incorrect', 'chosen', 'selected', 'correct-answer', 'incorrect-selected');
             });
             slide.querySelector('.feedback-area').style.display = 'none';
         });
@@ -335,5 +386,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (document.getElementById('materials-modal-tournament')) {
         initMaterialsModalTournament();
+    }
+
+    // Botón de instrucciones para reabrir el modal de bienvenida
+    const instructionsBtn = document.getElementById('instructions-btn-tournament');
+    if (instructionsBtn) {
+        instructionsBtn.addEventListener('click', () => {
+            welcomeModal.style.display = 'flex';
+            welcomeModal.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            const dialog = welcomeModal.querySelector('.modal-dialog');
+            if (dialog) {
+                dialog.style.transform = 'scale(0.7) translateY(-50px)';
+                dialog.style.opacity = '0';
+            }
+
+            // Animación suave de entrada
+            setTimeout(() => {
+                welcomeModal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                if (dialog) {
+                    dialog.style.transform = 'scale(1) translateY(0)';
+                    dialog.style.opacity = '1';
+                }
+            }, 10);
+        });
     }
 }); 

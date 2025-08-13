@@ -24,11 +24,14 @@
             <div class="modal-content">
                 <img src="app/img/avatar2.svg" alt="Avatar" class="modal-avatar" />
                 <h2 class="modal-title">Torneo de dados</h2>
-                <p class="modal-text">¡Bienvenidos al Torneo de dados! Este evento está diseñado tanto para aficionados
-                    como para expertos en el juego de dados. Será una actividad emocionante para demostrar sus
-                    conocimientos, aprender nuevas estrategias y ganar en un entorno de sana diversión. Evan, Ambar y
-                    Samuel, estudiantes de secundaria, participarán en el torneo donde la competencia está en su punto
-                    más alto.</p>
+                <p class="modal-text">¡Bienvenidos y bienvenidas al Torneo de dados! Este evento está diseñado tanto
+                    para personas aficionadas como para expertas. Evan, Ambar y Samuel, estudiantes de secundaria,
+                    participarán en el torneo.
+                    <br /><br />
+                    En este ejercicio, se presentan las cinco rondas de desafíos, después, nos uniremos al juego
+                    respondiendo preguntas de falso y verdadero. Será una actividad emocionante para demostrar nuestros
+                    conocimientos, aprender nuevas estrategias y ganar en un entorno de sana diversión.
+                </p>
                 <button id="start-tournament-btn" class="modal-button">Continuar</button>
             </div>
         </div>
@@ -41,9 +44,10 @@
         <div class="content-container">
             <h1 class="page-title">Torneo de dados</h1>
 
-            <!-- Botón de Materiales - Siempre disponible -->
+            <!-- Botones de Materiales e Instrucciones - Siempre disponibles -->
             <div class="materials-button-container">
                 <button id="materials-btn-tournament" class="modal-button secondary">Materiales</button>
+                <button id="instructions-btn-tournament" class="modal-button secondary">Instrucciones</button>
             </div>
 
             <!-- Modal de Materiales -->
@@ -171,6 +175,16 @@
                     </div>
                 </div>
                 <button class="slider-arrow slider-arrow-right" id="slider-right">›</button>
+
+                <!-- Dots de navegación -->
+                <div class="slider-dots">
+                    <button class="dot active" data-slide="0"></button>
+                    <button class="dot" data-slide="1"></button>
+                    <button class="dot" data-slide="2"></button>
+                    <button class="dot" data-slide="3"></button>
+                    <button class="dot" data-slide="4"></button>
+                    <button class="dot" data-slide="5"></button>
+                </div>
             </div>
 
             <!-- Slider de Preguntas -->

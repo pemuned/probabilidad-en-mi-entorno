@@ -570,43 +570,26 @@ function updateResultsTableVasos() {
 
     // Agregar fila de totales si hay resultados
     if (results.length > 0) {
-        const totalKeptWins = results.filter(r => !r.changed && r.win).length;
-        const totalKeptLosses = results.filter(r => !r.changed && !r.win).length;
-        const totalChangedWins = results.filter(r => r.changed && r.win).length;
-        const totalChangedLosses = results.filter(r => r.changed && !r.win).length;
-
         const totalRow = document.createElement('tr');
         totalRow.className = 'totals-row';
 
-        // Celda "Total" con colspan
+        // Celda "Total" con colspan para las primeras 6 columnas
         const tdTotal = document.createElement('td');
         tdTotal.textContent = 'Total';
-        tdTotal.colSpan = 4;
+        tdTotal.colSpan = 6;
         tdTotal.style.fontWeight = 'bold';
         tdTotal.style.backgroundColor = '#f8f9fa';
+        tdTotal.style.textAlign = 'center';
         totalRow.appendChild(tdTotal);
 
-        // Total mantener
-        const tdTotalMantener = document.createElement('td');
-        tdTotalMantener.textContent = `${totalKeptWins} ✅ / ${totalKeptLosses} ❌`;
-        tdTotalMantener.style.fontWeight = 'bold';
-        tdTotalMantener.style.backgroundColor = '#f8f9fa';
-        totalRow.appendChild(tdTotalMantener);
-
-        // Total cambiar
-        const tdTotalCambiar = document.createElement('td');
-        tdTotalCambiar.textContent = `${totalChangedWins} ✅ / ${totalChangedLosses} ❌`;
-        tdTotalCambiar.style.fontWeight = 'bold';
-        tdTotalCambiar.style.backgroundColor = '#f8f9fa';
-        totalRow.appendChild(tdTotalCambiar);
-
-        // Total general
+        // Total general (solo la última columna)
         const tdTotalGeneral = document.createElement('td');
         const totalWins = results.filter(r => r.win).length;
         const totalLosses = results.filter(r => !r.win).length;
         tdTotalGeneral.textContent = `${totalWins} ✅ / ${totalLosses} ❌`;
         tdTotalGeneral.style.fontWeight = 'bold';
         tdTotalGeneral.style.backgroundColor = '#f8f9fa';
+        tdTotalGeneral.style.textAlign = 'center';
         totalRow.appendChild(tdTotalGeneral);
 
         resultsTableBody.appendChild(totalRow);
