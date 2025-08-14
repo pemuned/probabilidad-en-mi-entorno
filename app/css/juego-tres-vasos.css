@@ -1591,6 +1591,143 @@ body.vasos-game-page .content-container {
   }
 }
 
+/* --- Responsive para Modales en Dispositivos Móviles (Juego Tres Vasos) --- */
+@media (max-width: 768px) {
+  .modal-dialog {
+    width: 90%;
+    max-width: 450px;
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .modal-title {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+
+  .modal-text {
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .modal-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    min-width: 100px;
+  }
+
+  .modal-avatar {
+    width: 120px;
+    margin: 0 auto 15px;
+  }
+
+  .modal-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.4em;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* Botones específicos del juego de tres vasos */
+  .intro-buttons .modal-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    max-width: 220px;
+  }
+
+  .materials-button-container .modal-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    min-width: 100px;
+  }
+
+  .game-controls-row .modal-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    min-width: 100px;
+  }
+
+  /* Modal de instrucciones específico */
+  #instructions-modal .modal-title {
+    font-size: 1.2em;
+  }
+
+  #instructions-modal .modal-text {
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-dialog {
+    width: 95%;
+    max-width: 350px;
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .modal-title {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+  }
+
+  .modal-text {
+    font-size: 0.85em;
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+
+  .modal-button {
+    font-size: 13px;
+    padding: 8px 16px;
+    min-width: 90px;
+  }
+
+  .modal-avatar {
+    width: 100px;
+    margin: 0 auto 12px;
+  }
+
+  .modal-close {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    top: 8px;
+    right: 8px;
+  }
+
+  /* Botones específicos para pantallas muy pequeñas */
+  .intro-buttons .modal-button {
+    font-size: 13px;
+    padding: 8px 16px;
+    max-width: 200px;
+  }
+
+  .materials-button-container .modal-button {
+    font-size: 13px;
+    padding: 8px 16px;
+    min-width: 80px;
+  }
+
+  .game-controls-row .modal-button {
+    font-size: 13px;
+    padding: 8px 16px;
+    min-width: 80px;
+  }
+
+  /* Modal de instrucciones para pantallas muy pequeñas */
+  #instructions-modal .modal-title {
+    font-size: 1.1em;
+  }
+
+  #instructions-modal .modal-text {
+    font-size: 0.85em;
+    line-height: 1.4;
+  }
+}
+
 /* Estilos para fracciones matemáticas en la sección de análisis */
 #analysis sup,
 .analysis-section sup {

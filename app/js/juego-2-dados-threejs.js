@@ -98,7 +98,7 @@ function initThreeJS(containerId) {
     worlds[containerId].broadphase = new CANNON.NaiveBroadphase();
     worlds[containerId].solver.iterations = 10;
 
-    // Configurar materiales de contacto con mejor rebote para paredes
+    // Configurar materiales de contacto
     const defaultMaterial = new CANNON.Material();
     const defaultContactMaterial = new CANNON.ContactMaterial(
         defaultMaterial,
@@ -109,13 +109,13 @@ function initThreeJS(containerId) {
         }
     );
 
-    // Material de contacto mejorado para paredes con más rebote
+    // Material de contacto para paredes con rebote moderado
     const wallContactMaterial = new CANNON.ContactMaterial(
         defaultMaterial,
         defaultMaterial,
         {
-            friction: 0.0001,
-            restitution: 0.99
+            friction: 0.2, // Aumentado de 0.0001 a 0.2
+            restitution: 0.6 // Reducido de 0.99 a 0.6 para menos rebote
         }
     );
 
@@ -500,18 +500,18 @@ function rollDice(sceneType) {
             const startZ = index === 0 ? -0.5 : 0.5; // Separar ligeramente los dados
             body.position.set(startX, 2.5, startZ);
 
-            // Aplicar velocidad inicial según la dirección
-            const baseVelocity = 6 + Math.random() * 2;
+            // Aplicar velocidad inicial según la dirección - REDUCIDA para equipos lentos
+            const baseVelocity = 3 + Math.random() * 1; // Reducido de 6-8 a 3-4
             const velocidadX = isLeftThrow ? baseVelocity : -baseVelocity; // Positiva desde izquierda, negativa desde derecha
             const velocidadY = 0;
-            const velocidadZ = (Math.random() - 0.5) * 2; // Reducida de 4 a 2
+            const velocidadZ = (Math.random() - 0.5) * 2; // Rango original
 
             body.velocity.set(velocidadX, velocidadY, velocidadZ);
 
-            // Rotación como dado real (reducida para mayor control)
-            const rotX = (Math.random() - 0.5) * 15; // Reducida de 22 a 15
-            const rotY = (Math.random() - 0.5) * 15; // Reducida de 22 a 15
-            const rotZ = (Math.random() - 0.5) * 15; // Reducida de 22 a 15
+            // Rotación como dado real
+            const rotX = (Math.random() - 0.5) * 15; // Valores originales
+            const rotY = (Math.random() - 0.5) * 15; // Valores originales
+            const rotZ = (Math.random() - 0.5) * 15; // Valores originales
 
             body.angularVelocity.set(rotX, rotY, rotZ);
         });
