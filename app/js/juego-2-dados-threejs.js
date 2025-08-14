@@ -109,7 +109,7 @@ function initThreeJS(containerId) {
         }
     );
 
-    // Material de contacto para paredes con rebote moderado
+    // Material de contacto para paredes laterales con rebote moderado
     const wallContactMaterial = new CANNON.ContactMaterial(
         defaultMaterial,
         defaultMaterial,
@@ -173,6 +173,19 @@ function createWalls(containerId) {
     // Detectar si es dispositivo móvil
     const isMobile = window.innerWidth <= 768;
 
+    // Crear material específico para la pared frontal - muy resbaladizo
+    const frontWallMaterial = new CANNON.Material();
+    const defaultMaterial = new CANNON.Material();
+    const frontWallContactMaterial = new CANNON.ContactMaterial(
+        defaultMaterial,
+        frontWallMaterial,
+        {
+            friction: 0.001, // Muy baja fricción para que el dado se deslice
+            restitution: 0.3 // Bajo rebote para evitar que se pegue
+        }
+    );
+    worlds[containerId].addContactMaterial(frontWallContactMaterial);
+
     // Ajustar posiciones de paredes laterales para móviles
     const leftWallX = isMobile ? -4.5 : -7;    // Más cerca del centro en móviles
     const rightWallX = isMobile ? 4.5 : 7;     // Más cerca del centro en móviles  // Backup walls también más cerca
@@ -189,14 +202,15 @@ function createWalls(containerId) {
     });
     const wallFrontMesh = new THREE.Mesh(wallFrontGeometry, wallFrontMaterial);
     wallFrontMesh.position.set(0, 2, 4.2);
-    wallFrontMesh.rotation.x = 0.2;
+    wallFrontMesh.rotation.x = 0.3; // Aumentada de 0.2 a 0.3 para mayor inclinación
     scenes[containerId].add(wallFrontMesh);
 
     const wallFrontShape = new CANNON.Box(new CANNON.Vec3(7, 4, 0.3));
     const wallFrontBody = new CANNON.Body({ mass: 0 });
     wallFrontBody.addShape(wallFrontShape);
+    wallFrontBody.material = frontWallMaterial; // Asignar material específico para que se deslice
     wallFrontBody.position.set(0, 2, 4.2);
-    wallFrontBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), 0.2);
+    wallFrontBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), 0.3); // Aumentada de 0.2 a 0.3
     worlds[containerId].add(wallFrontBody);
 
     // Back wall (Z negative) - tilted inward
