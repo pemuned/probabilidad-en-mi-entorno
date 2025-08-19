@@ -753,6 +753,12 @@ function detectResultWithRaycast(containerId) {
     // Realizar el raycast solo contra el ceiling
     const intersects = raycaster.intersectObject(ceiling);
 
+    // DEBUG: Visualizar el ray (activar/desactivar según necesidad)
+    const enableRayDebug = true; // Cambiar a false para desactivar debug
+    if (enableRayDebug) {
+        visualizeRay(containerId, rayOrigin, rayDirection, intersects.length > 0);
+    }
+
     if (intersects.length > 0) {
         const hitPoint = intersects[0].point;
         const diceCenter = dicePosition;
@@ -792,34 +798,77 @@ function detectResultWithRaycast(containerId) {
 }
 
 function visualizeRay(containerId, origin, direction, hit) {
-    // Remover rayo anterior si existe
-    const existingRay = scenes[containerId].children.find(child => child.isRayDebug);
+    // Crear un ID único basado en la posición del dado para evitar conflictos
+    const rayId = `ray_${Math.round(origin.x * 10)}_${Math.round(origin.z * 10)}`;
+
+    // Remover solo el rayo anterior de este dado específico (basado en posición)
+    const existingRay = scenes[containerId].children.find(child =>
+        child.isRayDebug && child.userData.rayId === rayId
+    );
     if (existingRay) {
         scenes[containerId].remove(existingRay);
     }
 
+    // Asegurar que origin y direction sean THREE.Vector3
+    const rayOrigin = new THREE.Vector3(origin.x, origin.y, origin.z);
+    const rayDirection = new THREE.Vector3(direction.x, direction.y, direction.z);
+
     // Crear geometría del rayo
     const rayGeometry = new THREE.BufferGeometry().setFromPoints([
-        origin,
-        origin.clone().add(direction.clone().multiplyScalar(10))
+        rayOrigin,
+        rayOrigin.clone().add(rayDirection.clone().multiplyScalar(10))
     ]);
 
-    // Material del rayo (rojo si no hit, verde si hit)
+    // Material del rayo con colores más distintivos
     const rayMaterial = new THREE.LineBasicMaterial({
         color: hit ? 0x00ff00 : 0xff0000,
-        linewidth: 2
+        linewidth: 200, // Más grueso para mejor visibilidad
+        transparent: true,
+        opacity: 0.8
     });
 
     const rayLine = new THREE.Line(rayGeometry, rayMaterial);
-    rayLine.isRayDebug = true; // Marcar para poder removerlo después
+    rayLine.isRayDebug = true;
+    rayLine.userData = {
+        rayId: rayId,
+        origin: origin,
+        timestamp: Date.now(),
+        hit: hit
+    };
     scenes[containerId].add(rayLine);
 
-    // Remover el rayo después de 2 segundos
-    setTimeout(() => {
-        if (scenes[containerId] && scenes[containerId].children.includes(rayLine)) {
-            scenes[containerId].remove(rayLine);
+    // Animación de difuminado gradual
+    const fadeStartTime = Date.now();
+    const visibleDuration = 3000; // 3 segundos visible
+    const fadeDuration = 2000; // 2 segundos de difuminado
+    const totalDuration = visibleDuration + fadeDuration;
+
+    const fadeAnimation = () => {
+        const elapsed = Date.now() - fadeStartTime;
+
+        if (elapsed < visibleDuration) {
+            // Fase visible: mantener opacidad completa
+            rayLine.material.opacity = 0.8;
+        } else if (elapsed < totalDuration) {
+            // Fase de difuminado: reducir opacidad gradualmente
+            const fadeProgress = (elapsed - visibleDuration) / fadeDuration;
+            rayLine.material.opacity = 0.8 * (1 - fadeProgress);
+        } else {
+            // Fin de la animación: remover el rayo
+            if (scenes[containerId] && scenes[containerId].children.includes(rayLine)) {
+                scenes[containerId].remove(rayLine);
+            }
+            return;
         }
-    }, 2000);
+
+        // Continuar la animación si el rayo aún existe
+        if (scenes[containerId] && scenes[containerId].children.includes(rayLine)) {
+            requestAnimationFrame(fadeAnimation);
+        }
+    };
+
+    // Iniciar la animación de difuminado
+    fadeAnimation();
 }
 
 function detectAlternativeResult(quaternion) {
