@@ -912,7 +912,7 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
         if (scenes[containerId] && scenes[containerId].children.includes(rayLine)) {
             scenes[containerId].remove(rayLine);
         }
-    }, 5000);
+    }, 2000);
 }
 
 function detectAlternativeResult(quaternion) {
