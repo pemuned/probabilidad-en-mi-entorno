@@ -892,8 +892,8 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
     // Material del rayo con colores más distintivos
     const rayMaterial = new THREE.LineBasicMaterial({
         color: hit ? 0x00ff00 : 0xff0000,
-        linewidth: 14, // Aún más grueso
-        transparent: true,
+        linewidth: 50, // Aún más grueso
+        transparent: false,
         opacity: 0.8
     });
 
@@ -911,7 +911,7 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
     setTimeout(() => {
         if (scenes[containerId] && scenes[containerId].children.includes(rayLine)) {
             //El raycast se desvanecerá y luego se eliminará
-            const fadeOutDuration = 1000;
+            const fadeOutDuration = 2000;
             rayLine.material.opacity = 0.5; // Comenzar con opacidad 0.5
             const fadeOutInterval = setInterval(() => {
                 rayLine.material.opacity -= 0.05;
@@ -921,7 +921,7 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
                 }
             }, fadeOutDuration / 10);
         }
-    }, 1000);
+    }, 2000);
 }
 
 function detectAlternativeResult(quaternion) {
