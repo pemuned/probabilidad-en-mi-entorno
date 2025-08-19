@@ -332,7 +332,7 @@ function createDice(containerId, sceneType = 'scene-2d-1') {
 }
 
 function createSingleDice(sceneType, xOffset, zOffset) {
-    const diceGeometry = new THREE.BoxGeometry(1, 1, 1);
+    const diceGeometry = new THREE.BoxGeometry(1.2, 1.2, 1.2); // Aumentado de 1x1x1 a 1.2x1.2x1.2
 
     // Use the same color as scene-3 in juego-1-dado (light gray)
     const diceColor = 0xdadada; // Light gray color like scene-3
@@ -343,8 +343,8 @@ function createSingleDice(sceneType, xOffset, zOffset) {
     diceMesh.castShadow = true;
     diceMesh.receiveShadow = true;
 
-    // Create physics body
-    const diceShape = new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5));
+    // Create physics body - también aumentado para coincidir
+    const diceShape = new CANNON.Box(new CANNON.Vec3(0.6, 0.6, 0.6)); // Aumentado de 0.5x0.5x0.5 a 0.6x0.6x0.6
     const diceBody = new CANNON.Body({ mass: 1 });
     diceBody.addShape(diceShape);
     diceBody.position.set(xOffset, 3, zOffset);
@@ -356,114 +356,114 @@ function createSingleDice(sceneType, xOffset, zOffset) {
 }
 
 function createNormalDice(diceGroup) {
-    const dotGeometry = new THREE.CircleGeometry(0.08, 16);
+    const dotGeometry = new THREE.CircleGeometry(0.12, 16); // Aumentado de 0.08 a 0.12
     const dotMaterial = new THREE.MeshLambertMaterial({ color: 0x000000 });
 
-    // Face 1 (1 dot) - Top face
+    // Face 1 (1 dot) - Top face - ajustado para dado más grande
     const dot1 = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot1.position.set(0, 0.51, 0);
+    dot1.position.set(0, 0.61, 0); // Aumentado de 0.51 a 0.61
     dot1.rotation.x = -Math.PI / 2;
     diceGroup.add(dot1);
 
-    // Face 2 (2 dots) - Bottom face
+    // Face 2 (2 dots) - Bottom face - ajustado para dado más grande
     const dot2a = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot2a.position.set(-0.25, -0.51, 0.25);
+    dot2a.position.set(-0.3, -0.61, 0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot2a.rotation.x = Math.PI / 2;
     diceGroup.add(dot2a);
 
     const dot2b = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot2b.position.set(0.25, -0.51, -0.25);
+    dot2b.position.set(0.3, -0.61, -0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot2b.rotation.x = Math.PI / 2;
     diceGroup.add(dot2b);
 
-    // Face 3 (3 dots) - Front face
+    // Face 3 (3 dots) - Front face - ajustado para dado más grande
     const dot3a = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot3a.position.set(0, 0, 0.51);
+    dot3a.position.set(0, 0, 0.61); // Aumentado de 0.51 a 0.61
     diceGroup.add(dot3a);
 
     const dot3b = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot3b.position.set(-0.25, -0.25, 0.51);
+    dot3b.position.set(-0.3, -0.3, 0.61); // Aumentado espacio entre puntos de 0.25 a 0.3
     diceGroup.add(dot3b);
 
     const dot3c = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot3c.position.set(0.25, 0.25, 0.51);
+    dot3c.position.set(0.3, 0.3, 0.61); // Aumentado espacio entre puntos de 0.25 a 0.3
     diceGroup.add(dot3c);
 
-    // Face 4 (4 dots) - Back face
+    // Face 4 (4 dots) - Back face - ajustado para dado más grande
     const dot4a = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot4a.position.set(-0.25, 0.25, -0.51);
+    dot4a.position.set(-0.3, 0.3, -0.61); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot4a.rotation.y = Math.PI;
     diceGroup.add(dot4a);
 
     const dot4b = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot4b.position.set(0.25, 0.25, -0.51);
+    dot4b.position.set(0.3, 0.3, -0.61); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot4b.rotation.y = Math.PI;
     diceGroup.add(dot4b);
 
     const dot4c = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot4c.position.set(-0.25, -0.25, -0.51);
+    dot4c.position.set(-0.3, -0.3, -0.61); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot4c.rotation.y = Math.PI;
     diceGroup.add(dot4c);
 
     const dot4d = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot4d.position.set(0.25, -0.25, -0.51);
+    dot4d.position.set(0.3, -0.3, -0.61); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot4d.rotation.y = Math.PI;
     diceGroup.add(dot4d);
 
-    // Face 5 (5 dots) - Right face
+    // Face 5 (5 dots) - Right face - ajustado para dado más grande
     const dot5a = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot5a.position.set(0.51, 0, 0);
+    dot5a.position.set(0.61, 0, 0); // Aumentado de 0.51 a 0.61
     dot5a.rotation.y = Math.PI / 2;
     diceGroup.add(dot5a);
 
     const dot5b = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot5b.position.set(0.51, -0.25, -0.25);
+    dot5b.position.set(0.61, -0.3, -0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot5b.rotation.y = Math.PI / 2;
     diceGroup.add(dot5b);
 
     const dot5c = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot5c.position.set(0.51, 0.25, 0.25);
+    dot5c.position.set(0.61, 0.3, 0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot5c.rotation.y = Math.PI / 2;
     diceGroup.add(dot5c);
 
     const dot5d = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot5d.position.set(0.51, -0.25, 0.25);
+    dot5d.position.set(0.61, -0.3, 0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot5d.rotation.y = Math.PI / 2;
     diceGroup.add(dot5d);
 
     const dot5e = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot5e.position.set(0.51, 0.25, -0.25);
+    dot5e.position.set(0.61, 0.3, -0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot5e.rotation.y = Math.PI / 2;
     diceGroup.add(dot5e);
 
-    // Face 6 (6 dots) - Left face
+    // Face 6 (6 dots) - Left face - ajustado para dado más grande
     const dot6a = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot6a.position.set(-0.51, 0.25, 0.25);
+    dot6a.position.set(-0.61, 0.3, 0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot6a.rotation.y = -Math.PI / 2;
     diceGroup.add(dot6a);
 
     const dot6b = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot6b.position.set(-0.51, 0.25, -0.25);
+    dot6b.position.set(-0.61, 0.3, -0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot6b.rotation.y = -Math.PI / 2;
     diceGroup.add(dot6b);
 
     const dot6c = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot6c.position.set(-0.51, 0, 0.25);
+    dot6c.position.set(-0.61, 0, 0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot6c.rotation.y = -Math.PI / 2;
     diceGroup.add(dot6c);
 
     const dot6d = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot6d.position.set(-0.51, 0, -0.25);
+    dot6d.position.set(-0.61, 0, -0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot6d.rotation.y = -Math.PI / 2;
     diceGroup.add(dot6d);
 
     const dot6e = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot6e.position.set(-0.51, -0.25, 0.25);
+    dot6e.position.set(-0.61, -0.3, 0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot6e.rotation.y = -Math.PI / 2;
     diceGroup.add(dot6e);
 
     const dot6f = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot6f.position.set(-0.51, -0.25, -0.25);
+    dot6f.position.set(-0.61, -0.3, -0.3); // Aumentado espacio entre puntos de 0.25 a 0.3
     dot6f.rotation.y = -Math.PI / 2;
     diceGroup.add(dot6f);
 }
@@ -639,6 +639,11 @@ function detectResultWhenStopped(containerId) {
                     // Detectar ambos dados con confirmación
                     const result1 = detectDiceResultWithConfirmation(dice1, containerId);
                     const result2 = detectDiceResultWithConfirmation(dice2, containerId);
+
+                    // Resaltar las caras superiores detectadas
+                    highlightTopFace(containerId, 0, result1); // Primer dado
+                    highlightTopFace(containerId, 1, result2); // Segundo dado
+
                     if (onDiceResultCallback) {
                         onDiceResultCallback({ d1: result1, d2: result2 });
                     }
@@ -668,6 +673,11 @@ function detectResultWhenStopped(containerId) {
             const result1 = detectDiceResultWithConfirmation(diceBodies[containerId][0], containerId);
             const result2 = detectDiceResultWithConfirmation(diceBodies[containerId][1], containerId);
             isAnimating[containerId] = false;
+
+            // Resaltar las caras superiores detectadas
+            highlightTopFace(containerId, 0, result1); // Primer dado
+            highlightTopFace(containerId, 1, result2); // Segundo dado
+
             if (onDiceResultCallback) {
                 onDiceResultCallback({ d1: result1, d2: result2 });
             }
@@ -788,6 +798,133 @@ function detectDiceResult(diceBody) {
     return result;
 }
 
+// Función para resaltar la cara superior del dado
+function highlightTopFace(containerId, diceIndex, faceValue) {
+    if (!diceGroups[containerId] || !diceGroups[containerId].children[diceIndex]) {
+        return;
+    }
+
+    const dice = diceGroups[containerId].children[diceIndex];
+
+    // Determinar qué cara está hacia arriba basándose en la rotación del dado
+    const quaternion = dice.quaternion;
+    const faces = [
+        { value: 1, normal: new THREE.Vector3(0, 1, 0), position: new THREE.Vector3(0, 0.62, 0) },   // Cara superior - ajustado para dado más grande
+        { value: 2, normal: new THREE.Vector3(0, -1, 0), position: new THREE.Vector3(0, -0.62, 0) }, // Cara inferior - ajustado para dado más grande
+        { value: 3, normal: new THREE.Vector3(0, 0, 1), position: new THREE.Vector3(0, 0, 0.62) },   // Cara frontal - ajustado para dado más grande
+        { value: 4, normal: new THREE.Vector3(0, 0, -1), position: new THREE.Vector3(0, 0, -0.62) }, // Cara trasera - ajustado para dado más grande
+        { value: 5, normal: new THREE.Vector3(1, 0, 0), position: new THREE.Vector3(0.62, 0, 0) },   // Cara derecha - ajustado para dado más grande
+        { value: 6, normal: new THREE.Vector3(-1, 0, 0), position: new THREE.Vector3(-0.62, 0, 0) }  // Cara izquierda - ajustado para dado más grande
+    ];
+
+    // Encontrar la cara que corresponde al valor detectado
+    const targetFace = faces.find(face => face.value === faceValue);
+    if (!targetFace) return;
+
+    // Crear un cono de resaltado que apunte hacia la cara específica
+    const highlightGeometry = new THREE.ConeGeometry(0.15, 0.4, 8); // Radio base, altura, segmentos
+    const highlightMaterial = new THREE.MeshBasicMaterial({
+        color: 0x6ad6e0, // Color cyan directo sin parpadeo
+        transparent: true, // Necesario para el efecto de difuminado
+        opacity: 1.0
+        // Sin emissive para evitar efectos de luz, usando MeshBasicMaterial para 2D look
+    });
+
+    const highlightMesh = new THREE.Mesh(highlightGeometry, highlightMaterial);
+
+    // Desactivar sombras para look 2D
+    highlightMesh.castShadow = false;
+    highlightMesh.receiveShadow = false;
+
+    // Calcular la posición del cono (centrado en la cara del dado)
+    const faceWorldPosition = targetFace.position.clone().applyQuaternion(quaternion);
+    const faceWorldNormal = targetFace.normal.clone().applyQuaternion(quaternion);
+
+    // Posicionar el cono más separado de la cara específica
+    highlightMesh.position.copy(dice.position);
+    highlightMesh.position.add(faceWorldPosition);
+    highlightMesh.position.add(faceWorldNormal.clone().multiplyScalar(0.6)); // Subido de 0.3 a 0.6 unidades
+
+    // Orientar el cono para que la PUNTA apunte HACIA la cara (dirección opuesta a la normal)
+    // Crear una matriz de rotación que oriente el cono hacia la cara detectada
+    const targetDirection = faceWorldNormal.clone().negate(); // Dirección hacia la cara (opuesta a la normal)
+
+    // El cono por defecto apunta hacia Y+, necesitamos orientarlo hacia la cara
+    const coneDefaultDirection = new THREE.Vector3(0, 1, 0);
+    const quaternionRotation = new THREE.Quaternion();
+    quaternionRotation.setFromUnitVectors(coneDefaultDirection, targetDirection);
+    highlightMesh.setRotationFromQuaternion(quaternionRotation);
+
+    // Marcar para identificación
+    highlightMesh.isHighlight = true;
+    highlightMesh.userData = {
+        diceIndex: diceIndex,
+        faceValue: faceValue,
+        originalPosition: highlightMesh.position.clone(), // Guardar posición original para bouncing
+        faceNormal: faceWorldNormal.clone() // Guardar normal para animación de bouncing
+    };
+
+    // Agregar a la escena
+    scenes[containerId].add(highlightMesh);
+
+    // Variables para bouncing (sin blink)
+    const bounceAmplitude = 0.15; // Amplitud del rebote
+    const bounceFrequency = 4; // Frecuencia del rebote (ciclos por segundo)
+
+    // Animación de bouncing (rebote suave) sin parpadeo
+    const startTime = Date.now();
+    const bouncingAnimation = () => {
+        if (!highlightMesh.parent) return; // Salir si el cono fue removido
+
+        const elapsed = (Date.now() - startTime) / 1000; // Tiempo transcurrido en segundos
+        const bounceOffset = Math.sin(elapsed * bounceFrequency * Math.PI * 2) * bounceAmplitude;
+
+        // Aplicar el offset de bouncing en dirección de la normal de la cara
+        const currentPosition = highlightMesh.userData.originalPosition.clone();
+        const bounceDirection = highlightMesh.userData.faceNormal.clone();
+        currentPosition.add(bounceDirection.multiplyScalar(bounceOffset));
+
+        highlightMesh.position.copy(currentPosition);
+
+        // Continuar la animación mientras el cono exista
+        if (highlightMesh.parent) {
+            requestAnimationFrame(bouncingAnimation);
+        }
+    };
+
+    // Iniciar la animación de bouncing inmediatamente
+    bouncingAnimation();
+
+    // Desvanecer después de un tiempo (sin parpadeo previo)
+    setTimeout(() => {
+        fadeOutHighlight(containerId, highlightMesh, highlightMaterial);
+    }, 500); // 500ms antes de empezar a desvanecer
+}// Función para desvanecer el resaltado gradualmente
+function fadeOutHighlight(containerId, highlightMesh, highlightMaterial) {
+    const fadeStartTime = Date.now();
+    const fadeDuration = 500; // 500ms de desvanecimiento
+    const initialOpacity = highlightMaterial.opacity;
+
+    const fadeAnimation = () => {
+        const elapsed = Date.now() - fadeStartTime;
+        const progress = Math.min(elapsed / fadeDuration, 1);
+
+        // Reducir opacidad gradualmente
+        highlightMaterial.opacity = initialOpacity * (1 - progress);
+
+        if (progress < 1) {
+            requestAnimationFrame(fadeAnimation);
+        } else {
+            // Remover el mesh de resaltado
+            if (scenes[containerId] && scenes[containerId].children.includes(highlightMesh)) {
+                scenes[containerId].remove(highlightMesh);
+            }
+        }
+    };
+
+    fadeAnimation();
+}
+
 function detectDiceResultWithRaycast(diceBody) {
     // Encontrar el contenedor correspondiente al dado
     let containerId = null;
@@ -823,7 +960,7 @@ function detectDiceResultWithRaycast(diceBody) {
     const intersects = raycaster.intersectObject(ceiling);
 
     // DEBUG: Visualizar el ray (activar/desactivar según necesidad)
-    const enableRayDebug = true; // Cambiar a false para desactivar debug
+    const enableRayDebug = false; // Cambiar a false para desactivar debug
     if (enableRayDebug) {
         visualizeDiceRay(containerId, rayOrigin, rayDirection, intersects.length > 0);
     }

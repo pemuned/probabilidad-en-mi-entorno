@@ -727,9 +727,139 @@ function detectResult(containerId) {
         result = raycastResult;
     }
 
+    // Resaltar la cara superior detectada
+    highlightTopFace(containerId, 0, result);
+
     if (onDiceResultCallback) {
         onDiceResultCallback(result);
     }
+}
+
+// Función para resaltar la cara superior del dado
+function highlightTopFace(containerId, diceIndex, faceValue) {
+    if (!cubes[containerId]) {
+        return;
+    }
+
+    const dice = cubes[containerId];
+
+    // Determinar qué cara está hacia arriba basándose en la rotación del dado
+    const quaternion = dice.quaternion;
+    const faces = [
+        { value: 1, normal: new THREE.Vector3(0, 1, 0), position: new THREE.Vector3(0, 0.52, 0) },   // Cara superior
+        { value: 2, normal: new THREE.Vector3(0, -1, 0), position: new THREE.Vector3(0, -0.52, 0) }, // Cara inferior
+        { value: 3, normal: new THREE.Vector3(0, 0, 1), position: new THREE.Vector3(0, 0, 0.52) },   // Cara frontal
+        { value: 4, normal: new THREE.Vector3(0, 0, -1), position: new THREE.Vector3(0, 0, -0.52) }, // Cara trasera
+        { value: 5, normal: new THREE.Vector3(1, 0, 0), position: new THREE.Vector3(0.52, 0, 0) },   // Cara derecha
+        { value: 6, normal: new THREE.Vector3(-1, 0, 0), position: new THREE.Vector3(-0.52, 0, 0) }  // Cara izquierda
+    ];
+
+    // Encontrar la cara que corresponde al valor detectado
+    const targetFace = faces.find(face => face.value === faceValue);
+    if (!targetFace) return;
+
+    // Crear un cono de resaltado que apunte hacia la cara específica
+    const highlightGeometry = new THREE.ConeGeometry(0.15, 0.4, 8); // Radio base, altura, segmentos
+    const highlightMaterial = new THREE.MeshBasicMaterial({
+        color: 0x6ad6e0, // Color cyan directo sin parpadeo
+        transparent: true, // Necesario para el efecto de difuminado
+        opacity: 1.0
+        // Sin emissive para evitar efectos de luz, usando MeshBasicMaterial para 2D look
+    });
+
+    const highlightMesh = new THREE.Mesh(highlightGeometry, highlightMaterial);
+
+    // Desactivar sombras para look 2D
+    highlightMesh.castShadow = false;
+    highlightMesh.receiveShadow = false;
+
+    // Calcular la posición del cono (centrado en la cara del dado)
+    const faceWorldPosition = targetFace.position.clone().applyQuaternion(quaternion);
+    const faceWorldNormal = targetFace.normal.clone().applyQuaternion(quaternion);
+
+    // Posicionar el cono más separado de la cara específica
+    highlightMesh.position.copy(dice.position);
+    highlightMesh.position.add(faceWorldPosition);
+    highlightMesh.position.add(faceWorldNormal.clone().multiplyScalar(0.6)); // Subido de 0.3 a 0.6 unidades
+
+    // Orientar el cono para que la PUNTA apunte HACIA la cara (dirección opuesta a la normal)
+    // Crear una matriz de rotación que oriente el cono hacia la cara detectada
+    const targetDirection = faceWorldNormal.clone().negate(); // Dirección hacia la cara (opuesta a la normal)
+
+    // El cono por defecto apunta hacia Y+, necesitamos orientarlo hacia la cara
+    const coneDefaultDirection = new THREE.Vector3(0, 1, 0);
+    const quaternionRotation = new THREE.Quaternion();
+    quaternionRotation.setFromUnitVectors(coneDefaultDirection, targetDirection);
+    highlightMesh.setRotationFromQuaternion(quaternionRotation);
+
+    // Marcar para identificación
+    highlightMesh.isHighlight = true;
+    highlightMesh.userData = {
+        diceIndex: diceIndex,
+        faceValue: faceValue,
+        originalPosition: highlightMesh.position.clone(), // Guardar posición original para bouncing
+        faceNormal: faceWorldNormal.clone() // Guardar normal para animación de bouncing
+    };
+
+    // Agregar a la escena
+    scenes[containerId].add(highlightMesh);
+
+    // Variables para bouncing (sin blink)
+    const bounceAmplitude = 0.15; // Amplitud del rebote
+    const bounceFrequency = 4; // Frecuencia del rebote (ciclos por segundo)
+
+    // Animación de bouncing (rebote suave) sin parpadeo
+    const startTime = Date.now();
+    const bouncingAnimation = () => {
+        if (!highlightMesh.parent) return; // Salir si el cono fue removido
+
+        const elapsed = (Date.now() - startTime) / 1000; // Tiempo transcurrido en segundos
+        const bounceOffset = Math.sin(elapsed * bounceFrequency * Math.PI * 2) * bounceAmplitude;
+
+        // Aplicar el offset de bouncing en dirección de la normal de la cara
+        const currentPosition = highlightMesh.userData.originalPosition.clone();
+        const bounceDirection = highlightMesh.userData.faceNormal.clone();
+        currentPosition.add(bounceDirection.multiplyScalar(bounceOffset));
+
+        highlightMesh.position.copy(currentPosition);
+
+        // Continuar la animación mientras el cono exista
+        if (highlightMesh.parent) {
+            requestAnimationFrame(bouncingAnimation);
+        }
+    };
+
+    // Iniciar la animación de bouncing inmediatamente
+    bouncingAnimation();
+
+    // Desvanecer después de un tiempo (sin parpadeo previo)
+    setTimeout(() => {
+        fadeOutHighlight(containerId, highlightMesh, highlightMaterial);
+    }, 500); // 500ms antes de empezar a desvanecer
+}// Función para desvanecer el resaltado gradualmente
+function fadeOutHighlight(containerId, highlightMesh, highlightMaterial) {
+    const fadeStartTime = Date.now();
+    const fadeDuration = 500; // 500ms de desvanecimiento
+    const initialOpacity = highlightMaterial.opacity;
+
+    const fadeAnimation = () => {
+        const elapsed = Date.now() - fadeStartTime;
+        const progress = Math.min(elapsed / fadeDuration, 1);
+
+        // Reducir opacidad gradualmente
+        highlightMaterial.opacity = initialOpacity * (1 - progress);
+
+        if (progress < 1) {
+            requestAnimationFrame(fadeAnimation);
+        } else {
+            // Remover el mesh de resaltado
+            if (scenes[containerId] && scenes[containerId].children.includes(highlightMesh)) {
+                scenes[containerId].remove(highlightMesh);
+            }
+        }
+    };
+
+    fadeAnimation();
 }
 
 function detectResultWithRaycast(containerId) {
@@ -754,7 +884,7 @@ function detectResultWithRaycast(containerId) {
     const intersects = raycaster.intersectObject(ceiling);
 
     // DEBUG: Visualizar el ray (activar/desactivar según necesidad)
-    const enableRayDebug = true; // Cambiar a false para desactivar debug
+    const enableRayDebug = false; // Cambiar a false para desactivar debug
     if (enableRayDebug) {
         visualizeRay(containerId, rayOrigin, rayDirection, intersects.length > 0);
     }
