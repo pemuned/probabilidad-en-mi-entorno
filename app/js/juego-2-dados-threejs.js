@@ -868,13 +868,15 @@ function detectDiceResultWithRaycast(diceBody) {
 }
 
 function visualizeDiceRay(containerId, origin, direction, hit) {
-    // Remover rayos anteriores de este dado específico - MEJORADO PARA MÚLTIPLES DADOS
-    const existingRays = scenes[containerId].children.filter(child => child.isRayDebug);
-    // Solo remover si hay más de 2 rayos (permitir un rayo por dado)
-    if (existingRays.length >= 2) {
-        // Remover el rayo más antiguo
-        const oldestRay = existingRays[0];
-        scenes[containerId].remove(oldestRay);
+    // Crear un ID único basado en la posición del dado para evitar conflictos
+    const rayId = `ray_${Math.round(origin.x * 10)}_${Math.round(origin.z * 10)}`;
+
+    // Remover solo el rayo anterior de este dado específico (basado en posición)
+    const existingRay = scenes[containerId].children.find(child =>
+        child.isRayDebug && child.userData.rayId === rayId
+    );
+    if (existingRay) {
+        scenes[containerId].remove(existingRay);
     }
 
     // Asegurar que origin y direction sean THREE.Vector3
@@ -887,23 +889,30 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
         rayOrigin.clone().add(rayDirection.clone().multiplyScalar(10))
     ]);
 
-    // Material del rayo (rojo si no hit, verde si hit) - COPIADO DE JUEGO-1-DADO
+    // Material del rayo con colores más distintivos
     const rayMaterial = new THREE.LineBasicMaterial({
         color: hit ? 0x00ff00 : 0xff0000,
-        linewidth: 3 // Aumentado para mejor visibilidad
+        linewidth: 4, // Aún más grueso
+        transparent: true,
+        opacity: 0.8
     });
 
     const rayLine = new THREE.Line(rayGeometry, rayMaterial);
-    rayLine.isRayDebug = true; // Marcar para poder removerlo después
-    rayLine.userData = { origin: origin, timestamp: Date.now() }; // Agregar metadata
+    rayLine.isRayDebug = true;
+    rayLine.userData = {
+        rayId: rayId,
+        origin: origin,
+        timestamp: Date.now(),
+        hit: hit
+    };
     scenes[containerId].add(rayLine);
 
-    // Remover el rayo después de 3 segundos (aumentado para mejor visualización)
+    // Remover el rayo después de 5 segundos (más tiempo para análisis)
     setTimeout(() => {
         if (scenes[containerId] && scenes[containerId].children.includes(rayLine)) {
             scenes[containerId].remove(rayLine);
         }
-    }, 3000);
+    }, 5000);
 }
 
 function detectAlternativeResult(quaternion) {
