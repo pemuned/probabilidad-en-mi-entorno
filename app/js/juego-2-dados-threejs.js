@@ -892,9 +892,9 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
     // Material del rayo con colores más distintivos
     const rayMaterial = new THREE.LineBasicMaterial({
         color: hit ? 0x00ff00 : 0xff0000,
-        linewidth: 4, // Aún más grueso
+        linewidth: 6, // Aún más grueso
         transparent: true,
-        opacity: 0.8
+        opacity: 0.5
     });
 
     const rayLine = new THREE.Line(rayGeometry, rayMaterial);
@@ -910,9 +910,18 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
     // Remover el rayo después de 5 segundos (más tiempo para análisis)
     setTimeout(() => {
         if (scenes[containerId] && scenes[containerId].children.includes(rayLine)) {
-            scenes[containerId].remove(rayLine);
+            //El raycast se desvanecerá y luego se eliminará
+            const fadeOutDuration = 1000;
+            rayLine.material.opacity = 0.5; // Comenzar con opacidad 0.5
+            const fadeOutInterval = setInterval(() => {
+                rayLine.material.opacity -= 0.05;
+                if (rayLine.material.opacity <= 0) {
+                    clearInterval(fadeOutInterval);
+                    scenes[containerId].remove(rayLine);
+                }
+            }, fadeOutDuration / 10);
         }
-    }, 2000);
+    }, 1000);
 }
 
 function detectAlternativeResult(quaternion) {
