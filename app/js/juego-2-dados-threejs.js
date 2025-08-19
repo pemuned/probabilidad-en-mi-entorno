@@ -822,6 +822,12 @@ function detectDiceResultWithRaycast(diceBody) {
     // Realizar el raycast solo contra el ceiling
     const intersects = raycaster.intersectObject(ceiling);
 
+    // DEBUG: Visualizar el ray (activar/desactivar según necesidad)
+    const enableRayDebug = true; // Cambiar a false para desactivar debug
+    if (enableRayDebug) {
+        visualizeDiceRay(containerId, rayOrigin, rayDirection, intersects.length > 0);
+    }
+
     if (intersects.length > 0) {
         const hitPoint = intersects[0].point;
         const diceCenter = dicePosition;
