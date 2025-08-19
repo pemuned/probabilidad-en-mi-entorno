@@ -839,8 +839,8 @@ function visualizeRay(containerId, origin, direction, hit) {
 
     // Animación de difuminado gradual
     const fadeStartTime = Date.now();
-    const visibleDuration = 3000; // 3 segundos visible
-    const fadeDuration = 2000; // 2 segundos de difuminado
+    const visibleDuration = 1500; // 1.5 segundos visible
+    const fadeDuration = 500; // 0.5 segundos de difuminado
     const totalDuration = visibleDuration + fadeDuration;
 
     const fadeAnimation = () => {
