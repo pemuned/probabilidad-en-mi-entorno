@@ -892,7 +892,7 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
     // Material del rayo con colores más distintivos
     const rayMaterial = new THREE.LineBasicMaterial({
         color: hit ? 0x00ff00 : 0xff0000,
-        linewidth: 100, // Aún más grueso
+        linewidth: 100,
         transparent: true,
         opacity: 0.8
     });
