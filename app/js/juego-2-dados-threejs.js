@@ -868,10 +868,13 @@ function detectDiceResultWithRaycast(diceBody) {
 }
 
 function visualizeDiceRay(containerId, origin, direction, hit) {
-    // Remover rayo anterior si existe - COPIADO DE JUEGO-1-DADO
-    const existingRay = scenes[containerId].children.find(child => child.isRayDebug);
-    if (existingRay) {
-        scenes[containerId].remove(existingRay);
+    // Remover rayos anteriores de este dado específico - MEJORADO PARA MÚLTIPLES DADOS
+    const existingRays = scenes[containerId].children.filter(child => child.isRayDebug);
+    // Solo remover si hay más de 2 rayos (permitir un rayo por dado)
+    if (existingRays.length >= 2) {
+        // Remover el rayo más antiguo
+        const oldestRay = existingRays[0];
+        scenes[containerId].remove(oldestRay);
     }
 
     // Asegurar que origin y direction sean THREE.Vector3
@@ -887,19 +890,20 @@ function visualizeDiceRay(containerId, origin, direction, hit) {
     // Material del rayo (rojo si no hit, verde si hit) - COPIADO DE JUEGO-1-DADO
     const rayMaterial = new THREE.LineBasicMaterial({
         color: hit ? 0x00ff00 : 0xff0000,
-        linewidth: 2
+        linewidth: 3 // Aumentado para mejor visibilidad
     });
 
     const rayLine = new THREE.Line(rayGeometry, rayMaterial);
     rayLine.isRayDebug = true; // Marcar para poder removerlo después
+    rayLine.userData = { origin: origin, timestamp: Date.now() }; // Agregar metadata
     scenes[containerId].add(rayLine);
 
-    // Remover el rayo después de 2 segundos - COPIADO DE JUEGO-1-DADO
+    // Remover el rayo después de 3 segundos (aumentado para mejor visualización)
     setTimeout(() => {
         if (scenes[containerId] && scenes[containerId].children.includes(rayLine)) {
             scenes[containerId].remove(rayLine);
         }
-    }, 2000);
+    }, 3000);
 }
 
 function detectAlternativeResult(quaternion) {
