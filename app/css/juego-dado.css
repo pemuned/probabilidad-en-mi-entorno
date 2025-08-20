@@ -411,6 +411,7 @@ body.tournament-page .content-container {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .loader-spinner {

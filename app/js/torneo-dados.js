@@ -163,12 +163,12 @@ document.addEventListener('DOMContentLoaded', () => {
             false: "<h3>🔴 Incorrecto</h3> La posibilidad de que al lanzar el dado se obtenga como resultado el 1 o un número mayor es más probable a que se obtenga un número impar. Por lo tanto, su selección no fue correcta."
         },
         3: {
-            true: "<h3>🟢 ¡Correcto!</h3> ¡Correcto! Es más probable obtener un número igual o mayor al 1 que obtener como resultado el 7, el cual es un que no está en ninguna de las caras del dado.",
+            true: "<h3>🟢 ¡Correcto!</h3> ¡Correcto! Es más probable obtener un número igual o mayor al 1 que obtener como resultado el 7, el cual no está en ninguna de las caras del dado.",
             false: "<h3>🔴 Incorrecto</h3> Es más probable obtener un número igual o mayor al 1 que obtener como resultado el 7, el cual no está en ninguna de las caras del dado. Por lo tanto, su selección no fue correcta."
         },
         4: {
-            true: "<h3>🟢 ¡Correcto!</h3> ¡Muy bien! La probabilidad de obtener un número primo es de <sup>3</sup>&frasl;<sub>6</sub>, misma que la de obtener un número impar.",
-            false: "<h3>🔴 Incorrecto</h3> La probabilidad de obtener un número primo es de <sup>3</sup>&frasl;<sub>6</sub>, misma que la de obtener un número impar. Por lo tanto, su selección no fue correcta."
+            true: "<h3>🟢 ¡Correcto!</h3> ¡Muy bien! La probabilidad de obtener un número primo es de <span class=\"fraction\"><span>3</span><span class=\"denominator\">6</span></span>, misma que la de obtener un número impar.",
+            false: "<h3>🔴 Incorrecto</h3> La probabilidad de obtener un número primo es de <span class=\"fraction\"><span>3</span><span class=\"denominator\">6</span></span>, misma que la de obtener un número impar. Por lo tanto, su selección no fue correcta."
         },
         5: {
             true: "<h3>🟢 ¡Correcto!</h3> ¡Excelente! La probabilidad de obtener un número mayor que 5 es que salga un 6, por lo que sería un evento que puede suceder.",

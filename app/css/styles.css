@@ -1388,6 +1388,25 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
   font-weight: bold;
 }
 
+/* Estilos para fracciones */
+.fraction {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1em; /* ajusta tamaño si quieres */
+  line-height: 1.2;
+}
+.fraction span {
+  display: block;
+  padding: 0 4px;
+}
+.fraction .denominator {
+  border-top: 1px solid #fff;
+}
+.fraction .denominator-b {
+  border-top: 1px solid #000;
+}
+
 /* --- PREVENIR SCROLL HORIZONTAL EN MÓVIL PARA TODAS LAS PÁGINAS EXCEPTO INDEX --- */
 @media (max-width: 768px) {
   /* Solo aplicar estas reglas si NO es la página index */
