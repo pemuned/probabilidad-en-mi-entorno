@@ -711,6 +711,11 @@ body.three-cups-page .content-container {
   padding-left: 2rem;
 }
 
+.uned-logo {
+  display: block;
+  margin: 0 auto auto 5px;
+}
+
 /* Estilos para el bloque avatar-message */
 .avatar-message {
   display: flex;
