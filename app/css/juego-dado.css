@@ -1620,6 +1620,36 @@ body.tournament-page .content-container {
 
 /* Responsive específico para controles del juego */
 @media (max-width: 768px) {
+  /* Pestañas en columna para móviles/tablets */
+  .tabs-container {
+    flex-direction: column;
+    border-bottom: none;
+    border-left: 2px solid #ddd;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .tab-item {
+    padding: 12px 15px;
+    border-bottom: none;
+    border-left: 3px solid transparent;
+    text-align: left;
+    font-size: 0.95em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tab-item.active {
+    border-bottom-color: transparent;
+    border-left-color: #064570;
+    background-color: rgba(6, 69, 112, 0.1);
+  }
+
+  .tab-item:hover {
+    background-color: rgba(6, 69, 112, 0.05);
+  }
+
   .game-controls {
     flex-direction: column;
     width: 95%;
@@ -1664,6 +1694,16 @@ body.tournament-page .content-container {
 }
 
 @media (max-width: 480px) {
+  /* Pestañas más compactas en móviles */
+  .tabs-container {
+    margin-bottom: 10px;
+  }
+
+  .tab-item {
+    padding: 10px 12px;
+    font-size: 0.9em;
+  }
+
   .game-controls {
     gap: 10px;
     margin-top: 10px;
@@ -1711,6 +1751,12 @@ body.tournament-page .content-container {
 }
 
 @media (max-width: 360px) {
+  /* Pestañas más compactas en pantallas muy pequeñas */
+  .tab-item {
+    padding: 8px 10px;
+    font-size: 0.85em;
+  }
+
   .game-controls {
     gap: 8px;
   }
@@ -1879,5 +1925,106 @@ body.tournament-page .content-container {
 
   p {
     font-size: 0.9em;
+  }
+}
+
+/* Optimizaciones específicas para juego de 1 dado */
+@media (max-width: 768px) {
+  /* Contenedor principal del juego de 1 dado */
+  body.dado-game-page .content-container {
+    width: calc(100% - 20px) !important;
+    max-width: calc(100% - 20px) !important;
+    margin: 10px !important;
+    padding: 15px !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Botones específicos del escenario 1 */
+  #roll-dice-btn-esc1,
+  #simulate-100-btn-esc1,
+  #reset-scene-btn {
+    width: auto !important;
+    max-width: 100% !important;
+    min-width: 100px !important;
+    padding: 10px 16px !important;
+    font-size: 0.9em !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Contenedor de progreso específico */
+  .progress-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 15px 0 !important;
+  }
+
+  /* Área de resultados específica */
+  .results-area {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 10px !important;
+  }
+
+  /* Loader específico */
+  #waiting-loader-esc1 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Prevenir overflow en elementos específicos del escenario 1 */
+  #feedback-message,
+  #results-table,
+  .dice-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Contenedor principal más pequeño en móviles */
+  body.dado-game-page .content-container {
+    width: calc(100% - 10px) !important;
+    max-width: calc(100% - 10px) !important;
+    margin: 5px !important;
+    padding: 10px !important;
+  }
+
+  /* Botones más pequeños en móviles */
+  #roll-dice-btn-esc1,
+  #simulate-100-btn-esc1,
+  #reset-scene-btn {
+    padding: 8px 12px !important;
+    font-size: 0.85em !important;
+    min-width: 80px !important;
+  }
+
+  /* Asegurar que los contenedores no se desborden */
+  .game-area,
+  .results-area,
+  .progress-container {
+    padding: 0 5px !important;
+    margin: 10px 0 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Contenedor principal mínimo en pantallas muy pequeñas */
+  body.dado-game-page .content-container {
+    width: calc(100% - 6px) !important;
+    max-width: calc(100% - 6px) !important;
+    margin: 3px !important;
+    padding: 8px !important;
+  }
+
+  /* Optimizaciones para pantallas muy pequeñas */
+  #roll-dice-btn-esc1,
+  #simulate-100-btn-esc1,
+  #reset-scene-btn {
+    padding: 6px 10px !important;
+    font-size: 0.8em !important;
+    min-width: 70px !important;
   }
 }
