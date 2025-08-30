@@ -1940,16 +1940,26 @@ body.tournament-page .content-container {
     box-sizing: border-box !important;
   }
 
-  /* Botones específicos del escenario 1 */
+  /* Botones específicos de todos los escenarios - sin restricciones de ancho */
   #roll-dice-btn-esc1,
   #simulate-100-btn-esc1,
-  #reset-scene-btn {
-    width: auto !important;
-    max-width: 100% !important;
-    min-width: 100px !important;
+  #reset-scene-btn,
+  #roll-dice-btn-scene2,
+  #simulate-100-btn-scene2,
+  #reset-scene-btn-scene2,
+  #roll-dice-btn-scene3,
+  #simulate-100-btn-scene3,
+  #reset-scene-btn-scene3 {
     padding: 10px 16px !important;
     font-size: 0.9em !important;
     box-sizing: border-box !important;
+  }
+
+  /* Botones de lanzar dado más altos para que resalten */
+  #roll-dice-btn-esc1,
+  #roll-dice-btn-scene2,
+  #roll-dice-btn-scene3 {
+    padding: 14px 16px !important;
   }
 
   /* Contenedor de progreso específico */
@@ -1992,13 +2002,25 @@ body.tournament-page .content-container {
     padding: 10px !important;
   }
 
-  /* Botones más pequeños en móviles */
+  /* Botones más pequeños en móviles - todos los escenarios sin restricciones de ancho */
   #roll-dice-btn-esc1,
   #simulate-100-btn-esc1,
-  #reset-scene-btn {
+  #reset-scene-btn,
+  #roll-dice-btn-scene2,
+  #simulate-100-btn-scene2,
+  #reset-scene-btn-scene2,
+  #roll-dice-btn-scene3,
+  #simulate-100-btn-scene3,
+  #reset-scene-btn-scene3 {
     padding: 8px 12px !important;
     font-size: 0.85em !important;
-    min-width: 80px !important;
+  }
+
+  /* Botones de lanzar dado más altos en móviles */
+  #roll-dice-btn-esc1,
+  #roll-dice-btn-scene2,
+  #roll-dice-btn-scene3 {
+    padding: 12px 12px !important;
   }
 
   /* Asegurar que los contenedores no se desborden */
@@ -2019,12 +2041,24 @@ body.tournament-page .content-container {
     padding: 8px !important;
   }
 
-  /* Optimizaciones para pantallas muy pequeñas */
+  /* Optimizaciones para pantallas muy pequeñas - todos los escenarios sin restricciones de ancho */
   #roll-dice-btn-esc1,
   #simulate-100-btn-esc1,
-  #reset-scene-btn {
+  #reset-scene-btn,
+  #roll-dice-btn-scene2,
+  #simulate-100-btn-scene2,
+  #reset-scene-btn-scene2,
+  #roll-dice-btn-scene3,
+  #simulate-100-btn-scene3,
+  #reset-scene-btn-scene3 {
     padding: 6px 10px !important;
     font-size: 0.8em !important;
-    min-width: 70px !important;
+  }
+
+  /* Botones de lanzar dado más altos en pantallas muy pequeñas */
+  #roll-dice-btn-esc1,
+  #roll-dice-btn-scene2,
+  #roll-dice-btn-scene3 {
+    padding: 9px 10px !important;
   }
 }
