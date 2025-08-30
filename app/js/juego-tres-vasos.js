@@ -202,7 +202,7 @@ function createBallElement() {
 function updateDebugInfo() {
     // Encontrar en qué posición está el vaso que contiene la pelota
     const ballPosition = cupOrder.indexOf(ballUnder);
-    console.log('Debug: La pelota está en el vaso número', ballPosition + 1);
+    // console.log('Debug: La pelota está en el vaso número', ballPosition + 1);
 }
 
 function updateCupsGrid() {

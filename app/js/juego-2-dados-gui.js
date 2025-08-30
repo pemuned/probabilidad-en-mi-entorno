@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 10);
     } else {
-        console.warn('Modal de bienvenida no encontrado');
+        // console.warn('Modal de bienvenida no encontrado');
     }
     function hideWelcomeModal() {
         welcomeModal.classList.remove('show');
@@ -42,12 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (startGameBtn) {
         startGameBtn.addEventListener('click', hideWelcomeModal);
     } else {
-        console.warn('Botón de iniciar juego no encontrado');
+        // console.warn('Botón de iniciar juego no encontrado');
     }
     if (closeBtn) {
         closeBtn.addEventListener('click', hideWelcomeModal);
     } else {
-        console.warn('Botón de cerrar modal no encontrado');
+        // console.warn('Botón de cerrar modal no encontrado');
     }
 
     // Configuración de escenas

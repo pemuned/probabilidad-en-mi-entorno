@@ -164,7 +164,7 @@ class ComponentManager {
         renderFooter('footer-component');
         this.loadedComponents.add('footer-component');
 
-        console.log('✅ Componentes renderizados con Preact');
+        // console.log('✅ Componentes renderizados con Preact');
     }
 
     isComponentLoaded(elementId) {
@@ -688,25 +688,25 @@ class App {
 
     async init() {
         try {
-            console.log('🚀 Iniciando aplicación...');
-            console.log(`🔒 Protocolo: ${window.location.protocol}`);
-            console.log(`📄 Página: ${getCurrentPage()}`);
+            // console.log('🚀 Iniciando aplicación...');
+            // console.log(`🔒 Protocolo: ${window.location.protocol}`);
+            // console.log(`📄 Página: ${getCurrentPage()}`);
 
             // Cargar metadatos
             await this.metaManager.loadMetaData();
-            console.log('✅ Metadatos cargados');
+            // console.log('✅ Metadatos cargados');
 
             // Cargar componentes usando Preact
             this.componentManager.loadComponents();
-            console.log('✅ Componentes cargados');
+            // console.log('✅ Componentes cargados');
 
             // Inicializar funcionalidades específicas
             if (this.isIndexPage) {
                 new HorizontalScrollManager();
-                console.log('✅ Scroll horizontal inicializado');
+                // console.log('✅ Scroll horizontal inicializado');
             }
 
-            console.log('🎉 Aplicación inicializada correctamente');
+            // console.log('🎉 Aplicación inicializada correctamente');
 
             // Ocultar loader después de que todo esté cargado
             this.hideLoader();
@@ -786,5 +786,5 @@ if (window.location.hostname === 'localhost') {
             return app;
         }
     };
-    console.log('🔧 Modo debug activado. Usa window.debugApp para debugging.');
+    // console.log('🔧 Modo debug activado. Usa window.debugApp para debugging.');
 } 
