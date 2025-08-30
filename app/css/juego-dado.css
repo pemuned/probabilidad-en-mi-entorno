@@ -28,85 +28,9 @@ body.tournament-page .content-container {
   padding: 20px;
 }
 
-/* --- Estilos para el Modal del Juego --- */
-/* Eliminados, ya que se usan los estilos globales de styles.css */
+/* Estilos de pestañas, modales y responsive centralizados en styles.css */
 
-/* --- Estilos para Pestañas --- */
-.tabs-container {
-  display: flex;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #ddd;
-}
-.tab-item {
-  padding: 10px 20px;
-  cursor: pointer;
-  font-family: "Futura", sans-serif;
-  font-weight: bold;
-  color: #666;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-}
-.tab-item.active {
-  color: #064570;
-  border-bottom-color: #064570;
-}
-.tab-item:hover {
-  color: #064570;
-  background-color: rgba(6, 69, 112, 0.05);
-}
-.tab-content {
-  display: none;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-}
-.tab-content.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* --- Estilos Responsive para Pestañas --- */
-@media (max-width: 768px) {
-  .tabs-container {
-    flex-direction: column;
-    border-bottom: none;
-    border-left: 2px solid #ddd;
-    margin-bottom: 15px;
-  }
-
-  .tab-item {
-    padding: 12px 15px;
-    border-bottom: none;
-    border-left: 3px solid transparent;
-    text-align: left;
-    font-size: 0.95em;
-    transition: all 0.3s ease;
-  }
-
-  .tab-item.active {
-    border-bottom-color: transparent;
-    border-left-color: #064570;
-    background-color: rgba(6, 69, 112, 0.1);
-  }
-
-  .tab-item:hover {
-    background-color: rgba(6, 69, 112, 0.05);
-  }
-}
-
-@media (max-width: 480px) {
-  .tabs-container {
-    margin-bottom: 10px;
-  }
-
-  .tab-item {
-    padding: 10px 12px;
-    font-size: 0.9em;
-  }
-}
-
-/* --- Estilos del Área de Juego --- */
+/* --- Estilos específicos del Área de Juego --- */
 .game-area {
   display: flex;
   flex-direction: column;
@@ -131,18 +55,7 @@ body.tournament-page .content-container {
   display: block;
 }
 
-@media (max-width: 768px) {
-  .threejs-container {
-    width: 100%;
-    height: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .threejs-container {
-    height: 250px;
-  }
-}
+/* Media queries para threejs-container centralizados en styles.css */
 .game-text {
   flex: 1;
   font-size: 1.25em;
@@ -150,7 +63,7 @@ body.tournament-page .content-container {
   line-height: 1.25;
 }
 
-/* --- Nuevos Estilos --- */
+/* Estilos específicos del juego */
 .tip-box {
   background-color: #e3f2fd;
   border-left: 6px solid #1e81ce;
@@ -202,7 +115,7 @@ body.tournament-page .content-container {
   box-shadow: 0 6px 20px rgba(194, 54, 113, 0.4);
 }
 
-/* Nuevo: Estilos de hover para el botón principal */
+/* Estilos de hover para el botón principal */
 #roll-dice-btn,
 #roll-dice-btn-esc1,
 #roll-dice-btn-2d-1,
@@ -996,7 +909,7 @@ body.tournament-page .content-container {
   max-width: 1000px;
   margin: 20px auto;
   padding: 0;
-  display: none; /* Hidden initially */
+  display: none; /* Oculto inicialmente */
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s ease;
@@ -1635,7 +1548,7 @@ body.tournament-page .content-container {
 
 @media (max-width: 768px) {
   .materials-button-container {
-    justify-content: center;
+    justify-content: flex-end;
     margin-bottom: 15px;
     gap: 16px;
   }
@@ -1646,47 +1559,10 @@ body.tournament-page .content-container {
     padding: 10px 20px;
   }
 
-  /* Estilos responsive adicionales para todos los modales en móviles */
-  .modal-dialog {
-    width: 90%;
-    max-width: 450px;
-    padding: 20px;
-    margin: 20px;
-  }
-
-  .modal-title {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-  }
-
-  .modal-text {
-    font-size: 0.9em;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  .modal-button {
-    font-size: 14px;
-    padding: 10px 20px;
-    min-width: 100px;
-  }
-
+  /* Responsive para modales específicos del juego de dados */
   .modal-button.primary-action {
     font-size: 14px;
     padding: 12px 25px;
-  }
-
-  .modal-avatar {
-    width: 120px;
-    margin: 0 auto 15px;
-  }
-
-  .modal-close {
-    width: 35px;
-    height: 35px;
-    font-size: 1.4em;
-    top: 10px;
-    right: 10px;
   }
 
   /* Botones específicos del juego */
@@ -1716,47 +1592,10 @@ body.tournament-page .content-container {
     padding: 8px 16px;
   }
 
-  /* Estilos para pantallas muy pequeñas */
-  .modal-dialog {
-    width: 95%;
-    max-width: 350px;
-    padding: 15px;
-    margin: 10px;
-  }
-
-  .modal-title {
-    font-size: 1.1em;
-    margin-bottom: 12px;
-  }
-
-  .modal-text {
-    font-size: 0.85em;
-    line-height: 1.4;
-    margin-bottom: 18px;
-  }
-
-  .modal-button {
-    font-size: 13px;
-    padding: 8px 16px;
-    min-width: 90px;
-  }
-
+  /* Estilos específicos del juego para pantallas muy pequeñas */
   .modal-button.primary-action {
     font-size: 13px;
     padding: 10px 20px;
-  }
-
-  .modal-avatar {
-    width: 100px;
-    margin: 0 auto 12px;
-  }
-
-  .modal-close {
-    width: 30px;
-    height: 30px;
-    font-size: 1.2em;
-    top: 8px;
-    right: 8px;
   }
 
   /* Botones específicos del juego para pantallas muy pequeñas */
@@ -1776,5 +1615,269 @@ body.tournament-page .content-container {
     font-size: 12px;
     padding: 6px 12px;
     min-width: 80px;
+  }
+}
+
+/* Responsive específico para controles del juego */
+@media (max-width: 768px) {
+  .game-controls {
+    flex-direction: column;
+    width: 95%;
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .action-buttons,
+  .support-buttons {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .game-area {
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .threejs-container {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+
+  .game-text {
+    font-size: 1.1em;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  .tip-box {
+    margin: 15px 10px;
+    padding: 10px 12px;
+    font-size: 0.9em;
+  }
+
+  body.dado-game-page .content-container,
+  body.tournament-page .content-container {
+    padding: 20px 15px;
+    margin: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-controls {
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .action-buttons,
+  .support-buttons {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .support-buttons .modal-button {
+    min-width: 100px;
+    padding: 8px 12px;
+    font-size: 0.85em;
+  }
+
+  .modal-button.primary-action {
+    padding: 12px 20px;
+    font-size: 0.95em;
+  }
+
+  .game-text {
+    font-size: 1em;
+    padding: 0 10px;
+  }
+
+  .tip-box {
+    margin: 10px 5px;
+    padding: 8px 10px;
+    font-size: 0.85em;
+  }
+
+  body.dado-game-page .content-container,
+  body.tournament-page .content-container {
+    padding: 15px 10px;
+    margin: 5px;
+    border-radius: 15px;
+  }
+
+  .threejs-container {
+    border-radius: 10px;
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .game-controls {
+    gap: 8px;
+  }
+
+  .action-buttons,
+  .support-buttons {
+    gap: 6px;
+  }
+
+  .support-buttons .modal-button {
+    min-width: 85px;
+    padding: 6px 10px;
+    font-size: 0.8em;
+  }
+
+  .modal-button.primary-action {
+    padding: 10px 16px;
+    font-size: 0.9em;
+  }
+
+  .game-text {
+    font-size: 0.95em;
+  }
+
+  body.dado-game-page .content-container,
+  body.tournament-page .content-container {
+    padding: 12px 8px;
+  }
+
+  /* Tablas responsive para pantallas muy pequeñas */
+  #results-table,
+  #results-table-scene2,
+  #results-table-scene3 {
+    font-size: 0.75em;
+  }
+
+  #results-table th,
+  #results-table td,
+  #results-table-scene2 th,
+  #results-table-scene2 td,
+  #results-table-scene3 th,
+  #results-table-scene3 td {
+    padding: 4px 2px;
+  }
+}
+
+/* Optimizaciones adicionales para tablas responsive */
+@media (max-width: 768px) {
+  #results-table,
+  #results-table-scene2,
+  #results-table-scene3 {
+    font-size: 0.9em;
+    margin: 15px 0;
+  }
+
+  #results-table th,
+  #results-table td,
+  #results-table-scene2 th,
+  #results-table-scene2 td,
+  #results-table-scene3 th,
+  #results-table-scene3 td {
+    padding: 6px 4px;
+  }
+
+  /* Mensajes de feedback responsive */
+  #feedback-message,
+  #feedback-message-scene2,
+  #feedback-message-scene3 {
+    padding: 12px;
+    font-size: 1em;
+    margin: 15px 0;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  #results-table,
+  #results-table-scene2,
+  #results-table-scene3 {
+    font-size: 0.8em;
+  }
+
+  /* Permitir scroll horizontal para tablas en móviles si es necesario */
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 10px 0;
+  }
+
+  #feedback-message,
+  #feedback-message-scene2,
+  #feedback-message-scene3 {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+}
+
+/* Optimizaciones adicionales para contenido general */
+@media (max-width: 768px) {
+  /* Asegurar que el contenido principal tenga buen espaciado */
+  .content-container {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Optimizar títulos y texto en móviles */
+  h1,
+  h2,
+  h3 {
+    font-size: 1.5em;
+    margin: 15px 0;
+    text-align: center;
+  }
+
+  h4,
+  h5 {
+    font-size: 1.2em;
+    margin: 12px 0;
+  }
+
+  /* Asegurar que los párrafos se lean bien */
+  p {
+    line-height: 1.5;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3em;
+  }
+
+  h2,
+  h3 {
+    font-size: 1.2em;
+  }
+
+  h4,
+  h5 {
+    font-size: 1.1em;
+  }
+
+  p {
+    font-size: 0.95em;
+    line-height: 1.4;
+  }
+
+  /* Asegurar que las imágenes no se desborden */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  h1 {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+
+  h2,
+  h3 {
+    font-size: 1.1em;
+    margin: 8px 0;
+  }
+
+  p {
+    font-size: 0.9em;
   }
 }

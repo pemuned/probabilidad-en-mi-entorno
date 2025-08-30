@@ -37,9 +37,14 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
+/* Prevenir scroll del body cuando el modal está abierto */
+body.modal-open {
+  overflow: hidden;
+}
+
 /* Estilos para la página de tres vasos */
 body.three-cups-page {
-  /* Removed unused background image */
+  /* Imagen de fondo removida por no utilizar */
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -71,7 +76,7 @@ body.three-cups-page .content-container {
 
 /* Scrollbar para navegadores basados en Webkit */
 
-/* Works on Firefox */
+/* Funciona en Firefox */
 * {
   scrollbar-width: thick;
   scrollbar-color: #022b41 #fff;
@@ -81,7 +86,7 @@ body.three-cups-page .content-container {
   background-color: #022b41;
 }
 
-/* Works on Chrome, Edge, and Safari */
+/* Funciona en Chrome, Edge y Safari */
 *::-webkit-scrollbar {
   width: 10px;
 }
@@ -265,7 +270,7 @@ body.three-cups-page .content-container {
   }
 }
 
-/* Modal Dialog Styles */
+/* Estilos de diálogo modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -278,19 +283,25 @@ body.three-cups-page .content-container {
   align-items: center;
   z-index: 1000;
   transition: background-color 0.3s ease-in-out;
+  pointer-events: auto;
+  transform: translateZ(0);
+  overflow: hidden; /* Prevenir scroll en el overlay */
 }
 
 .modal-overlay.show {
   display: flex;
   background-color: rgba(0, 0, 0, 0.7);
+  pointer-events: auto;
 }
 
 .modal-overlay.animate-in {
   background-color: rgba(0, 0, 0, 0.7);
+  pointer-events: auto;
 }
 
 .modal-overlay.animate-out {
   background-color: rgba(0, 0, 0, 0);
+  pointer-events: auto;
 }
 
 .modal-dialog {
@@ -299,23 +310,28 @@ body.three-cups-page .content-container {
   border-radius: 8px;
   padding: 25px;
   max-width: 500px;
-  width: 50%;
+  width: 70%;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transform: scale(0.7) translateY(-50px);
+  transform: scale(0.7);
   opacity: 0;
   transition: all 0.3s ease-in-out;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
   min-width: 300px;
-  z-index: 15;
+  margin: 10px;
+  box-sizing: border-box; /* Incluir padding en el cálculo de width */
 }
 
 .modal-overlay.animate-in .modal-dialog {
-  transform: scale(1) translateY(0);
+  transform: scale(1);
   opacity: 1;
 }
 
 .modal-overlay.animate-out .modal-dialog {
-  transform: scale(0.7) translateY(50px);
+  transform: scale(0.7);
   opacity: 0;
 }
 
@@ -347,6 +363,8 @@ body.three-cups-page .content-container {
 
 .modal-content {
   text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .modal-avatar {
@@ -363,6 +381,8 @@ body.three-cups-page .content-container {
   margin-bottom: 20px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .modal-text {
@@ -372,6 +392,9 @@ body.three-cups-page .content-container {
   line-height: 1.6;
   margin-bottom: 30px;
   text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .modal-button {
@@ -386,6 +409,10 @@ body.three-cups-page .content-container {
   cursor: pointer;
   transition: all 0.3s ease;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  margin: auto;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .modal-button:hover {
@@ -393,7 +420,153 @@ body.three-cups-page .content-container {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Content Section Styles */
+/* Modal con fondo blanco (para aplicaciones) */
+.modal-overlay.light-theme .modal-dialog {
+  background-color: #fefefe;
+  border: 10px solid transparent;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 400px;
+}
+
+.modal-overlay.light-theme .modal-title {
+  color: #333;
+  text-shadow: none;
+}
+
+.modal-overlay.light-theme .modal-text {
+  color: #333;
+}
+
+.modal-overlay.light-theme .modal-close {
+  color: #fff;
+  background: #aaa;
+  border: none;
+  width: 35px;
+  height: 35px;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5em;
+}
+
+.modal-overlay.light-theme .modal-close:hover {
+  background-color: #777;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Animaciones keyframes para modales especiales */
+@keyframes fadeInScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutScaleDown {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.modal-overlay.keyframe-animation.show .modal-dialog {
+  animation: fadeInScaleUp 0.3s ease-out forwards;
+}
+
+.modal-overlay.keyframe-animation.hide .modal-dialog {
+  animation: fadeOutScaleDown 0.3s ease-in forwards;
+}
+
+/* Media queries responsive para modales */
+@media (max-width: 768px) {
+  .modal-dialog {
+    width: 90%;
+    max-width: 90%;
+    padding: 20px;
+    min-width: auto;
+    margin: 10px;
+    max-height: 80vh;
+  }
+
+  .modal-title {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
+
+  .modal-text {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .modal-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .modal-avatar {
+    width: 120px;
+    margin: 0 auto 15px;
+  }
+
+  .modal-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.4em;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-dialog {
+    width: 95%;
+    max-width: 95%;
+    padding: 15px;
+    margin: 5px;
+    max-height: 85vh;
+  }
+
+  .modal-title {
+    font-size: 1.2em;
+    margin-bottom: 12px;
+  }
+
+  .modal-text {
+    font-size: 0.85em;
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+
+  .modal-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .modal-avatar {
+    width: 100px;
+    margin: 0 auto 12px;
+  }
+
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.3em;
+    top: 8px;
+    right: 8px;
+  }
+}
+
+/* Estilos de sección de contenido */
 .content-section {
   position: fixed;
   top: 50%;
@@ -428,14 +601,14 @@ body.three-cups-page .content-container {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Active menu link */
+/* Enlace de menú activo */
 .menu-link.active {
   background-color: rgba(75, 179, 253, 1);
   transform: translateX(-50%) scale(1.1);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Page Template Styles */
+/* Estilos de plantilla de página */
 .page-header {
   position: relative;
   width: 100%;
@@ -478,7 +651,7 @@ body.three-cups-page .content-container {
   height: auto;
 }
 
-/* Navigation styles */
+/* Estilos de navegación */
 .header-nav {
   max-width: 1000px;
   margin: 0 auto;
@@ -518,7 +691,7 @@ body.three-cups-page .content-container {
   background-color: #d32272;
 }
 
-/* Nuevo: Estilo para enlaces no clickables del menú */
+/* Estilo para enlaces no clickables del menú */
 .nav-menu a.no-link {
   cursor: default;
 }
@@ -527,7 +700,7 @@ body.three-cups-page .content-container {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Dropdown styles */
+/* Estilos de menú desplegable */
 .dropdown {
   position: relative;
 }
@@ -680,7 +853,7 @@ body.three-cups-page .content-container {
   text-decoration: underline;
 }
 
-/* Submenu styles */
+/* Estilos de submenú */
 .submenu-container {
   display: flex;
   flex-direction: column;
@@ -698,7 +871,7 @@ body.three-cups-page .content-container {
   display: block;
 }
 
-/* References list styles */
+/* Estilos de lista de referencias */
 .references-list {
   list-style: none;
   padding: 0;
@@ -989,7 +1162,7 @@ blockquote:hover {
   width: 60px;
   height: 60px;
   box-sizing: border-box;
-  /* Nuevo: Centrar contenido */
+  /* Centrar contenido */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1775,4 +1948,44 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
     top: 8px;
     right: 8px;
   }
+}
+
+/* Pestañas - Usadas en múltiples archivos */
+.tabs-container {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+}
+
+.tab-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: "Futura", sans-serif;
+  font-weight: bold;
+  color: #666;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  color: #064570;
+  border-bottom-color: #064570;
+}
+
+.tab-item:hover {
+  color: #064570;
+  background-color: rgba(6, 69, 112, 0.05);
+}
+
+.tab-content {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.tab-content.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }

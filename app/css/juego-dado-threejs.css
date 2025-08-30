@@ -71,19 +71,31 @@
   max-height: 100%;
 }
 
-/* Responsive adjustments */
+/* Ajustes responsivos */
 @media (max-width: 768px) {
   #threejs-container-scene1,
   #threejs-container-scene2,
   #threejs-container-scene3,
   #threejs-container-scene2d1,
   #threejs-container-scene2d2 {
-    height: 300px;
-    max-height: 300px;
+    height: 280px;
+    max-height: 280px;
   }
 
   .dice-container {
-    min-height: 300px;
+    min-height: 280px;
+  }
+
+  .dice-container.dice-single {
+    height: 280px;
+    max-width: 100%;
+    margin: 0 10px;
+  }
+
+  .threejs-loader-spinner {
+    width: 50px;
+    height: 50px;
+    border-width: 5px;
   }
 }
 
@@ -93,12 +105,42 @@
   #threejs-container-scene3,
   #threejs-container-scene2d1,
   #threejs-container-scene2d2 {
-    height: 250px;
-    max-height: 250px;
+    height: 220px;
+    max-height: 220px;
   }
 
   .dice-container {
-    min-height: 250px;
+    min-height: 220px;
+  }
+
+  .dice-container.dice-single {
+    height: 220px;
+    margin: 0 5px;
+  }
+
+  .threejs-loader-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+}
+
+@media (max-width: 360px) {
+  #threejs-container-scene1,
+  #threejs-container-scene2,
+  #threejs-container-scene3,
+  #threejs-container-scene2d1,
+  #threejs-container-scene2d2 {
+    height: 200px;
+    max-height: 200px;
+  }
+
+  .dice-container {
+    min-height: 200px;
+  }
+
+  .dice-container.dice-single {
+    height: 200px;
   }
 }
 

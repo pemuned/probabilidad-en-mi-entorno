@@ -646,44 +646,8 @@ body.vasos-game-page .content-container {
 }
 
 /* Estilos para la estructura de pestañas */
-.tabs-container {
-  display: flex;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #ddd;
-}
-
-.tab-item {
-  padding: 10px 20px;
-  cursor: pointer;
-  font-family: "Futura", sans-serif;
-  font-weight: bold;
-  color: #666;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.tab-item:hover {
-  color: #064570;
-  background-color: rgba(6, 69, 112, 0.05);
-}
-
-.tab-item.active {
-  color: #064570;
-  border-bottom-color: #064570;
-}
-
-.tab-content {
-  display: none;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-}
-
-.tab-content.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
+/* NOTA: Estilos básicos de pestañas movidos a styles.css para centralizar */
+/* Solo mantenemos estilos específicos del juego de tres vasos aquí */
 
 /* Estilos para la sección de introducción */
 .intro-content {
@@ -740,13 +704,31 @@ body.vasos-game-page .content-container {
 .game-controls-row .shuffle-btn {
   margin: 0;
   order: 1;
+  margin-right: auto; /* Empuja el botón de mezclar a la izquierda */
 }
 
 .game-controls-row .modal-button {
   padding: 10px 20px;
   font-size: 1em;
   order: 2;
-  margin-left: auto;
+  margin-left: auto; /* Empuja el botón de reiniciar a la derecha */
+  margin-right: 0; /* Asegurar que no haya margen derecho */
+  margin-top: 0; /* Sobrescribir margin: auto de la regla base */
+  margin-bottom: 0; /* Sobrescribir margin: auto de la regla base */
+  width: 120px !important; /* Ancho fijo con !important para sobrescribir reglas globales */
+  min-width: 120px !important;
+  max-width: 120px !important;
+  flex-shrink: 0; /* Evita que se encoja */
+  text-align: center;
+}
+
+/* Regla específica para el botón de reiniciar por ID */
+#restart-btn-header {
+  width: 120px !important;
+  min-width: 120px !important;
+  max-width: 120px !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
 }
 
 /* Estilos para el modal de instrucciones */
@@ -1396,7 +1378,7 @@ body.vasos-game-page .content-container {
   }
 
   .materials-button-container {
-    justify-content: center;
+    justify-content: flex-end;
     margin-bottom: 15px;
     gap: 16px;
   }
@@ -1417,6 +1399,16 @@ body.vasos-game-page .content-container {
   .game-controls-row .modal-button {
     padding: 8px 16px;
     font-size: 0.9em;
+    width: 110px !important; /* Ancho fijo ligeramente menor en tablets */
+    min-width: 110px !important;
+    max-width: 110px !important;
+  }
+
+  /* Regla específica para reiniciar en tablets */
+  #restart-btn-header {
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
   }
 
   #instructions-modal .modal-content {
@@ -1591,45 +1583,8 @@ body.vasos-game-page .content-container {
   }
 }
 
-/* --- Responsive para Modales en Dispositivos Móviles (Juego Tres Vasos) --- */
+/* Responsive para modales específicos del juego tres vasos */
 @media (max-width: 768px) {
-  .modal-dialog {
-    width: 90%;
-    max-width: 450px;
-    padding: 20px;
-    margin: 20px;
-  }
-
-  .modal-title {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-  }
-
-  .modal-text {
-    font-size: 0.9em;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  .modal-button {
-    font-size: 14px;
-    padding: 10px 20px;
-    min-width: 100px;
-  }
-
-  .modal-avatar {
-    width: 120px;
-    margin: 0 auto 15px;
-  }
-
-  .modal-close {
-    width: 35px;
-    height: 35px;
-    font-size: 1.4em;
-    top: 10px;
-    right: 10px;
-  }
-
   /* Botones específicos del juego de tres vasos */
   .intro-buttons .modal-button {
     font-size: 14px;
@@ -1646,10 +1601,23 @@ body.vasos-game-page .content-container {
   .game-controls-row .modal-button {
     font-size: 14px;
     padding: 10px 20px;
-    min-width: 100px;
+    width: 100px !important; /* Ancho fijo para móviles */
+    min-width: 100px !important;
+    max-width: 100px !important;
+  }
+
+  /* Regla específica para reiniciar en móviles */
+  #restart-btn-header {
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
   }
 
   /* Modal de instrucciones específico */
+  #instructions-modal .modal-content {
+    max-width: 450px;
+  }
+
   #instructions-modal .modal-title {
     font-size: 1.2em;
   }
@@ -1661,43 +1629,6 @@ body.vasos-game-page .content-container {
 }
 
 @media (max-width: 480px) {
-  .modal-dialog {
-    width: 95%;
-    max-width: 350px;
-    padding: 15px;
-    margin: 10px;
-  }
-
-  .modal-title {
-    font-size: 1.1em;
-    margin-bottom: 12px;
-  }
-
-  .modal-text {
-    font-size: 0.85em;
-    line-height: 1.4;
-    margin-bottom: 18px;
-  }
-
-  .modal-button {
-    font-size: 13px;
-    padding: 8px 16px;
-    min-width: 90px;
-  }
-
-  .modal-avatar {
-    width: 100px;
-    margin: 0 auto 12px;
-  }
-
-  .modal-close {
-    width: 30px;
-    height: 30px;
-    font-size: 1.2em;
-    top: 8px;
-    right: 8px;
-  }
-
   /* Botones específicos para pantallas muy pequeñas */
   .intro-buttons .modal-button {
     font-size: 13px;
@@ -1714,10 +1645,23 @@ body.vasos-game-page .content-container {
   .game-controls-row .modal-button {
     font-size: 13px;
     padding: 8px 16px;
-    min-width: 80px;
+    width: 90px !important; /* Ancho fijo más pequeño para pantallas muy pequeñas */
+    min-width: 90px !important;
+    max-width: 90px !important;
+  }
+
+  /* Regla específica para reiniciar en móviles pequeños */
+  #restart-btn-header {
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
   }
 
   /* Modal de instrucciones para pantallas muy pequeñas */
+  #instructions-modal .modal-content {
+    max-width: 350px;
+  }
+
   #instructions-modal .modal-title {
     font-size: 1.1em;
   }
