@@ -1833,41 +1833,6 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
     overflow-wrap: break-word !important;
     hyphens: auto !important;
   }
-
-  /* Contenedor responsive específico para referencias - 768px */
-  .references-container-responsive {
-    padding: 0 15px !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  .references-container-responsive .page-title {
-    font-size: 1.8em !important;
-    margin-bottom: 1.2rem !important;
-    text-align: center !important;
-  }
-
-  .references-container-responsive .references-list {
-    margin: 15px 0 !important;
-    padding: 0 !important;
-  }
-
-  .references-container-responsive .references-list li {
-    margin-bottom: 1.2rem !important;
-    padding-left: 1.2em !important;
-    text-indent: -1.2em !important;
-    font-size: 0.95em !important;
-    line-height: 1.5 !important;
-  }
-
-  .references-container-responsive .references-list li a {
-    word-break: break-all !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
-    color: #064570 !important;
-  }
 }
 
 /* Reglas adicionales para pantallas muy pequeñas */
@@ -1891,36 +1856,6 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
     word-break: break-all !important;
     overflow-wrap: break-word !important;
     hyphens: auto !important;
-  }
-
-  /* Contenedor responsive específico para referencias - 480px */
-  .references-container-responsive {
-    padding: 0 10px !important;
-    margin: 0 !important;
-  }
-
-  .references-container-responsive .page-title {
-    font-size: 1.5em !important;
-    margin-bottom: 1rem !important;
-  }
-
-  .references-container-responsive .references-list {
-    margin: 10px 0 !important;
-  }
-
-  .references-container-responsive .references-list li {
-    margin-bottom: 1rem !important;
-    padding-left: 1em !important;
-    text-indent: -1em !important;
-    font-size: 0.9em !important;
-    line-height: 1.4 !important;
-  }
-
-  .references-container-responsive .references-list li a {
-    word-break: break-all !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
-    color: #064570 !important;
   }
 }
 
@@ -2029,51 +1964,6 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
   }
 }
 
-/* Responsive para referencias en móviles */
-@media (max-width: 768px) {
-  .references-container-responsive {
-    padding: 0 12px !important;
-  }
-  .references-container-responsive .page-title {
-    font-size: 1.3em !important;
-    margin-bottom: 1em !important;
-  }
-  .references-container-responsive .references-list {
-    margin: 10px 0 !important;
-  }
-  .references-container-responsive .references-list li {
-    margin-bottom: 1em !important;
-    padding-left: 1em !important;
-    text-indent: -1em !important;
-    font-size: 0.95em !important;
-    line-height: 1.4 !important;
-  }
-  .references-container-responsive .references-list li a {
-    font-size: 0.93em !important;
-    word-break: break-all !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
-  }
-}
-@media (max-width: 480px) {
-  .references-container-responsive {
-    padding: 0 6px !important;
-  }
-  .references-container-responsive .page-title {
-    font-size: 1.1em !important;
-    margin-bottom: 0.7em !important;
-  }
-  .references-container-responsive .references-list li {
-    font-size: 0.85em !important;
-    margin-bottom: 0.7em !important;
-    padding-left: 0.7em !important;
-    text-indent: -0.7em !important;
-    line-height: 1.3 !important;
-  }
-  .references-container-responsive .references-list li a {
-    font-size: 0.8em !important;
-  }
-}
 .tabs-container {
   display: flex;
   margin-bottom: 20px;
@@ -2122,36 +2012,6 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
     overflow-wrap: break-word !important;
     hyphens: auto !important;
   }
-
-  /* Contenedor responsive específico para referencias - 360px */
-  .references-container-responsive {
-    padding: 0 8px !important;
-    margin: 0 !important;
-  }
-
-  .references-container-responsive .page-title {
-    font-size: 1.3em !important;
-    margin-bottom: 0.8rem !important;
-  }
-
-  .references-container-responsive .references-list {
-    margin: 8px 0 !important;
-  }
-
-  .references-container-responsive .references-list li {
-    margin-bottom: 0.8rem !important;
-    padding-left: 0.8em !important;
-    text-indent: -0.8em !important;
-    font-size: 0.85em !important;
-    line-height: 1.35 !important;
-  }
-
-  .references-container-responsive .references-list li a {
-    word-break: break-all !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
-    color: #064570 !important;
-  }
 }
 
 /* Reglas para pantallas extremadamente pequeñas - Referencias ultra optimizadas */
@@ -2175,37 +2035,6 @@ body.index-page .header-nav .dropdown.is-open > .dropdown-menu {
     word-break: break-all !important;
     overflow-wrap: break-word !important;
     hyphens: auto !important;
-  }
-
-  /* Contenedor responsive específico para referencias - 320px */
-  .references-container-responsive {
-    padding: 0 6px !important;
-    margin: 0 !important;
-  }
-
-  .references-container-responsive .page-title {
-    font-size: 1.2em !important;
-    margin-bottom: 0.7rem !important;
-  }
-
-  .references-container-responsive .references-list {
-    margin: 5px 0 !important;
-  }
-
-  .references-container-responsive .references-list li {
-    margin-bottom: 0.7rem !important;
-    padding-left: 0.7em !important;
-    text-indent: -0.7em !important;
-    font-size: 0.8em !important;
-    line-height: 1.3 !important;
-  }
-
-  .references-container-responsive .references-list li a {
-    word-break: break-all !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
-    color: #064570 !important;
-    font-size: 0.75em !important;
   }
 }
 
