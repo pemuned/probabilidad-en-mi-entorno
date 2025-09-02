@@ -4,6 +4,9 @@
 
 const { h, render } = window.preact;
 
+// Importar funciones de analytics
+import { initializeGoogleAnalytics, trackPageView } from './analytics.js';
+
 export const Header = ({ currentPage = '' }) => {
     const setupNavigation = () => {
         // Marcar enlace activo
@@ -65,6 +68,14 @@ export const Header = ({ currentPage = '' }) => {
     setTimeout(() => {
         setupNavigation();
         setupResponsiveMenu();
+
+        // Inicializar Google Analytics
+        initializeGoogleAnalytics();
+
+        // Rastrear la página actual
+        const pageTitle = document.title;
+        const pagePath = window.location.pathname;
+        trackPageView(pageTitle, pagePath);
     }, 0);
 
     return h('div', null, [
