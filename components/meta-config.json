@@ -1,17 +1,17 @@
 {
     "default": {
         "title": "Descubriendo la probabilidad en mi entorno",
-        "description": "Aplicación educativa sobre probabilidad para estudiantes",
-        "keywords": "probabilidad, matemáticas, educación, dados, juegos",
-        "author": "Universidad Estatal a Distancia",
-        "favicon": "favicon.svg",
+        "description": "Este material está diseñado especialmente para personas docentes de matemática, brindando una herramienta dinámica y enriquecedora para la enseñanza de conceptos clave de probabilidad. Su propósito es brindar un espacio interactivo en el que las personas educadoras puedan explorar, experimentar y descubrir métodos innovadores para abordar la probabilidad en el contexto de la vida cotidiana.",
+        "keywords": "probabilidad, educación, matemática, enseñanza, aprendizaje",
+        "author": "Programa de Producción Electrónica Multimedial (PEM) - Universidad Estatal a Distancia (UNED)",
         "og": {
             "title": "Descubriendo la probabilidad en mi entorno",
-            "description": "Aplicación educativa sobre probabilidad para estudiantes",
-            "image": "https://deiverhz.github.io/probabilidad/og-image.png",
+            "description": "Este material está diseñado especialmente para personas docentes de matemática, brindando una herramienta dinámica y enriquecedora para la enseñanza de conceptos clave de probabilidad. Su propósito es brindar un espacio interactivo en el que las personas educadoras puedan explorar, experimentar y descubrir métodos innovadores para abordar la probabilidad en el contexto de la vida cotidiana.",
+            "image": "https://multimedia.uned.ac.cr/pem/probabilidad-en-mi-entorno/og-image.png",
+            "url": "https://multimedia.uned.ac.cr/pem/probabilidad-en-mi-entorno",
             "type": "website",
             "locale": "es_ES",
-            "site_name": "UNED"
+            "site_name": "Descubriendo la probabilidad en mi entorno"
         }
     }
 }
